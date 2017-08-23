@@ -14,6 +14,7 @@ var height = 400;
 
 		var imageData = ctx.createImageData(width, height);
     var num= 0;
+
 		for (y=0; y<height; y++){
 				for (x=0; x<Math.floor(width/2); x++){
 						num = Math.floor((y/height)*255);
@@ -24,19 +25,37 @@ var height = 400;
 						setPixel(imageData, x, y, 255, 255-num, 0, 255);
 						}
 			}
-		/* Version con Fabo
-		for (x=0; x<width; x++){
-				for (y=0; y<height; y++){
-						if (Math.floor(x<width/2)){
-							num = Math.floor((y/height)*255);
-							setPixel(imageData, x, y, num, num, 0, 255);
-						}
-					else {
-								num = Math.floor((y/height)*255);
-								setPixel(imageData, x, y, 255, 255-num, 0, 255);
-								}
-			}
 
+
+
+		/* CON UN CORTE VERTICAL A MITAD DE X
+		for (y=0; y<height; y++){
+				for (x=0; x<Math.floor(width/2); x++){
+						num = Math.floor((y/height)*255);
+						setPixel(imageData, x, y, num, num, 0, 255);
+					}
+				for (x = Math.floor(width/2) ; x<width; x++){
+						num = Math.floor((y/height)*255);
+						setPixel(imageData, x, y, 255, 255-num, 0, 255);
+						}
+			}
+		*/
+
+
+		/*
+		CON UN CORTE VERTICAL A MITAD DE X
+				for (x=0; x<width; x++){
+						for (y=0; y<height; y++){
+								if (Math.floor(x<width/2)){
+									num = Math.floor((y/height)*255);
+									setPixel(imageData, x, y, num, num, 0, 255);
+								}
+								else {
+									num = Math.floor((y/height)*255);
+									setPixel(imageData, x, y, 255, 255-num, 0, 255);
+								}
+					}
+				}
 		*/
 
 		ctx.putImageData(imageData, 50, 50);
