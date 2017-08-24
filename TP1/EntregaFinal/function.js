@@ -1,28 +1,5 @@
-$(function() {
-    $('#file-input').change(function(e) {
-        var file = e.target.files[0],
-            imageType = /image.*/;
-        
-        if (!file.type.match(imageType))
-            return;
-        
-        var reader = new FileReader();
-        reader.onload = fileOnload;
-        reader.readAsDataURL(file);
-        
-    });
-    
-    function fileOnload(e) {
-        var $img = $('<img>', { src: e.target.result });
-        var canvas = $('#canvas')[0];
-        var context = canvas.getContext('2d');
 
-        $img.load(function() {
-            context.drawImage(this, 0, 0);
-        });
-    }
-});
-var ctx = document.getElementById("canvas").getContext("2d");
+  var ctx = document.getElementById("canvas").getContext("2d");
   var width = 400;
   var height =300;
 
@@ -34,7 +11,7 @@ image1.onload = function(){  // realiza la funcion despues de que cargo la image
 }
 
 function myDrawImageMethod(image){
-  ctx.drawImage(image,50,50,this.width,this.height);
+  ctx.drawImage(image,100,100,this.width,this.height);
   imageData =  ctx.getImageData(50,50, this.width,this.height);
   imageData2 = ctx.getImageData(50,50, this.width,this.height);
   imageData3 = ctx.getImageData(50,50, this.width,this.height);
@@ -137,6 +114,3 @@ function setPixel(imageData, x, y, r, g, b, a){
 	imageData.data[index+2] = b;
 	imageData.data[index+3] = a;
 }
-
-
-
