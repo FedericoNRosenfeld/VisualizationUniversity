@@ -66,6 +66,14 @@ $(document).ready(function(){
   		});
   	});
 
+  ////////////////////////////////////////////////////////// BARRA DE SATURACION QUE SE UPDATEA CON EL MOVIMIENTO
+
+     $(document).ready(function(){
+     		$('#barra_saturacion').change(function() {
+     		Filtrar("saturacion",$(this).val());
+     		});
+     	});
+
 ////////////////////////////////////////////////////////// SELECCIONAR Y APLICAR UN FILTRO A LA IMAGEN DEL CANVAS
 
 function Filtrar(filtro_deseado,valor_extra){
@@ -96,9 +104,9 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
       case "blur":
            realizar_Blur(imageDataX);
            break;
-      case "saturacion":
-          realizar_Saturacion(imageDataX);
-          break;
+     case "saturacion":
+         realizar_Saturacion(imageDataX,valor_extra);
+         break;
       case "bordes":
           realizar_DeteccionDeBordes(imageDataX);
           break;
@@ -118,27 +126,27 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
 
 // Estas funciones las utilizo para no repetir codigo
 
-function multiplicarRed(imageData1,arrPos){
+function multiplicarRed(imageData,arrPos){
 
-  var valor = ( getRed(imageData1,x-1,y-1)*arrPos[0] +  getRed(imageData1,x-1,y)*arrPos[1] +  getRed(imageData1,x-1,y+1)*arrPos[2] +
-                getRed(imageData1,x,y-1)*arrPos[3] + getRed(imageData1,x,y)*arrPos[4]  + getRed(imageData1,x,y+1)*arrPos[5] +
-                getRed(imageData1,x+1,y-1)*arrPos[6] +  getRed(imageData1,x+1,y)*arrPos[7] +  getRed(imageData1,x+1,y+1)*arrPos[8]);
+  var valor = ( getRed(imageData,x-1,y-1)*arrPos[0] +  getRed(imageData,x-1,y)*arrPos[1] +  getRed(imageData,x-1,y+1)*arrPos[2] +
+                getRed(imageData,x,y-1)*arrPos[3] + getRed(imageData,x,y)*arrPos[4]  + getRed(imageData,x,y+1)*arrPos[5] +
+                getRed(imageData,x+1,y-1)*arrPos[6] +  getRed(imageData,x+1,y)*arrPos[7] +  getRed(imageData,x+1,y+1)*arrPos[8]);
   return valor;
 }
 
-function multiplicarGreen(imageData1,arrPos){
+function multiplicarGreen(imageData,arrPos){
 
-  var valor = ( getGreen(imageData1,x-1,y-1)*arrPos[0] +  getGreen(imageData1,x-1,y)*arrPos[1] +  getGreen(imageData1,x-1,y+1)*arrPos[2] +
-                getGreen(imageData1,x,y-1)*arrPos[3] + getGreen(imageData1,x,y)*arrPos[4]  + getGreen(imageData1,x,y+1)*arrPos[5] +
-                getGreen(imageData1,x+1,y-1)*arrPos[6] +  getGreen(imageData1,x+1,y)*arrPos[7] +  getGreen(imageData1,x+1,y+1)*arrPos[8]);
+  var valor = ( getGreen(imageData,x-1,y-1)*arrPos[0] +  getGreen(imageData,x-1,y)*arrPos[1] +  getGreen(imageData,x-1,y+1)*arrPos[2] +
+                getGreen(imageData,x,y-1)*arrPos[3] + getGreen(imageData,x,y)*arrPos[4]  + getGreen(imageData,x,y+1)*arrPos[5] +
+                getGreen(imageData,x+1,y-1)*arrPos[6] +  getGreen(imageData,x+1,y)*arrPos[7] +  getGreen(imageData,x+1,y+1)*arrPos[8]);
   return valor;
 }
 
-function multiplicarBlue(imageData1,arrPos){
+function multiplicarBlue(imageData,arrPos){
 
-  var valor = ( getBlue(imageData1,x-1,y-1)*arrPos[0] +  getBlue(imageData1,x-1,y)*arrPos[1] +  getBlue(imageData1,x-1,y+1)*arrPos[2] +
-                getBlue(imageData1,x,y-1)*arrPos[3] + getBlue(imageData1,x,y)*arrPos[4]  + getBlue(imageData1,x,y+1)*arrPos[5] +
-                getBlue(imageData1,x+1,y-1)*arrPos[6] +  getBlue(imageData1,x+1,y)*arrPos[7] +  getBlue(imageData1,x+1,y+1)*arrPos[8]);
+  var valor = ( getBlue(imageData,x-1,y-1)*arrPos[0] +  getBlue(imageData,x-1,y)*arrPos[1] +  getBlue(imageData,x-1,y+1)*arrPos[2] +
+                getBlue(imageData,x,y-1)*arrPos[3] + getBlue(imageData,x,y)*arrPos[4]  + getBlue(imageData,x,y+1)*arrPos[5] +
+                getBlue(imageData,x+1,y-1)*arrPos[6] +  getBlue(imageData,x+1,y)*arrPos[7] +  getBlue(imageData,x+1,y+1)*arrPos[8]);
   return valor;
 }
 
@@ -146,7 +154,7 @@ function multiplicarBlue(imageData1,arrPos){
     ////////////////////////////////////////////////////////// Deteccion De Bordes
 
 
-    function  realizar_DeteccionDeBordes(imageDataAux){
+    function  realizar_DeteccionDeBordes(imageData){
       var valRx =0;
       var valGx =0;
       var valBx =0;
@@ -158,106 +166,106 @@ function multiplicarBlue(imageData1,arrPos){
       var arrV = [-1,0,1,-2,0,2,-1,0,1];
       //HORIZONTAL  = ((-1,0,1),(-2,0,2),(-1,0,1));
       //VERTICAL   = ((-1,-2,-1),(0,0,0),(1,2,1));
-      for (x=1; x<imageDataAux.width-1; x++){
-         for (y=1; y<imageDataAux.height-1; y++){
-           valRx = multiplicarRed(imageDataAux,arrH);
-           valRy = multiplicarRed(imageDataAux,arrV);
-           valGx = multiplicarGreen(imageDataAux,arrH);
-           valGy = multiplicarGreen(imageDataAux,arrV);
-           valBx = multiplicarBlue(imageDataAux,arrH);
-           valGy = multiplicarBlue(imageDataAux,arrV);
+      for (x=1; x<imageData.width-1; x++){
+         for (y=1; y<imageData.height-1; y++){
+           valRx = multiplicarRed(imageData,arrH);
+           valRy = multiplicarRed(imageData,arrV);
+           valGx = multiplicarGreen(imageData,arrH);
+           valGy = multiplicarGreen(imageData,arrV);
+           valBx = multiplicarBlue(imageData,arrH);
+           valGy = multiplicarBlue(imageData,arrV);
           fila = (valRx + valGx + valBx)/3;
           columna = (valRy + valGy + valBy)/3;
-          setPixel(imageDataAux, x, y,255-(fila+columna),255-(fila+columna),255-(fila+columna), 255);
+          setPixel(imageData, x, y,255-(fila+columna),255-(fila+columna),255-(fila+columna), 255);
          }
       }
-      putimagedataf(imageDataAux);
+      putimagedataf(imageData);
       }
 
 
 
     // Negativo
-			function realizar_Negativo(imageData1){
-			 for (x=0; x<imageData1.width; x++){
-			    for (y=0; y<imageData1.height; y++){
-			      setPixel(imageData1, x, y, 255-getRed(imageData1,x,y),255-getGreen(imageData1,x,y),255-getBlue(imageData1,x,y), 255);
+			function realizar_Negativo(imageData){
+			 for (x=0; x<imageData.width; x++){
+			    for (y=0; y<imageData.height; y++){
+			      setPixel(imageData, x, y, 255-getRed(imageData,x,y),255-getGreen(imageData,x,y),255-getBlue(imageData,x,y), 255);
 					}
 			 }
-       putimagedataf(imageData1);
+       putimagedataf(imageData);
 		}
 
 		// Gray Scale
-			function realizar_Gray_Scale(imageData2){
-				for (x=0; x<imageData2.width; x++){
-					 for (y=0; y<imageData2.height; y++){
-				      prom = (getRed(imageData2,x,y) + getGreen(imageData2,x,y) + getBlue(imageData2,x,y))/3;
-				      setPixel(imageData2, x, y, prom ,prom ,prom , 255);
+			function realizar_Gray_Scale(imageData){
+				for (x=0; x<imageData.width; x++){
+					 for (y=0; y<imageData.height; y++){
+				      prom = (getRed(imageData,x,y) + getGreen(imageData,x,y) + getBlue(imageData,x,y))/3;
+				      setPixel(imageData, x, y, prom ,prom ,prom , 255);
 						}
 				}
-        putimagedataf(imageData2);
+        putimagedataf(imageData);
 			 }
 
        // Blur
-   			function realizar_Blur(imageData1){
+   			function realizar_Blur(imageData){
           var valR = 0;
           var valG = 0;
           var valB = 0;
           var arr = [1,1,1,1,1,1,1,1,1];
 
-          for (x=0; x<imageData1.width; x++){
-   			    for (y=0; y<imageData1.height; y++){
-              valR = multiplicarRed(imageData1,arr)/9;
-              valG = multiplicarGreen(imageData1,arr)/9;
-              valB = multiplicarBlue(imageData1,arr)/9;
-   			      setPixel(imageData1, x, y, valR,valG,valB, 255);
+          for (x=0; x<imageData.width; x++){
+   			    for (y=0; y<imageData.height; y++){
+              valR = multiplicarRed(imageData,arr)/9;
+              valG = multiplicarGreen(imageData,arr)/9;
+              valB = multiplicarBlue(imageData,arr)/9;
+   			      setPixel(imageData, x, y, valR,valG,valB, 255);
    					}
    			 }
-         putimagedataf(imageData1);
+         putimagedataf(imageData);
    		}
 
 
       // Sepia
-			function realizar_Sepia(imageData3){
-				for (x=0; x<imageData3.width; x++){
-		 	    for (y=0; y<imageData3.height; y++){
-				      red = getRed(imageData3,x,y);
-				      green = getGreen(imageData3,x,y);
-				      blue = getBlue(imageData3,x,y);
+			function realizar_Sepia(imageData){
+				for (x=0; x<imageData.width; x++){
+		 	    for (y=0; y<imageData.height; y++){
+				      red = getRed(imageData,x,y);
+				      green = getGreen(imageData,x,y);
+				      blue = getBlue(imageData,x,y);
 
 				      sepiaR = Math.floor(0.393*red + 0.769*green+ 0.189*blue);
 				      sepiaG = Math.floor(0.349*red + 0.686*green + 0.168*blue);
 				      sepiaB = Math.floor(0.272*red + 0.534*green + 0.131*blue);
-				      setPixel(imageData3, x, y, sepiaR,sepiaG,sepiaB, 255);
+				      setPixel(imageData, x, y, sepiaR,sepiaG,sepiaB, 255);
 					}
 			 	}
-        putimagedataf(imageData3);
+        putimagedataf(imageData);
 			 }
 
 	      // Binarizacion
 
-			function realizar_Binarizacion(imageData4,valor_extra){
-        for (x=0; x<imageData4.width; x++){
-           for (y=0; y<imageData4.height; y++){
-			      prom2 = (getRed(imageData4,x,y) + getGreen(imageData4,x,y) + getBlue(imageData4,x,y))/3;
+			function realizar_Binarizacion(imageData,valor_extra){
+        for (x=0; x<imageData.width; x++){
+           for (y=0; y<imageData.height; y++){
+			      prom2 = (getRed(imageData,x,y) + getGreen(imageData,x,y) + getBlue(imageData,x,y))/3;
 			      if (prom2 < valor_extra){
 			        prom2 = 0;
 			      }
 			      else {
 			        prom2 = 255;
 			      }
-			      setPixel(imageData4, x, y, prom2 ,prom2 ,prom2 , 255);
+			      setPixel(imageData, x, y, prom2 ,prom2 ,prom2 , 255);
 			   }
 	  		}
-        putimagedataf(imageData4);
+        putimagedataf(imageData);
 			}
 
-      function realizar_brillo(imageData4,brillo){
+      function realizar_brillo(imageData,brillo){
 
-      for (x=0; x<imageData4.width; x++){
-         for (y=0; y<imageData4.height; y++){
-          red = getRed(imageData4,x,y);
-    	    green = getGreen(imageData4,x,y);
-    	    blue = getBlue(imageData4,x,y);
+      for (x=0; x<imageData.width; x++){
+         for (y=0; y<imageData.height; y++){
+          red = getRed(imageData,x,y);
+    	    green = getGreen(imageData,x,y);
+    	    blue = getBlue(imageData,x,y);
 
           red+= brillo;
           if (red > 255){
@@ -283,17 +291,118 @@ function multiplicarBlue(imageData1,arrPos){
               blue = 0;
           }
 
-               setPixel(imageData4, x, y, red ,green ,blue , 255);
+               setPixel(imageData, x, y, red ,green ,blue , 255);
            }
          }
-          putimagedataf(imageData4);
+          putimagedataf(imageData);
     }
+    /////////////////////////////////////////////////////////// saturacion
 
+        function RGB_to_HSV(r,g,b){
+          var h,s,v;
+          min = Math.min(r, g, b);
+          max = Math.max(r, g, b);
+          v = max;
+          // value listo
+
+          delta = max-min;
+
+          if (max!=0)
+            s = delta/max;
+            // saturacion lista
+          else {
+            // si todo es 0, saturacion = 0 (negro)
+            s = 0;
+            h = 0;
+            v = 0;
+          return [h, s, v];
+          }
+
+          // miro cual fue el maximo
+
+          if (r==max)
+            h = (g-b)/delta;
+          else if (g==max)
+            h = 2+(b-r)/delta;
+          else
+            h = 4+(r-g)/delta;
+
+          // multiplico por 60 porque son grados
+          h = h*60;
+          if (h<0)
+              h += 360;
+
+          // si da negativo lo convierto al angulo equivalente
+          if (isNaN(h))
+              h = 0;
+          return [h,s,v];
+        }
+
+        function HSV_to_RGB(h,s,v){
+          var pisoH, factorialH,p,q,t;
+          var r,g,b;
+
+          if (s==0) {
+            //escala de grises
+            r = g = b = v;
+            return [r,g,b];
+          }
+
+          h = h / 60;
+          pisoH = Math.floor(h);
+          factorialH = h - pisoH;
+
+          p = v * (1 - s);
+          q = v * (1 - s * factorialH);
+          t = v * (1 - s * (1 - factorialH));
+
+          switch( pisoH ) {
+              case 0:
+                  r = v; g = t; b = p;
+                  break;
+              case 1:
+                  r = q; g = v; b = p;
+                  break;
+              case 2:
+                  r = p; g = v; b = t;
+                  break;
+              case 3:
+                  r = p; g = q; b = v;
+                  break;
+              case 4:
+                  r = t; g = p; b = v;
+                  break;
+              default:        // case 5:
+                  r = v; g = p; b = q;
+                  break;
+          }
+          return [r,g,b];
+        }
+
+
+        function realizar_Saturacion(imageData,saturacion){
+          var hsv, rgb;
+          for (x=0; x<imageData.width; x++){
+            for (y=0; y<imageData.height; y++){
+              hsv = RGB_to_HSV( getRed(imageData,x,y), getGreen(imageData,x,y), getBlue(imageData,x,y) );
+              hsv[1] = (hsv[1] * saturacion);
+              if (hsv[1] > 255){
+                hsv[1] = 255;
+              }
+              else if (hsv[1] < 0) {
+                hsv[1] = 0;
+              }
+              rgb = HSV_to_RGB(hsv[0],hsv[1],hsv[2]);
+              setPixel(imageData, x, y, rgb[0], rgb[1], rgb[2], 255);
+            }
+          }
+          putimagedataf(imageData);
+        }
 
     ////////////////////////////////////////////////////////// putImageData
 
-    function putimagedataf(imageData4){
-        ctx2.putImageData(imageData4,0, 0);
+    function putimagedataf(imageData){
+        ctx2.putImageData(imageData,0, 0);
     }
 
 
