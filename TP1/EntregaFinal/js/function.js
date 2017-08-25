@@ -1,11 +1,10 @@
 
-
-
-
 var image1 = new Image();
 image1.src = "imagen1.jpg"; // asigna la direccion de donde cargar la imagen
 var ctx = document.getElementById("canvas").getContext("2d");
 var ctx2 = document.getElementById("canvas2").getContext("2d");
+
+////////////////////////////////////////////////////////// PONER UNA IMAGEN AL CANVAS LUEGO DE QUE ESTA CARGO
 
 image1.onload = function(){  // realiza la funcion despues de que cargo la imagen y con esto evita error
   myDrawImageMethod(this);
@@ -15,7 +14,7 @@ image1.onload = function(){  // realiza la funcion despues de que cargo la image
     imageData =  ctx.getImageData(0,0, canvas.width,canvas.width);
 }
 
-
+////////////////////////////////////////////////////////// CARGAR UNA IMAGEN AL CANVAS DESDE PC
 $(function() {
     $('#file-input').change(function(e) {
         var file = e.target.files[0],
@@ -36,17 +35,24 @@ $(function() {
             myDrawImageMethod(this); // modifique esta parte porque no andaban los filtros mas adelante
         });
     }
-
+    ////////////////////////////////////////////////////////// APLICAR UN FILTRO A LA IMAGEN DEL CANVAS
     $('#Aplicar_Filtro_X').on('click', function() {
        imageDataX =  ctx.getImageData(0,0, canvas.width,canvas.width);
        realizar_Negativo(imageDataX);
     });
 
 });
+////////////////////////////////////////////////////////// DESCARGAR LA IMAGEN DEL CANVAS A LA PC
 
 
+var button = document.getElementById('btn-download');
+button.addEventListener('click', function (e) {
+    var dataURL = canvas.toDataURL('image/png');
+    button.href = dataURL;
+});
+////////////////////////////////////////////////////////// FILTROS
 
-		// Aca podria poner un case que me de la opcion de que filtro ponerle
+    // Aca podria poner un case que me de la opcion de que filtro ponerle
 
 			function realizar_Negativo(imageData1){
 			 for (x=0; x<imageData1.width; x++){
@@ -139,7 +145,7 @@ $(function() {
 	        }
 	      }
 	*/
-	// Get de los colores
+  ////////////////////////////////////////////////////////// GET DE LOS COLORES Y EL SETPIXEL
 	function getRed(imagedata, x, y){
 	  index = (x + y * imageData.width)*4;
 	  return imageData.data[index+0];
