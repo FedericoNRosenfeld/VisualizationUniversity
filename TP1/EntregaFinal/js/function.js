@@ -124,29 +124,14 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
 ////////////////////////////////////////////////////////// FILTROS
 
 
-// Estas funciones las utilizo para no repetir codigo
+// Estas funcion la utilizo para no repetir codigo
 
-function multiplicarRed(imageData,arrPos){
 
-  var valor = ( getRed(imageData,x-1,y-1)*arrPos[0] +  getRed(imageData,x-1,y)*arrPos[1] +  getRed(imageData,x-1,y+1)*arrPos[2] +
-                getRed(imageData,x,y-1)*arrPos[3] + getRed(imageData,x,y)*arrPos[4]  + getRed(imageData,x,y+1)*arrPos[5] +
-                getRed(imageData,x+1,y-1)*arrPos[6] +  getRed(imageData,x+1,y)*arrPos[7] +  getRed(imageData,x+1,y+1)*arrPos[8]);
-  return valor;
-}
+function multiplicarColor(imageData,arrPos,getColor){
 
-function multiplicarGreen(imageData,arrPos){
-
-  var valor = ( getGreen(imageData,x-1,y-1)*arrPos[0] +  getGreen(imageData,x-1,y)*arrPos[1] +  getGreen(imageData,x-1,y+1)*arrPos[2] +
-                getGreen(imageData,x,y-1)*arrPos[3] + getGreen(imageData,x,y)*arrPos[4]  + getGreen(imageData,x,y+1)*arrPos[5] +
-                getGreen(imageData,x+1,y-1)*arrPos[6] +  getGreen(imageData,x+1,y)*arrPos[7] +  getGreen(imageData,x+1,y+1)*arrPos[8]);
-  return valor;
-}
-
-function multiplicarBlue(imageData,arrPos){
-
-  var valor = ( getBlue(imageData,x-1,y-1)*arrPos[0] +  getBlue(imageData,x-1,y)*arrPos[1] +  getBlue(imageData,x-1,y+1)*arrPos[2] +
-                getBlue(imageData,x,y-1)*arrPos[3] + getBlue(imageData,x,y)*arrPos[4]  + getBlue(imageData,x,y+1)*arrPos[5] +
-                getBlue(imageData,x+1,y-1)*arrPos[6] +  getBlue(imageData,x+1,y)*arrPos[7] +  getBlue(imageData,x+1,y+1)*arrPos[8]);
+  var valor = ( getColor(imageData,x-1,y-1)*arrPos[0] +  getColor(imageData,x-1,y)*arrPos[1] +  getColor(imageData,x-1,y+1)*arrPos[2] +
+                getColor(imageData,x,y-1)*arrPos[3] + getColor(imageData,x,y)*arrPos[4]  + getColor(imageData,x,y+1)*arrPos[5] +
+                getColor(imageData,x+1,y-1)*arrPos[6] +  getColor(imageData,x+1,y)*arrPos[7] +  getColor(imageData,x+1,y+1)*arrPos[8]);
   return valor;
 }
 
@@ -168,12 +153,12 @@ function multiplicarBlue(imageData,arrPos){
       //VERTICAL   = ((-1,-2,-1),(0,0,0),(1,2,1));
       for (x=1; x<imageData.width-1; x++){
          for (y=1; y<imageData.height-1; y++){
-           valRx = multiplicarRed(imageData,arrH);
-           valRy = multiplicarRed(imageData,arrV);
-           valGx = multiplicarGreen(imageData,arrH);
-           valGy = multiplicarGreen(imageData,arrV);
-           valBx = multiplicarBlue(imageData,arrH);
-           valBy = multiplicarBlue(imageData,arrV);
+           valRx = multiplicarColor(imageData,arrH,getRed);
+           valRy = multiplicarColor(imageData,arrV,getRed);
+           valGx = multiplicarColor(imageData,arrH,getGreen);
+           valGy = multiplicarColor(imageData,arrV,getGreen);
+           valBx = multiplicarColor(imageData,arrH,getBlue);
+           valBy = multiplicarColor(imageData,arrV,getBlue);
           fila = (valRx + valGx + valBx)/3;
           columna = (valRy + valGy + valBy)/3;
           setPixel(imageData, x, y,255-(fila+columna),255-(fila+columna),255-(fila+columna), 255);
@@ -214,9 +199,9 @@ function multiplicarBlue(imageData,arrPos){
 
           for (x=0; x<imageData.width; x++){
    			    for (y=0; y<imageData.height; y++){
-              valR = multiplicarRed(imageData,arr)/9;
-              valG = multiplicarGreen(imageData,arr)/9;
-              valB = multiplicarBlue(imageData,arr)/9;
+              valR = multiplicarColor(imageData,arr,getRed)/9;
+              valG = multiplicarColor(imageData,arr,getGreen)/9;
+              valB = multiplicarColor(imageData,arr,getBlue)/9;
    			      setPixel(imageData, x, y, valR,valG,valB, 255);
    					}
    			 }
