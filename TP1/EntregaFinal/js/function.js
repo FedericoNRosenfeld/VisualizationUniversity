@@ -116,29 +116,61 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
 ////////////////////////////////////////////////////////// FILTROS
 
 
-//HORIZONTAL_GRADIENT_SOBEL: TTemplate = ((-1,0,1),(-2,0,2),(-1,0,1));
-//VERTICAL_GRADIENT_SOBEL: TTemplate = ((-1,-2,-1),(0,0,0),(1,2,1));
+// Estas funciones las utilizo para no repetir codigo
+
+function multiplicarRed(imageData1,arrPos){
+
+  var valor = ( getRed(imageData1,x-1,y-1)*arrPos[0] +  getRed(imageData1,x-1,y)*arrPos[1] +  getRed(imageData1,x-1,y+1)*arrPos[2] +
+                getRed(imageData1,x,y-1)*arrPos[3] + getRed(imageData1,x,y)*arrPos[4]  + getRed(imageData1,x,y+1)*arrPos[5] +
+                getRed(imageData1,x+1,y-1)*arrPos[6] +  getRed(imageData1,x+1,y)*arrPos[7] +  getRed(imageData1,x+1,y+1)*arrPos[8]);
+  return valor;
+}
+
+function multiplicarGreen(imageData1,arrPos){
+
+  var valor = ( getGreen(imageData1,x-1,y-1)*arrPos[0] +  getGreen(imageData1,x-1,y)*arrPos[1] +  getGreen(imageData1,x-1,y+1)*arrPos[2] +
+                getGreen(imageData1,x,y-1)*arrPos[3] + getGreen(imageData1,x,y)*arrPos[4]  + getGreen(imageData1,x,y+1)*arrPos[5] +
+                getGreen(imageData1,x+1,y-1)*arrPos[6] +  getGreen(imageData1,x+1,y)*arrPos[7] +  getGreen(imageData1,x+1,y+1)*arrPos[8]);
+  return valor;
+}
+
+function multiplicarBlue(imageData1,arrPos){
+
+  var valor = ( getBlue(imageData1,x-1,y-1)*arrPos[0] +  getBlue(imageData1,x-1,y)*arrPos[1] +  getBlue(imageData1,x-1,y+1)*arrPos[2] +
+                getBlue(imageData1,x,y-1)*arrPos[3] + getBlue(imageData1,x,y)*arrPos[4]  + getBlue(imageData1,x,y+1)*arrPos[5] +
+                getBlue(imageData1,x+1,y-1)*arrPos[6] +  getBlue(imageData1,x+1,y)*arrPos[7] +  getBlue(imageData1,x+1,y+1)*arrPos[8]);
+  return valor;
+}
+
+
+    ////////////////////////////////////////////////////////// Deteccion De Bordes
+
+
     function  realizar_DeteccionDeBordes(imageDataAux){
-      var valR =0;
-      var valG =0;
-      var valB =0;
+      var valRx =0;
+      var valGx =0;
+      var valBx =0;
+      var valRy =0;
+      var valGy =0;
+      var valBy =0;
+
+      var arrH = [-1,-2,-1,0,0,0,1,2,1];
+      var arrV = [-1,0,1,-2,0,2,-1,0,1];
+      //HORIZONTAL  = ((-1,0,1),(-2,0,2),(-1,0,1));
+      //VERTICAL   = ((-1,-2,-1),(0,0,0),(1,2,1));
       for (x=1; x<imageDataAux.width-1; x++){
          for (y=1; y<imageDataAux.height-1; y++){
-           valRx = ( getRed(imageDataAux,x-1,y-1)*(-1) +  getRed(imageDataAux,x-1,y)*(-2) +  getRed(imageDataAux,x-1,y+1)*(-1) +
-                    getRed(imageDataAux,x+1,y-1) +  getRed(imageDataAux,x+1,y)*(2) + getRed(imageDataAux,x+1,y+1));
-
-           valGx = ( getGreen(imageDataAux,x-1,y-1)*(-1) +  getGreen(imageDataAux,x-1,y)*(-2) +  getGreen(imageDataAux,x-1,y+1)*(-1) +
-                    getGreen(imageDataAux,x+1,y-1) +  getGreen(imageDataAux,x+1,y)*(2) +  getGreen(imageDataAux,x+1,y+1));
-
-           valBx = ( getBlue(imageDataAux,x-1,y-1)*(-1) +  getBlue(imageDataAux,x-1,y)*(-2) +  getBlue(imageDataAux,x-1,y+1)*(-1) +
-                    getBlue(imageDataAux,x+1,y-1) +  getBlue(imageDataAux,x+1,y)*(2) +  getBlue(imageDataAux,x+1,y+1));
+           valRx = multiplicarRed(imageDataAux,arrH);
+           valRy = multiplicarRed(imageDataAux,arrV);
+           valGx = multiplicarGreen(imageDataAux,arrH);
+           valGy = multiplicarGreen(imageDataAux,arrV);
+           valBx = multiplicarBlue(imageDataAux,arrH);
+           valGy = multiplicarBlue(imageDataAux,arrV);
           fila = (valRx + valGx + valBx)/3;
           columna = (valRy + valGy + valBy)/3;
-
-          setPixel(imageDataAux, x, y, nana,nana,nana, 255);
+          setPixel(imageDataAux, x, y,255-(fila+columna),255-(fila+columna),255-(fila+columna), 255);
          }
-      }      alert('fin');
-
+      }
       putimagedataf(imageDataAux);
       }
 
@@ -170,18 +202,13 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
           var valR = 0;
           var valG = 0;
           var valB = 0;
+          var arr = [1,1,1,1,1,1,1,1,1];
+
           for (x=0; x<imageData1.width; x++){
    			    for (y=0; y<imageData1.height; y++){
-              valR = ( getRed(imageData1,x-1,y-1) +  getRed(imageData1,x-1,y) +  getRed(imageData1,x-1,y+1) + getRed(imageData1,x,y-1) +
-                      getRed(imageData1,x,y)  + getRed(imageData1,x,y+1) + getRed(imageData1,x+1,y-1) +  getRed(imageData1,x+1,y) +
-                      getRed(imageData1,x+1,y+1))/9
-              valG = ( getGreen(imageData1,x-1,y-1) +  getGreen(imageData1,x-1,y) +  getGreen(imageData1,x-1,y+1) + getGreen(imageData1,x,y-1) +
-                      getGreen(imageData1,x,y)  + getGreen(imageData1,x,y+1) + getGreen(imageData1,x+1,y-1) +  getGreen(imageData1,x+1,y) +
-                      getGreen(imageData1,x+1,y+1))/9
-              valB = ( getBlue(imageData1,x-1,y-1) +  getBlue(imageData1,x-1,y) +  getBlue(imageData1,x-1,y+1) + getBlue(imageData1,x,y-1) +
-                      getBlue(imageData1,x,y)  + getBlue(imageData1,x,y+1) + getBlue(imageData1,x+1,y-1) +  getBlue(imageData1,x+1,y) +
-                      getBlue(imageData1,x+1,y+1))/9
-
+              valR = multiplicarRed(imageData1,arr)/9;
+              valG = multiplicarGreen(imageData1,arr)/9;
+              valB = multiplicarBlue(imageData1,arr)/9;
    			      setPixel(imageData1, x, y, valR,valG,valB, 255);
    					}
    			 }
