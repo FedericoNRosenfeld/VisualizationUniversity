@@ -7,18 +7,51 @@
 		<div id="imagen_original" >
 			<p>Imagen Original</p>
 			<input type="file" id="file-input">
-			<canvas id="canvas" width="500" height="300" style="border:#000 solid 1px;" />
+			<canvas id="canvas" width="" height="" style="border:#000 solid 1px;" />
 		</div>
 		<div class="filtros_disponibles" >
 			<p> Listado de filtros disponibles</p>
 		<ul>
+			<!--<div id="Aplicar_Filtro_X">Aplicar Filtro</div> -->
 		  <li class="filtro">
-				<div id="Aplicar_Filtro_X">Aplicar Filtro</div>
+				 <button type="button" class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)">Negativo</button>
+
 			</li>
+			<li class="filtro">
+				<button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button>
+		 </li>
+
+		 <li class="filtro">
+			 <button type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button>
+		</li>
+
+		 <li class="filtro">
+			 		<p> Brillo </p>
+			 		<input id="barra_brillo" type="range" name="barra_brillo" min="-255" max="255" step="1" value="?">
+			</li>
+		 <li class="filtro">
+			 <p> Binarizacion </p>
+ 			<input id="barra_binarizacion" type="range" name="barra_binarizacion" min="0" max="255" step="1" value="?">
+		 </li>
+		 <li class="filtro">
+				<button type="button" class="btn" id="btn-filtro-blur" onclick="Filtrar('blur',0)">Blur</button>
+		 </li>
+		 <li class="filtro">
+				<button type="button" class="btn" id="btn-filtro-bordes" onclick="Filtrar('bordes',0)">Deteccion de Bordes</button>
+		 </li>
+		 <li class="filtro">
+				<button type="button" class="btn" id="btn-filtro" onclick="Filtrar('negativo',0)">Basic Button</button>
+		 </li>
+		 <li class="filtro">
+				<button type="button" class="btn" id="btn-filtro" onclick="Filtrar('negativo',0)">Basic Button</button>
+		 </li>
+		 <li class="filtro">
+				<button type="button" class="btn">Basic Button</button>
+		 </li>
 		</ul>
 		</div>
 		<div id="imagen_filtrada" >
-			<canvas id="canvas2" width="500" height="300" style="border:#000 solid 1px;" />
+			<canvas id="canvas2" width="" height="" style="border:#000 solid 1px;" />
 		</div>
 		<div>
 			<p> Si desea Guardar esta imagen en su ordenador haga click aqui abajo !! </p>

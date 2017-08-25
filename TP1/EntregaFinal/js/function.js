@@ -10,8 +10,11 @@ image1.onload = function(){  // realiza la funcion despues de que cargo la image
   myDrawImageMethod(this);
 }
   function myDrawImageMethod(image){
-    ctx.drawImage(image,0,0 ,canvas.width,canvas.height);
-    imageData =  ctx.getImageData(0,0, canvas.width,canvas.width);
+
+    $("canvas").attr("width",image.width);
+    $("canvas").attr("height",image.height);
+    ctx.drawImage(image,0,0 ,image.width,image.height);
+    imageData =  ctx.getImageData(0,0, canvas.width,canvas.height);
 }
 
 ////////////////////////////////////////////////////////// CARGAR UNA IMAGEN AL CANVAS DESDE PC
@@ -39,7 +42,6 @@ $(function() {
 
 });
 
-
 ////////////////////////////////////////////////////////// DESCARGAR LA IMAGEN DEL CANVAS A LA PC
 
 var button = document.getElementById('btn-download');
@@ -48,63 +50,100 @@ button.addEventListener('click', function (e) {
     button.href = dataURL;
 });
 
+////////////////////////////////////////////////////////// BARRA DE BRILLO QUE SE UPDATEA CON EL MOVIMIENTO
+
+$(document).ready(function(){
+		$('#barra_brillo').change(function() {
+		Filtrar("brillo",$(this).val());
+		});
+	});
+
+  ////////////////////////////////////////////////////////// BARRA DE binarizacion QUE SE UPDATEA CON EL MOVIMIENTO
+
+  $(document).ready(function(){
+  		$('#barra_binarizacion').change(function() {
+  		Filtrar("binarizacion",$(this).val());
+  		});
+  	});
 
 ////////////////////////////////////////////////////////// SELECCIONAR Y APLICAR UN FILTRO A LA IMAGEN DEL CANVAS
 
-
-var buttonFiltros = document.getElementById('btn-download');
-buttonFiltros.addEventListener('click', function (filtro_deseado) {
-  // de aca para arriba hay que ver como hace ru ndesplegable
-   imageDataX =  ctx.getImageData(0,0, canvas.width,canvas.width);
-   realizarFiltro(imageDataX,filtro_deseado);
-});
+function Filtrar(filtro_deseado,valor_extra){
+  imageDataX =  ctx.getImageData(0,0, canvas.width,canvas.height);
+   val = parseInt(valor_extra);
+  realizarFiltro(imageDataX,filtro_deseado,val);
+}
 
 function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
 
   switch(filtro_deseado) {
-      case negativo:
-          realizar_Negativo(imageDataX)
+      case "negativo":
+          realizar_Negativo(imageDataX);
           break;
-
-      case binarización:
-          realizar_Binarizacion(imageDataX,valor_extra)
+      case "binarizacion":
+          realizar_Binarizacion(imageDataX,valor_extra);
           break;
-      case sepia:
-          realizar_Sepia(imageDataX)
+      case "sepia":
+          realizar_Sepia(imageDataX);
           break;
-      case Gray_Scale:
-          realizar_Gray_Scale(imageDataX)
+      case "Gray_Scale":
+          realizar_Gray_Scale(imageDataX);
           break;
       // de aca para abajo no tengo ninguno echo
-      case brillo:
-          realizar_brillo(imageDataX,valor_extra)
+      case "brillo":
+          realizar_brillo(imageDataX,valor_extra);
           break;
-      case n:
-          realizar_Saturacion(imageDataX)
+      case "blur":
+           realizar_Blur(imageDataX);
+           break;
+      case "saturacion":
+          realizar_Saturacion(imageDataX);
           break;
-      case n:
-          realizar_Suavizacion(imageDataX)
-          break;
-      case n:
-          realizar_DeteccionDeBordes(imageDataX)
-          break;
-     case n:
-          realizar_Blur(imageDataX)
+      case "bordes":
+          realizar_DeteccionDeBordes(imageDataX);
           break;
 
+      case n:
+          realizar_Suavizacion(imageDataX);
+          break;
 
       default:
-          code block
+          alert('cai en alert');
   }
-
-
 
 }
 
 ////////////////////////////////////////////////////////// FILTROS
 
-    // Aca podria poner un case que me de la opcion de que filtro ponerle
-    
+
+//HORIZONTAL_GRADIENT_SOBEL: TTemplate = ((-1,0,1),(-2,0,2),(-1,0,1));
+//VERTICAL_GRADIENT_SOBEL: TTemplate = ((-1,-2,-1),(0,0,0),(1,2,1));
+    function  realizar_DeteccionDeBordes(imageDataAux){
+      var valR =0;
+      var valG =0;
+      var valB =0;
+      for (x=1; x<imageDataAux.width-1; x++){
+         for (y=1; y<imageDataAux.height-1; y++){
+           valRx = ( getRed(imageDataAux,x-1,y-1)*(-1) +  getRed(imageDataAux,x-1,y)*(-2) +  getRed(imageDataAux,x-1,y+1)*(-1) +
+                    getRed(imageDataAux,x+1,y-1) +  getRed(imageDataAux,x+1,y)*(2) + getRed(imageDataAux,x+1,y+1));
+
+           valGx = ( getGreen(imageDataAux,x-1,y-1)*(-1) +  getGreen(imageDataAux,x-1,y)*(-2) +  getGreen(imageDataAux,x-1,y+1)*(-1) +
+                    getGreen(imageDataAux,x+1,y-1) +  getGreen(imageDataAux,x+1,y)*(2) +  getGreen(imageDataAux,x+1,y+1));
+
+           valBx = ( getBlue(imageDataAux,x-1,y-1)*(-1) +  getBlue(imageDataAux,x-1,y)*(-2) +  getBlue(imageDataAux,x-1,y+1)*(-1) +
+                    getBlue(imageDataAux,x+1,y-1) +  getBlue(imageDataAux,x+1,y)*(2) +  getBlue(imageDataAux,x+1,y+1));
+          fila = (valRx + valGx + valBx)/3;
+          columna = (valRy + valGy + valBy)/3;
+
+          setPixel(imageDataAux, x, y, nana,nana,nana, 255);
+         }
+      }      alert('fin');
+
+      putimagedataf(imageDataAux);
+      }
+
+
+
     // Negativo
 			function realizar_Negativo(imageData1){
 			 for (x=0; x<imageData1.width; x++){
@@ -112,23 +151,48 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
 			      setPixel(imageData1, x, y, 255-getRed(imageData1,x,y),255-getGreen(imageData1,x,y),255-getBlue(imageData1,x,y), 255);
 					}
 			 }
-       ctx2.putImageData(imageData1,0, 0);
+       putimagedataf(imageData1);
 		}
 
 		// Gray Scale
 			function realizar_Gray_Scale(imageData2){
-				for (x=0; x<ctx.width; x++){
-					 for (y=0; y<ctx.height; y++){
+				for (x=0; x<imageData2.width; x++){
+					 for (y=0; y<imageData2.height; y++){
 				      prom = (getRed(imageData2,x,y) + getGreen(imageData2,x,y) + getBlue(imageData2,x,y))/3;
 				      setPixel(imageData2, x, y, prom ,prom ,prom , 255);
 						}
 				}
-        ctx2.putImageData(imageData2,0, 0);
+        putimagedataf(imageData2);
 			 }
+
+       // Blur
+   			function realizar_Blur(imageData1){
+          var valR = 0;
+          var valG = 0;
+          var valB = 0;
+          for (x=0; x<imageData1.width; x++){
+   			    for (y=0; y<imageData1.height; y++){
+              valR = ( getRed(imageData1,x-1,y-1) +  getRed(imageData1,x-1,y) +  getRed(imageData1,x-1,y+1) + getRed(imageData1,x,y-1) +
+                      getRed(imageData1,x,y)  + getRed(imageData1,x,y+1) + getRed(imageData1,x+1,y-1) +  getRed(imageData1,x+1,y) +
+                      getRed(imageData1,x+1,y+1))/9
+              valG = ( getGreen(imageData1,x-1,y-1) +  getGreen(imageData1,x-1,y) +  getGreen(imageData1,x-1,y+1) + getGreen(imageData1,x,y-1) +
+                      getGreen(imageData1,x,y)  + getGreen(imageData1,x,y+1) + getGreen(imageData1,x+1,y-1) +  getGreen(imageData1,x+1,y) +
+                      getGreen(imageData1,x+1,y+1))/9
+              valB = ( getBlue(imageData1,x-1,y-1) +  getBlue(imageData1,x-1,y) +  getBlue(imageData1,x-1,y+1) + getBlue(imageData1,x,y-1) +
+                      getBlue(imageData1,x,y)  + getBlue(imageData1,x,y+1) + getBlue(imageData1,x+1,y-1) +  getBlue(imageData1,x+1,y) +
+                      getBlue(imageData1,x+1,y+1))/9
+
+   			      setPixel(imageData1, x, y, valR,valG,valB, 255);
+   					}
+   			 }
+         putimagedataf(imageData1);
+   		}
+
+
       // Sepia
 			function realizar_Sepia(imageData3){
-				for (x=0; x<ctx.width; x++){
-		 	    for (y=0; y<ctx.height; y++){
+				for (x=0; x<imageData3.width; x++){
+		 	    for (y=0; y<imageData3.height; y++){
 				      red = getRed(imageData3,x,y);
 				      green = getGreen(imageData3,x,y);
 				      blue = getBlue(imageData3,x,y);
@@ -139,14 +203,14 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
 				      setPixel(imageData3, x, y, sepiaR,sepiaG,sepiaB, 255);
 					}
 			 	}
-        ctx2.putImageData(imageData3,0, 0);
+        putimagedataf(imageData3);
 			 }
 
 	      // Binarizacion
 
 			function realizar_Binarizacion(imageData4,valor_extra){
-        for (x=0; x<ctx.width; x++){
-           for (y=0; y<ctx.height; y++){
+        for (x=0; x<imageData4.width; x++){
+           for (y=0; y<imageData4.height; y++){
 			      prom2 = (getRed(imageData4,x,y) + getGreen(imageData4,x,y) + getBlue(imageData4,x,y))/3;
 			      if (prom2 < valor_extra){
 			        prom2 = 0;
@@ -157,45 +221,56 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
 			      setPixel(imageData4, x, y, prom2 ,prom2 ,prom2 , 255);
 			   }
 	  		}
-        ctx2.putImageData(imageData4,0, 0);
+        putimagedataf(imageData4);
 			}
 
-	/*
-	    // Brillo
-	    red = getRed(imageData3,x,y);
-	    green = getGreen(imageData3,x,y);
-	    blue = getBlue(imageData3,x,y);
+      function realizar_brillo(imageData4,brillo){
 
-	    var  brillo = 40;
-	      red+= brillo;
-	      green+= brillo;
-	      blue+= brillo;
-	      if  ((red > 255) or (red < 0)){
-	        if (red >255){
-	          red=255;
-	        }
-	        else {
-	          red=0;
-	        }
-	      }
-	      if  ((green > 255) or (green < 0)){
-	        if (green >255){
-	          green=255;
-	        }
-	        else {
-	          green=0;
-	        }
-	      }
+      for (x=0; x<imageData4.width; x++){
+         for (y=0; y<imageData4.height; y++){
+          red = getRed(imageData4,x,y);
+    	    green = getGreen(imageData4,x,y);
+    	    blue = getBlue(imageData4,x,y);
 
-	      if  ((blue > 255) or (blue < 0)){
-	        if (blue >255){
-	          blue=255;
-	        }
-	        else {
-	          blue=0;
-	        }
-	      }
-	*/
+          red+= brillo;
+          if (red > 255){
+              red = 255;
+          }
+          if (red < 0){
+              red = 0;
+          }
+
+          green+= brillo;
+          if (green > 255){
+              green = 255;
+          }
+          if (green < 0){
+              green = 0;
+          }
+
+          blue+= brillo;
+          if (blue > 255){
+            blue = 255;
+          }
+          if (blue < 0){
+              blue = 0;
+          }
+
+               setPixel(imageData4, x, y, red ,green ,blue , 255);
+           }
+         }
+          putimagedataf(imageData4);
+    }
+
+
+    ////////////////////////////////////////////////////////// putImageData
+
+    function putimagedataf(imageData4){
+        ctx2.putImageData(imageData4,0, 0);
+    }
+
+
+
   ////////////////////////////////////////////////////////// GET DE LOS COLORES Y EL SETPIXEL
 	function getRed(imagedata, x, y){
 	  index = (x + y * imageData.width)*4;
