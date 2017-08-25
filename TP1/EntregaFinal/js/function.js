@@ -35,29 +35,80 @@ $(function() {
             myDrawImageMethod(this); // modifique esta parte porque no andaban los filtros mas adelante
         });
     }
-    ////////////////////////////////////////////////////////// APLICAR UN FILTRO A LA IMAGEN DEL CANVAS
-    $('#Aplicar_Filtro_X').on('click', function() {
-       imageDataX =  ctx.getImageData(0,0, canvas.width,canvas.width);
-       realizar_Negativo(imageDataX);
-    });
+
 
 });
-////////////////////////////////////////////////////////// DESCARGAR LA IMAGEN DEL CANVAS A LA PC
 
+
+////////////////////////////////////////////////////////// DESCARGAR LA IMAGEN DEL CANVAS A LA PC
 
 var button = document.getElementById('btn-download');
 button.addEventListener('click', function (e) {
     var dataURL = canvas2.toDataURL('image/png');
     button.href = dataURL;
 });
+
+
+////////////////////////////////////////////////////////// SELECCIONAR Y APLICAR UN FILTRO A LA IMAGEN DEL CANVAS
+
+
+var buttonFiltros = document.getElementById('btn-download');
+buttonFiltros.addEventListener('click', function (filtro_deseado) {
+  // de aca para arriba hay que ver como hace ru ndesplegable
+   imageDataX =  ctx.getImageData(0,0, canvas.width,canvas.width);
+   realizarFiltro(imageDataX,filtro_deseado);
+});
+
+function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
+
+  switch(filtro_deseado) {
+      case negativo:
+          realizar_Negativo(imageDataX)
+          break;
+
+      case binarización:
+          realizar_Binarizacion(imageDataX,valor_extra)
+          break;
+      case sepia:
+          realizar_Sepia(imageDataX)
+          break;
+      case Gray_Scale:
+          realizar_Gray_Scale(imageDataX)
+          break;
+      // de aca para abajo no tengo ninguno echo
+      case brillo:
+          realizar_brillo(imageDataX,valor_extra)
+          break;
+      case n:
+          realizar_Saturacion(imageDataX)
+          break;
+      case n:
+          realizar_Suavizacion(imageDataX)
+          break;
+      case n:
+          realizar_DeteccionDeBordes(imageDataX)
+          break;
+     case n:
+          realizar_Blur(imageDataX)
+          break;
+
+
+      default:
+          code block
+  }
+
+
+
+}
+
 ////////////////////////////////////////////////////////// FILTROS
 
     // Aca podria poner un case que me de la opcion de que filtro ponerle
-
+    
+    // Negativo
 			function realizar_Negativo(imageData1){
 			 for (x=0; x<imageData1.width; x++){
 			    for (y=0; y<imageData1.height; y++){
-			      // Negativo
 			      setPixel(imageData1, x, y, 255-getRed(imageData1,x,y),255-getGreen(imageData1,x,y),255-getBlue(imageData1,x,y), 255);
 					}
 			 }
@@ -93,11 +144,11 @@ button.addEventListener('click', function (e) {
 
 	      // Binarizacion
 
-			function realizar_Binarizacion(imageData4){
+			function realizar_Binarizacion(imageData4,valor_extra){
         for (x=0; x<ctx.width; x++){
            for (y=0; y<ctx.height; y++){
 			      prom2 = (getRed(imageData4,x,y) + getGreen(imageData4,x,y) + getBlue(imageData4,x,y))/3;
-			      if (prom2 < 128){// el 128 deberia se una variable editable por el usuario el cual maneje el rango de cambio
+			      if (prom2 < valor_extra){
 			        prom2 = 0;
 			      }
 			      else {
