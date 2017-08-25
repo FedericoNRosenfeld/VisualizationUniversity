@@ -173,7 +173,7 @@ function multiplicarBlue(imageData,arrPos){
            valGx = multiplicarGreen(imageData,arrH);
            valGy = multiplicarGreen(imageData,arrV);
            valBx = multiplicarBlue(imageData,arrH);
-           valGy = multiplicarBlue(imageData,arrV);
+           valBy = multiplicarBlue(imageData,arrV);
           fila = (valRx + valGx + valBx)/3;
           columna = (valRy + valGy + valBy)/3;
           setPixel(imageData, x, y,255-(fila+columna),255-(fila+columna),255-(fila+columna), 255);
@@ -184,7 +184,7 @@ function multiplicarBlue(imageData,arrPos){
 
 
 
-    // Negativo
+  ////////////////////////////////////////////////////////// Negativo
 			function realizar_Negativo(imageData){
 			 for (x=0; x<imageData.width; x++){
 			    for (y=0; y<imageData.height; y++){
@@ -194,7 +194,7 @@ function multiplicarBlue(imageData,arrPos){
        putimagedataf(imageData);
 		}
 
-		// Gray Scale
+////////////////////////////////////////////////////////// Gray Scale
 			function realizar_Gray_Scale(imageData){
 				for (x=0; x<imageData.width; x++){
 					 for (y=0; y<imageData.height; y++){
@@ -205,7 +205,7 @@ function multiplicarBlue(imageData,arrPos){
         putimagedataf(imageData);
 			 }
 
-       // Blur
+////////////////////////////////////////////////////////// Blur
    			function realizar_Blur(imageData){
           var valR = 0;
           var valG = 0;
@@ -224,7 +224,7 @@ function multiplicarBlue(imageData,arrPos){
    		}
 
 
-      // Sepia
+////////////////////////////////////////////////////////// Sepia
 			function realizar_Sepia(imageData){
 				for (x=0; x<imageData.width; x++){
 		 	    for (y=0; y<imageData.height; y++){
@@ -241,7 +241,7 @@ function multiplicarBlue(imageData,arrPos){
         putimagedataf(imageData);
 			 }
 
-	      // Binarizacion
+////////////////////////////////////////////////////////// Binarizacion
 
 			function realizar_Binarizacion(imageData,valor_extra){
         for (x=0; x<imageData.width; x++){
@@ -258,7 +258,7 @@ function multiplicarBlue(imageData,arrPos){
 	  		}
         putimagedataf(imageData);
 			}
-
+////////////////////////////////////////////////////////// brillo
       function realizar_brillo(imageData,brillo){
 
       for (x=0; x<imageData.width; x++){
