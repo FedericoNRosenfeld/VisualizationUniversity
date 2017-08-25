@@ -3,26 +3,69 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>FiltrOmatic</title>
+		<!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Estilos propios -->
+	<!-- <link href="css/Estilo_base.css" type="text/css" rel="stylesheet" > -->
+
 	</head>
-		<div id="imagen_original" >
-			<p>Imagen Original</p>
-			<input type="file" id="file-input">
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="jumbotron-heading">Filtros Don Muddy</h1>
+			<p class="lead text-muted">Si bien tu imagen ya es genial como esta en este momento, quizas quieras ver como se veria con algunos filtros</p>
+	<p class="lead text-muted">Selecciona una imagen y adentrate en la aventura del cambio</p>
+		<div>
+				<input type="file" id="file-input">
+			</div><p></p>
+		<div class="row">
+		<div  class="col-sm-2">
+			<p> Imagen Original </p>
+		</div
+		<div id="imagen_original" class="col-sm-2">
 			<canvas id="canvas" width="" height="" style="border:#000 solid 1px;" />
+		</div>
+		<p></p>
+		<div class="row">
+			<div  class="col-sm-2">
+				<p> Imagen con Filtro </p>
+			</div
+			<div id="imagen_filtrada"class="col-sm-2" >
+				<canvas id="canvas2" width="" height="" style="border:#000 solid 1px;" />
+			</div>
+		</div>
+
+		</div>
+	</section>
+
 		</div>
 		<div class="filtros_disponibles" >
 			<p> Listado de filtros disponibles</p>
 		<ul>
-			<!--<div id="Aplicar_Filtro_X">Aplicar Filtro</div> -->
+			<div class="row">
+				  <div class="col-sm-3"><button type="button" class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)">Negativo</button></div>
+				  <div class="col-sm-3"><button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button></div>
+				  <div class="col-sm-3"><button type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button></div>
+			</div>
+			<div class="row">
+				  <div class="col-sm-3">.col-sm-4</div>
+				  <div class="col-sm-3">.col-sm-4</div>
+				  <div class="col-sm-3">.col-sm-4</div>
+			</div>
+			<div class="row">
+				  <div class="col-sm-3">.col-sm-4</div>
+				  <div class="col-sm-3">.col-sm-4</div>
+				  <div class="col-sm-3">.col-sm-4</div>
+			</div>
 		  <li class="filtro">
-				 <button type="button" class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)">Negativo</button>
+
 
 			</li>
 			<li class="filtro">
-				<button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button>
+
 		 </li>
 
 		 <li class="filtro">
-			 <button type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button>
+
 		</li>
 
 		 <li class="filtro">
@@ -50,9 +93,7 @@
 		 </li>
 		</ul>
 		</div>
-		<div id="imagen_filtrada" >
-			<canvas id="canvas2" width="" height="" style="border:#000 solid 1px;" />
-		</div>
+
 		<div>
 			<p> Si desea Guardar esta imagen en su ordenador haga click aqui abajo !! </p>
 			<a href="#" class="button" id="btn-download" download="Imagen_Filtrada.png">Download</a>
@@ -60,6 +101,7 @@
 
 	<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 	<script type="text/javascript" src="js/function.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	</body>
 
 </html>
