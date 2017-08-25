@@ -47,7 +47,7 @@ $(function() {
 
 var button = document.getElementById('btn-download');
 button.addEventListener('click', function (e) {
-    var dataURL = canvas.toDataURL('image/png');
+    var dataURL = canvas2.toDataURL('image/png');
     button.href = dataURL;
 });
 ////////////////////////////////////////////////////////// FILTROS
