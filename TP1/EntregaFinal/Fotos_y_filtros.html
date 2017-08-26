@@ -49,28 +49,35 @@
 												<div class=" well well-sm lead text-muted"> Listado de filtros disponibles</div>
 											<ul>
 												<div class="row">
-													  <div class="col-sm-4"><a href="#tema1"><button type="button"  class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)"> Negativo</button></a></div>
-													  <div class="col-sm-4"><a href="#tema1"><button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button></a></div>
-														<div class="col-sm-4"><p> Binarizacion </p>
-									 				 <a href="#tema1"><input id="barra_binarizacion"  type="range" name="barra_binarizacion" min="0" max="255" step="1" value="?"></a>
-									 				 </div>
+												<div class="col-sm-4"><p> Brillo </p>
+													<a href="#tema1">	<input id="barra_brillo" type="range" name="barra_brillo" min="-255" max="255" step="1" value="?"></a>
+												</div>
+												<div class="col-sm-4"><p> Binarizacion </p>
+							 				 		<a href="#tema1"><input id="barra_binarizacion"  type="range" name="barra_binarizacion" min="0" max="255" step="1" value="?"></a>
+							 				  </div>
+												<div class="col-sm-4"> <p> Saturacion </p>
+														<a href="#tema1"> <input id="barra_saturacion" type="range" name="barra_saturacion" min="0" max="5" step="0.01" value="?"></a>
+												</div>
 												</div>
 												<div class="row">
 													<div class="col-sm-4"><a href="#tema1"><button  type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button></a></div>
 													<div class="col-sm-4"><a href="#tema1"> <button type="button" class="btn" id="btn-filtro-blur" onclick="Filtrar('blur',0)">Blur</button></a></div>
-													<div class="col-sm-4"><p> Brillo </p>
-													<a href="#tema1">	<input id="barra_brillo" type="range" name="barra_brillo" min="-255" max="255" step="1" value="?"></a>
-													</div>
+													<div class="col-sm-4"><a href="#tema1"><button type="button"  class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)"> Negativo</button></a></div>
+
+
 												</div>
 												<div class="row">
 													  <div class="col-sm-4"><a href="#tema1"><button type="button" class="btn" id="btn-filtro-bordes" onclick="Filtrar('bordes',0)">Deteccion de Bordes</button></a></div>
 					 									<div class="col-sm-4"><a href="#tema1"><button type="button" class="btn" id="btn-colores-mezclados" onclick="Filtrar('colores',0)">Colores Mezclados</button></a></div>
-														<div class="col-sm-4"> <p> Saturacion </p>
-																<a href="#tema1"> <input id="barra_saturacion" type="range" name="barra_saturacion" min="0" max="5" step="0.01" value="?"></a>
-														</div>
+														<div class="col-sm-4"><a href="#tema1"><button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button></a></div>
 												</div>
 											</ul>
+
 									</section>
+									<p class="small"> Los filtros solo funcionan con la imagen original, no es posible combinar filtros desde la pagina por el momento</p>
+									<p class="small"> Para probar distintos filtros a la vez en la misma imagen , descargue la filtrada y carguela nuevamente como principal </p>
+									<p class="small"> Cualquier consulta escriba a tuconsultanolavoyaleer@muddymania.com</p>
+
 								</div>
 
 
