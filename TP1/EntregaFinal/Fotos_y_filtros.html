@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"; width=device-width, initial-scale=1.0 />
 		<title>FiltrOmatic</title>
 		<!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- Estilos propios -->
-	<!-- <link href="css/Estilo_base.css" type="text/css" rel="stylesheet" > -->
+	 <link href="css/estilos.css" type="text/css" rel="stylesheet" >
 
 	</head>
 	<div class="container">
@@ -34,6 +34,7 @@
 									<div  class="col-sm-2">
 										<p class="lead text-muted"> Imagen con Filtro </p>
 									</div>
+									<a name="tema1" ></a>
 									<div id="imagen_filtrada"class="col-sm-6" >
 										<canvas id="canvas2" width="" height="" style="border:#000 solid 1px;" />
 									</div>
@@ -48,24 +49,24 @@
 												<div class=" well well-sm lead text-muted"> Listado de filtros disponibles</div>
 											<ul>
 												<div class="row">
-													  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)">Negativo</button></div>
-													  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button></div>
+													  <div class="col-sm-4"><a href="#tema1"><button type="button"  class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)"> Negativo</button></a></div>
+													  <div class="col-sm-4"><a href="#tema1"><button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button></a></div>
 														<div class="col-sm-4"><p> Binarizacion </p>
-									 				 <input id="barra_binarizacion" type="range" name="barra_binarizacion" min="0" max="255" step="1" value="?">
+									 				 <a href="#tema1"><input id="barra_binarizacion"  type="range" name="barra_binarizacion" min="0" max="255" step="1" value="?"></a>
 									 				 </div>
 												</div>
 												<div class="row">
-													<div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button></div>
-													<div class="col-sm-4"> <button type="button" class="btn" id="btn-filtro-blur" onclick="Filtrar('blur',0)">Blur</button></div>
+													<div class="col-sm-4"><a href="#tema1"><button  type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button></a></div>
+													<div class="col-sm-4"><a href="#tema1"> <button type="button" class="btn" id="btn-filtro-blur" onclick="Filtrar('blur',0)">Blur</button></a></div>
 													<div class="col-sm-4"><p> Brillo </p>
-														<input id="barra_brillo" type="range" name="barra_brillo" min="-255" max="255" step="1" value="?">
+													<a href="#tema1">	<input id="barra_brillo" type="range" name="barra_brillo" min="-255" max="255" step="1" value="?"></a>
 													</div>
 												</div>
 												<div class="row">
-													  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-bordes" onclick="Filtrar('bordes',0)">Deteccion de Bordes</button></div>
-					 									<div class="col-sm-4"><button type="button" class="btn" id="btn-colores-mezclados" onclick="Filtrar('colores',0)">Colores Mezclados</button></div>
+													  <div class="col-sm-4"><a href="#tema1"><button type="button" class="btn" id="btn-filtro-bordes" onclick="Filtrar('bordes',0)">Deteccion de Bordes</button></a></div>
+					 									<div class="col-sm-4"><a href="#tema1"><button type="button" class="btn" id="btn-colores-mezclados" onclick="Filtrar('colores',0)">Colores Mezclados</button></a></div>
 														<div class="col-sm-4"> <p> Saturacion </p>
-																 <input id="barra_saturacion" type="range" name="barra_saturacion" min="0" max="5" step="0.01" value="?">
+																<a href="#tema1"> <input id="barra_saturacion" type="range" name="barra_saturacion" min="0" max="5" step="0.01" value="?"></a>
 														</div>
 												</div>
 											</ul>
