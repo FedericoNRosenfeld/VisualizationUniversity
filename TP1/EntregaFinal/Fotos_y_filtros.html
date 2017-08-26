@@ -12,7 +12,7 @@
 	<div class="container">
 					<section class="jumbotron text-center">
 							<div class="container">
-								<h1 class="jumbotron-heading">Filtros Don Muddy</h1>
+								<h1 class="jumbotron-heading text-success">Filtros Don Muddy</h1>
 								<p class="lead text-muted">Si bien tu imagen ya es genial como esta en este momento, quizas quieras ver como se veria con algunos filtros</p>
 								<p class="lead text-muted">Selecciona una imagen y adentrate en la aventura del cambio</p>
 								<div>
@@ -20,63 +20,62 @@
 								</div><p></p>
 								<div class="row">
 								<div  class="col-sm-2">
-									<p> Imagen Original </p>
+									<p class="lead text-muted"> Imagen Original </p>
 								</div>
 								<div id="imagen_original" class="col-sm-2">
 									<canvas id="canvas" width="" height="" style="border:#000 solid 1px;" />
 								</div>
 							</div>
 								<div class="row">
-									<div  class="col-sm-2"> </div>
+									<div  class="col-sm-12">
+									</div>
 								</div>
 								<div class="row">
 									<div  class="col-sm-2">
-										<p> Imagen con Filtro </p>
+										<p class="lead text-muted"> Imagen con Filtro </p>
 									</div>
 									<div id="imagen_filtrada"class="col-sm-6" >
 										<canvas id="canvas2" width="" height="" style="border:#000 solid 1px;" />
 									</div>
+									<div class="col-sm-12">
+									<p> Si desea Guardar esta imagen en su ordenador haga click aqui abajo !! </p>
+									<a href="#" class="button" id="btn-download" download="Imagen_Filtrada.png">Download</a>
 								</div>
-										<div>
-											<p> Si desea Guardar esta imagen en su ordenador haga click aqui abajo !! </p>
-											<a href="#" class="button" id="btn-download" download="Imagen_Filtrada.png">Download</a>
-										</div>
+								</div>
+
+								<div class="container">
+									<section class="jumbotron text-center">
+												<div class=" well well-sm lead text-muted"> Listado de filtros disponibles</div>
+											<ul>
+												<div class="row">
+													  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)">Negativo</button></div>
+													  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button></div>
+														<div class="col-sm-4"><p> Binarizacion </p>
+									 				 <input id="barra_binarizacion" type="range" name="barra_binarizacion" min="0" max="255" step="1" value="?">
+									 				 </div>
+												</div>
+												<div class="row">
+													<div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button></div>
+													<div class="col-sm-4"> <button type="button" class="btn" id="btn-filtro-blur" onclick="Filtrar('blur',0)">Blur</button></div>
+													<div class="col-sm-4"><p> Brillo </p>
+														<input id="barra_brillo" type="range" name="barra_brillo" min="-255" max="255" step="1" value="?">
+													</div>
+												</div>
+												<div class="row">
+													  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-bordes" onclick="Filtrar('bordes',0)">Deteccion de Bordes</button></div>
+					 									<div class="col-sm-4"><button type="button" class="btn" id="btn-colores-mezclados" onclick="Filtrar('colores',0)">Colores Mezclados</button></div>
+														<div class="col-sm-4"> <p> Saturacion </p>
+																 <input id="barra_saturacion" type="range" name="barra_saturacion" min="0" max="5" step="0.01" value="?">
+														</div>
+												</div>
+											</ul>
+									</section>
+								</div>
+
+
 							</div>
 					</section>
 			</div>
-<div class="container">
-				<section class="jumbotron text-center">
-
-						<section class="jumbotron text-center">
-						<div class="filtros_disponibles" >
-							<p class="lead text-muted"> Listado de filtros disponibles</p>
-						<ul>
-							<div class="row">
-								  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-negativo" onclick="Filtrar('negativo',0)">Negativo</button></div>
-								  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-grey-scale" onclick="Filtrar('Gray_Scale',0)">Gray_Scale</button></div>
-									<div class="col-sm-4"><p> Binarizacion </p>
-				 				 <input id="barra_binarizacion" type="range" name="barra_binarizacion" min="0" max="255" step="1" value="?">
-				 				 </div>
-							</div>
-							<div class="row">
-								<div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-sepia" onclick="Filtrar('sepia',0)">Sepia</button></div>
-								<div class="col-sm-4"> <button type="button" class="btn" id="btn-filtro-blur" onclick="Filtrar('blur',0)">Blur</button></div>
-								<div class="col-sm-4"><p> Brillo </p>
-									<input id="barra_brillo" type="range" name="barra_brillo" min="-255" max="255" step="1" value="?">
-								</div>
-							</div>
-							<div class="row">
-								  <div class="col-sm-4"><button type="button" class="btn" id="btn-filtro-bordes" onclick="Filtrar('bordes',0)">Deteccion de Bordes</button></div>
- 									<div class="col-sm-4">.col-sm-4</div>
-									<div class="col-sm-4"> <p> Saturacion </p>
-											 <input id="barra_saturacion" type="range" name="barra_saturacion" min="0" max="5" step="0.01" value="?">
-									</div>
-
-							</div>
-						</ul>
-						</div>
-				</section>
-</div>
 
 
 	<script type="text/javascript" src="js/jquery-3.2.1.js"></script>

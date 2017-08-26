@@ -111,8 +111,8 @@ function realizarFiltro(imageDataX,filtro_deseado,valor_extra){
           realizar_DeteccionDeBordes(imageDataX);
           break;
 
-      case n:
-          realizar_Suavizacion(imageDataX);
+      case "colores":
+          realizar_coloresMezclados(imageDataX);
           break;
 
       default:
@@ -178,6 +178,17 @@ function multiplicarColor(imageData,arrPos,getColor){
 			 }
        putimagedataf(imageData);
 		}
+
+    ////////////////////////////////////////////////////////// COlores Mezclados
+
+    function realizar_coloresMezclados(imageData){
+     for (x=0; x<imageData.width; x++){
+        for (y=0; y<imageData.height; y++){
+          setPixel(imageData, x, y, getGreen(imageData,x,y),getBlue(imageData,x,y),getRed(imageData,x,y), 255);
+        }
+     }
+     putimagedataf(imageData);
+  }
 
 ////////////////////////////////////////////////////////// Gray Scale
 			function realizar_Gray_Scale(imageData){
