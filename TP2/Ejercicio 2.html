@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
+	</body>
+	<script>
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	
+	 //CREACION DE UNA CLASE CIRCULO CON APLCIACION DE UN METODO
+	
+	//DEFINIR OBJETOS FIGURAS
+	function Circle(paramPosX, paramPosY, paramRadio, paramColor){
+		this.posX =paramPosX;
+		this.posY =paramPosY;
+		this.Radio = paramRadio;
+		this.Color =paramColor;
+
+	}	
+
+	function Square(paramPosX, paramPosY,color){
+		var val = Math.floor(Math.random()*15);
+
+		this.Color = color;
+		this.posX =paramPosX;
+		this.posY =paramPosY;
+		this.posfX = paramPosX+val;
+		this.posfY =paramPosY+val;
+
+	}	
+	
+	
+	//DIBUJAR OBJETOS FIGURAS
+
+	function crearCirculo(circle){
+	ctx.fillStyle = circle.Color;
+	ctx.beginPath();
+	ctx.arc(circle.posX,circle.posY,circle.Radio,0,Math.PI * 2);
+	ctx.fill();
+	ctx.closePath();
+	}
+
+
+	function crearCuadrado(cuadrado){
+	
+	ctx.fillStyle = cuadrado.Color;
+	ctx.beginPath();
+	ctx.fillRect(cuadrado.posX,cuadrado.posY,cuadrado.posfX,cuadrado.posfY);
+	ctx.fill();
+	
+	ctx.closePath();
+	}
+	
+	//DEFINIR CREAR PARAMETROS ESPECIFICOS FIGURAS Y COENCTAR CON SU CREACION Y DIBUJO
+
+	function quieroCirculo(cX,cY,color){
+		var radio = Math.floor(Math.random()*15) +5;
+		var circle = new Circle(cX,cY,radio,color);
+		crearCirculo(circle);
+		}
+		
+	function quieroCuadrado(cX,cY,color){
+
+		var cuadrado = new Square(cX,cY,color);
+		crearCuadrado(cuadrado);
+	}
+	
+	//DEFINIR UN SWITCH DE FIGURAS ALEATORIAS
+
+	function crearFigura(numeroFigura,posiX,posiY,color){
+		  switch(numeroFigura) {
+			  case 1:
+				  quieroCirculo(posiX,posiY,color);
+				  break;
+			  case 2:
+				  quieroCuadrado(posiX,posiY,color);
+				  break;
+			
+	}}
+	
+	document.getElementById("canvas").addEventListener("click",function(){
+		var cX = Math.floor(Math.random()*canvas.width);
+		var cY = Math.floor(Math.random()*canvas.height);
+		var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+		var figura = crearFigura(Math.floor(Math.random()*2)+1,cX,cY,color);
+		});
+	//falta los patrones
+
+</script>
+</html>

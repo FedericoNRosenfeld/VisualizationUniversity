@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
+	</body>
+	<script>
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	
+	 //CREACION DE UNA CLASE CIRCULO CON APLCIACION DE UN METODO
+	function Circle(paramPosX, paramPosY, paramRadio, paramColor){
+		this.posX =paramPosX;
+		this.posY =paramPosY;
+		this.Radio = paramRadio;
+		this.Color =paramColor;
+
+	}	
+	
+		
+	function cambiarColores(valor){
+		gradient.addColorStop(0, valor);
+		ctx.fillStyle = gradient;
+		ctx.fill();
+	}
+	
+	
+	//circulo
+	function crearCirculo(){
+	ctx.fillStyle = '#141444';
+	ctx.beginPath();
+	ctx.arc(400, 250, 100, 0, Math.PI * 2);
+	ctx.fill();
+	ctx.closePath();
+	}
+	
+	
+	function crearCirculo(circle){
+	ctx.fillStyle = circle.Color;
+	ctx.beginPath();
+	ctx.arc(circle.posX,circle.posY,circle.Radio,0,Math.PI * 2);
+	ctx.fill();
+	ctx.closePath();
+	}
+
+	//contorno
+	/*
+	ctx.beginPath();
+	ctx.arc(400, 250, 100, 0, Math.PI * 2);
+	ctx.lineWidth = 15;
+	ctx.lineCap = 'round';
+	ctx.strokeStyle = 'black';
+	ctx.stroke();
+	ctx.closePath();
+	
+	
+	//gradiente
+	
+	var gradient = ctx.createLinearGradient(200, 0, 650, 0);
+	gradient.addColorStop(0, 'black');
+	gradient.addColorStop(1, 'red');
+	ctx.fillStyle = gradient; //
+	//ctx.fillRect(300, 250, 200, 250); //
+	ctx.fill();
+	*/
+	
+	function mouseDown(e) {		
+		var cX = e.clientX;
+		var cY = e.clientY;
+		var radio = Math.floor(Math.random()*15) +5;
+		var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+		var circle = new Circle(cX,cY,radio,color);
+		crearCirculo(circle);
+	}
+	
+	document.getElementById("canvas").addEventListener("click",mouseDown);
+
+	//document.getElementById("canvas").addEventListener("click",function(){cambiarColores("blue");});
+	//document.getElementById("canvas").addEventListener("mouseover", function(){cambiarColores("green");});
+	//document.getElementById("canvas").addEventListener("mouseout", function(){ cambiarColores('yellow'); });
+
+</script>
+</html>
