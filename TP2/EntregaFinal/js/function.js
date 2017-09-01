@@ -46,7 +46,7 @@ var fichas = [];
       var tamanio = cantidad*20;
       for (i = 0; i < cantidad ;i++){
         var color = '#'+Math.floor(Math.random()*16777215).toString(16);
-        var fichaX = new Ficha(cantidad,cX,cY,color,tamanio);
+        var fichaX = new Ficha(i+1,cX,cY,color,tamanio);
         fichas[i] = fichaX;
         columna.fichas.push(fichaX);
         cY-= 12;
