@@ -1,6 +1,8 @@
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+var fichaSelected; // variable para saber si existe una Ficha seleccionada
+var oldX,oldY; //almacena las coordenas X,Y antes de realizar un desplazamiento
 
  ///////////////CREACION DE UNA CLASE FICHA CON APLCIACION DE UN METODO
  ////// Ficha
@@ -28,8 +30,8 @@ var ctx = canvas.getContext("2d");
      this.colFichas = [];
    }
 
-   
-   
+
+
    function Piso(posX, posY,ancho){
       this.posicionX = posX;
       this.posicionY = posY;
@@ -57,6 +59,7 @@ var ctx = canvas.getContext("2d");
 
 
     function Tablero(cantPiezas){
+      this.columnas = [];         // un arreglo de columnas
       var largo = cantPiezas * 70;
       var alto = cantPiezas * 20;
       canvas.width = largo + 50;
@@ -65,26 +68,26 @@ var ctx = canvas.getContext("2d");
       var posY = canvas.height - 22;
       this.piso = new Piso(posX,posY,largo);
       posX = posX + Math.floor(cantPiezas*10);
-      this.columna1 = new Columna(1,posX,posY,alto);
-      generadorFichas(cantPiezas,posX- Math.floor(cantPiezas*9), posY - this.piso.alto /2 ,this.columna1);
+      this.columnas.push(new Columna(1,posX,posY,alto));
+      generadorFichas(cantPiezas,posX- Math.floor(cantPiezas*9), posY - this.piso.alto /2 ,this.columnas[0]);
       posX = posX + largo/3 ;
-      this.columna2 = new Columna(2,posX,posY,alto);
+      this.columnas.push(new Columna(2,posX,posY,alto));
       posX = posX + largo/3 ;
-      this.columna3 = new Columna(3,posX,posY,alto);
+      this.columnas.push(new Columna(3,posX,posY,alto));
     }
 
   /////////////// METODOS DE LA COLUMNA
-  
+
     Columna.prototype.apilarFicha = function(){ // Retira la ficha tope de la pila auxiliar y la agrega en la columna
 		this.colFichas.push(fichas.pop());
 	}
-	
-	Columna.prototype.desapilarFicha = function(){ // Retira la ficha tope de la columna y la agrega en la pila auxiliar 
+
+	Columna.prototype.desapilarFicha = function(){ // Retira la ficha tope de la columna y la agrega en la pila auxiliar
 		fichas.push(this.colFichas.pop());
 	}
-	
-	
-	Columna.prototype.validarFichaYLugar = function(){ 
+
+
+	Columna.prototype.validarFichaYLugar = function(){
 	// Chequea si es valido el movimiento de apliar en la columna la ficha que s eencuentra en el arreglo aux
 		var fichaMano = fichas[fichas.length-1];
 		var fichaColumna = this.colFichas[colFichas.length-1];
@@ -94,23 +97,23 @@ var ctx = canvas.getContext("2d");
 		else{
 			return false;
 		}
-	}	
-	
-	
-	function levantarFicha(columna){
-		columna.
 	}
-	
-	
-	function colocarFicha(columnaAnt,columnaSig){ 
-		// Al tener ya la ficha en el Arreglo Aux , se le pregunta a la columna seleccionada si es valida la insercion 
+
+
+	function levantarFicha(columna){
+		columna.desapilarFicha();
+	}
+
+
+	function colocarFicha(columnaAnt,columnaSig){
+		// Al tener ya la ficha en el Arreglo Aux , se le pregunta a la columna seleccionada si es valida la insercion
 		if (columnaSig.validarFichaYLugar()){
 			columnaSig.apilarFicha();
 		}
 		else{
 			columnaAnt.apilarFicha();
 		}
-		
+
 	}
 
   /////////////// DIBUJAR EN EL CANVAS
@@ -123,6 +126,8 @@ var ctx = canvas.getContext("2d");
     ctx.closePath();
     }
 
+
+
   Piso.prototype.dibujarPiso = function(color){
     ctx.fillStyle = color;
   	ctx.beginPath();
@@ -133,7 +138,7 @@ var ctx = canvas.getContext("2d");
 
 
   Columna.prototype.dibujarColumna = function(color){
-	
+
     ctx.fillStyle = color;
   	ctx.beginPath();
   	ctx.fillRect(this.posicionX,this.posicionY,this.ancho,this.alto);
@@ -150,45 +155,103 @@ var ctx = canvas.getContext("2d");
   Tablero.prototype.dibujartablero = function(){
     	color = "#8B4513";
       this.piso.dibujarPiso(color);
-      this.columna1.dibujarColumna(color);
-      this.columna2.dibujarColumna(color);
-      this.columna3.dibujarColumna(color);
+      for (i = 0;i < this.columnas.length; i++){
+      this.columnas[i].dibujarColumna(color);
+      }
       for (i = 0;i < fichas.length; i++){
           fichas[i].dibujarFicha();
       }
   	}
 
 
+  function paint() {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      t.dibujartablero();
+    }
+
+
+/////////////////////////////////////////// EVENTOS DE MOUSE
+
+
+function getMousePos(canvas, evt) { // posicion del mouse en el canvas
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+}
+
+
+
     function mousedown(e) {
-    		var cX = e.clientX;
-    		var cY = e.clientY;
-    	
-    	}
-		
-	function mouseUp(e) {
-		var cX = e.clientX;
-		var cY = e.clientY;
-	
-	}
-	
-	function mousemove(e) {
-		
-		var cX = e.clientX;
-		var cY = e.clientY;
-		 $("#lala").text(cX+ ", " +cY);
-	
-	}
+      pos = getMousePos(canvas, e);
+      //se capturan coordenas del mouse
+      mouseX = pos.x;
+      mouseY = pos.y;
+      alert("mouseX = " + mouseX + " mouseY = " + mouseY);
+      for (var i=0; i< t.columnas.length; i++){
+        columnaActual = t.columnas[i]
+        alert("Columna " + columnaActual.id + " En posicion x = " + columnaActual.posicionX + " En posicion y = " + columnaActual.posicionY +  " En ancho x = " + (columnaActual.posicionX + columnaActual.ancho) +  " En altura  = " + (columnaActual.posicionY + columnaActual.alto));
 
-    document.getElementById("canvas").addEventListener("click",mousedown);
+      if ( (mouseX>columnaActual.posicionX) && (mouseX < (columnaActual.posicionX + columnaActual.ancho)) &&
+           (mouseY<columnaActual.posicionY) && (mouseY > (columnaActual.posicionY + columnaActual.alto) )
+         ) {
+            alert("pisaste columna "+ t.columnas[i].id);
+           }
+     else{
+
+        }
+      }
+
+/*
+      //se controla en todas las fichas de esa columna
+      for (var i=0; i<fichas.length; i++) {
+      //se determina si se presiono el mouse encima de alguna ficha
+      if ( (mouseX>fichas[i].posX) &&
+           (mouseX < (fichas[i].posX + fichas[i].largoX)) &&
+           (mouseY>fichas[i].posY) &&
+           (mouseY < (fichas[i].posY + fichas[i].altoY) )
+         ){
+            // coordenas X,Y donde se hizo clic
+            oldX = mouseX;
+            oldY = mouseY;
+                    fichaSelected = i;
+                    break;
+          }
+      }/// cierra el for */
+    }
+
+
+  function mousemove(e) {
+    pos = getMousePos(canvas, e);
+    mouseX = pos.x;
+    mouseY = pos.y;
+  //si existe una FIcha seleccionada
+  if (fichaSelected != undefined) {
+      //se calcula la distancia del dezplazamiento
+      var dx =  mouseX - oldX ;
+      var dy =  mouseY- oldY ;
+      //se asignan nuevos valores
+      oldX = mouseX;
+      oldY = mouseY;
+      //se actualiza coordenadas X,Y de la Ficha seleccionada
+      fichaVal = fichas[fichaSelected]
+      fichas[fichaSelected] = new Ficha( fichaVal.id, fichaVal.Color, fichaVal.posX + dx,  fichaVal.posY + dy,fichaVal.largoX,fichaVal.altoY );
+      }
+  }
+
+  function mouseup(e) {
+   selectedShape = undefined;
+   //todo el lienzo se repinta cada 50 milisegundos
+   setInterval(paint, 50);
+   }
+
+    document.getElementById("canvas").addEventListener("mousedown",mousedown);
     document.getElementById("canvas").addEventListener("mousemove",mousemove);
-    document.getElementById("canvas").addEventListener("click",mouseUp);
+    document.getElementById("canvas").addEventListener("mouseup",mouseup);
 
 
 
-  /////////////// Llamado al tablero
+  /////////////// Llamado al tablero inicial
   t = new Tablero(3);
   t.dibujartablero();
-
-//document.getElementById("canvas").addEventListener("click",function(){cambiarColores("blue");});
-//document.getElementById("canvas").addEventListener("mouseover", function(){cambiarColores("green");});
-//document.getElementById("canvas").addEventListener("mouseout", function(){ cambiarColores('yellow'); });
