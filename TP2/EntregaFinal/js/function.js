@@ -75,28 +75,43 @@ var ctx = canvas.getContext("2d");
 
   /////////////// METODOS DE LA COLUMNA
   
-    Columna.prototype.apilarFicha = function(){
+    Columna.prototype.apilarFicha = function(){ // Retira la ficha tope de la pila auxiliar y la agrega en la columna
 		this.colFichas.push(fichas.pop());
 	}
 	
+	Columna.prototype.desapilarFicha = function(){ // Retira la ficha tope de la columna y la agrega en la pila auxiliar 
+		fichas.push(this.colFichas.pop());
+	}
 	
-	Columna.prototype.validarFichaYLugar = function(){
+	
+	Columna.prototype.validarFichaYLugar = function(){ 
+	// Chequea si es valido el movimiento de apliar en la columna la ficha que s eencuentra en el arreglo aux
 		var fichaMano = fichas[fichas.length-1];
 		var fichaColumna = this.colFichas[colFichas.length-1];
-		if (fichaMano.id < fichaColumna.id){ // el id mas chico hace la ficha mas grande
-			// no se puede apilar
+		if (fichaMano.id > fichaColumna.id){ // el id mas chico hace la ficha mas grande
+			return true;
 		}
 		else{
-			// se puede apilar	
+			return false;
 		}
 	}	
 	
 	
-	Columna.prototype.sacarFicha = function(){
-
+	function levantarFicha(columna){
+		columna.
 	}
 	
 	
+	function colocarFicha(columnaAnt,columnaSig){ 
+		// Al tener ya la ficha en el Arreglo Aux , se le pregunta a la columna seleccionada si es valida la insercion 
+		if (columnaSig.validarFichaYLugar()){
+			columnaSig.apilarFicha();
+		}
+		else{
+			columnaAnt.apilarFicha();
+		}
+		
+	}
 
   /////////////// DIBUJAR EN EL CANVAS
 
