@@ -5,7 +5,7 @@ var ctx = canvas.getContext("2d");
  ///////////////CREACION DE UNA CLASE FICHA CON APLCIACION DE UN METODO
  ////// Ficha
  function Ficha(id,paramPosX, paramPosY,color,tamanio){
-    this.id = id;
+		this.id = id;
  		this.Color = color;
  		this.posX =paramPosX;
  		this.posY = paramPosY ;
@@ -15,23 +15,24 @@ var ctx = canvas.getContext("2d");
  	}
 
 
-
   /////////////// CREACION DEL TABLERO CON APLCIACION DE UN METODO
-var fichas = [];
+
+  var fichas = []; // arreglo donde se guardarian las fichas que no estan en ninguna columna
 
   function Columna(id,posX, posY,alto){
      this.id = id;
      this.posicionX = posX;
      this.posicionY =posY;
-     this.ancho = 15;
+     this.ancho = 10;
      this.alto = -alto;
-     this.fichas = [];
-
+     this.colFichas = [];
    }
 
+   
+   
    function Piso(posX, posY,ancho){
       this.posicionX = posX;
-      this.posicionY =posY;
+      this.posicionY = posY;
       this.ancho = ancho;
       this.alto = 23;
 
@@ -47,8 +48,7 @@ var fichas = [];
       for (i = 0; i < cantidad ;i++){
         var color = '#'+Math.floor(Math.random()*16777215).toString(16);
         var fichaX = new Ficha(i+1,cX,cY,color,tamanio);
-        fichas[i] = fichaX;
-        columna.fichas.push(fichaX);
+        columna.colFichas.push(fichaX);
         cY-= 12;
         tamanio-= 10;
         cX+=5;
@@ -60,7 +60,7 @@ var fichas = [];
       var largo = cantPiezas * 70;
       var alto = cantPiezas * 20;
       canvas.width = largo + 50;
-      canvas.height = alto + 50;
+      canvas.height = alto + 150;
       var posX = 20;
       var posY = canvas.height - 22;
       this.piso = new Piso(posX,posY,largo);
@@ -73,9 +73,32 @@ var fichas = [];
       this.columna3 = new Columna(3,posX,posY,alto);
     }
 
+  /////////////// METODOS DE LA COLUMNA
+  
+    Columna.prototype.apilarFicha = function(){
+		this.colFichas.push(fichas.pop());
+	}
+	
+	
+	Columna.prototype.validarFichaYLugar = function(){
+		var fichaMano = fichas[fichas.length-1];
+		var fichaColumna = this.colFichas[colFichas.length-1];
+		if (fichaMano.id < fichaColumna.id){ // el id mas chico hace la ficha mas grande
+			// no se puede apilar
+		}
+		else{
+			// se puede apilar	
+		}
+	}	
+	
+	
+	Columna.prototype.sacarFicha = function(){
 
+	}
+	
+	
 
-  /////////////// DIBUJAR  UNA  FICHA EN EL CANVAS
+  /////////////// DIBUJAR EN EL CANVAS
 
   Ficha.prototype.dibujarFicha = function(){
     ctx.fillStyle = this.Color;
@@ -95,17 +118,22 @@ var fichas = [];
 
 
   Columna.prototype.dibujarColumna = function(color){
+	
     ctx.fillStyle = color;
   	ctx.beginPath();
   	ctx.fillRect(this.posicionX,this.posicionY,this.ancho,this.alto);
   	ctx.fill();
   	ctx.closePath();
+	 for (var i = 0; i < this.colFichas.length; i++){
+		 this.colFichas[i].dibujarFicha();
+	 }
   	}
 
 
 
+
   Tablero.prototype.dibujartablero = function(){
-    	color = "brown";
+    	color = "#8B4513";
       this.piso.dibujarPiso(color);
       this.columna1.dibujarColumna(color);
       this.columna2.dibujarColumna(color);
@@ -114,6 +142,33 @@ var fichas = [];
           fichas[i].dibujarFicha();
       }
   	}
+
+
+    function mousedown(e) {
+    		var cX = e.clientX;
+    		var cY = e.clientY;
+    	
+    	}
+		
+	function mouseUp(e) {
+		var cX = e.clientX;
+		var cY = e.clientY;
+	
+	}
+	
+	function mousemove(e) {
+		
+		var cX = e.clientX;
+		var cY = e.clientY;
+		 $("#lala").text(cX+ ", " +cY);
+	
+	}
+
+    document.getElementById("canvas").addEventListener("click",mousedown);
+    document.getElementById("canvas").addEventListener("mousemove",mousemove);
+    document.getElementById("canvas").addEventListener("click",mouseUp);
+
+
 
   /////////////// Llamado al tablero
   t = new Tablero(3);
