@@ -1,7 +1,6 @@
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var fichaSelected; // variable para saber si existe una Ficha seleccionada
 var oldX,oldY; //almacena las coordenas X,Y antes de realizar un desplazamiento
 
  ///////////////CREACION DE UNA CLASE FICHA CON APLCIACION DE UN METODO
@@ -184,49 +183,44 @@ function getMousePos(canvas, evt) { // posicion del mouse en el canvas
 
 
     function mousedown(e) {
-      pos = getMousePos(canvas, e);
+      pos = getMousePos(canvas, e); // para sacar la posicion exacta del mouse en el canvas
       //se capturan coordenas del mouse
       mouseX = pos.x;
       mouseY = pos.y;
-      alert("mouseX = " + mouseX + " mouseY = " + mouseY);
+
       for (var i=0; i< t.columnas.length; i++){
-        columnaActual = t.columnas[i]
-        alert("Columna " + columnaActual.id + " En posicion x = " + columnaActual.posicionX + " En posicion y = " + columnaActual.posicionY +  " En ancho x = " + (columnaActual.posicionX + columnaActual.ancho) +  " En altura  = " + (columnaActual.posicionY + columnaActual.alto));
-
-      if ( (mouseX>columnaActual.posicionX) && (mouseX < (columnaActual.posicionX + columnaActual.ancho)) &&
+          columnaActual = t.columnas[i]
+      if ( (mouseX>columnaActual.posicionX-50) && (mouseX < (columnaActual.posicionX + columnaActual.ancho+50)) &&
            (mouseY<columnaActual.posicionY) && (mouseY > (columnaActual.posicionY + columnaActual.alto) )
-         ) {
-            alert("pisaste columna "+ t.columnas[i].id);
-           }
-     else{
-
-        }
-      }
-
-/*
-      //se controla en todas las fichas de esa columna
-      for (var i=0; i<fichas.length; i++) {
-      //se determina si se presiono el mouse encima de alguna ficha
-      if ( (mouseX>fichas[i].posX) &&
-           (mouseX < (fichas[i].posX + fichas[i].largoX)) &&
-           (mouseY>fichas[i].posY) &&
-           (mouseY < (fichas[i].posY + fichas[i].altoY) )
          ){
-            // coordenas X,Y donde se hizo clic
-            oldX = mouseX;
-            oldY = mouseY;
-                    fichaSelected = i;
-                    break;
-          }
-      }/// cierra el for */
-    }
-
+            alert("pisaste columna "+ t.columnas[i].id);
+            //se controla en todas las fichas de esa columna
+            for (var j=0; j<columnaActual.colFichas.length; j++) {
+            //se determina si se presiono el mouse encima de alguna ficha
+            fichaj = columnaActual.colFichas[j]
+            if ( (mouseX>fichaj.posX) &&
+                 (mouseX < (fichaj.posX + fichaj.largoX)) &&
+                 (mouseY>fichaj.posY) &&
+                 (mouseY < (fichaj.posY + fichaj.altoY) ) && (fichaj == columnaActual.colFichas[columnaActual.colFichas.length-1] )
+               ){
+                  // coordenas X,Y donde se hizo clic
+                  oldX = mouseX;
+                  oldY = mouseY;
+                  levantarFicha(columnaActual);
+                  alert("id de la ficha = " + fichaj.id);
+                  break;
+                }
+            }/// cierra el for de las fichas de la columna
+        } // cierra el if de la columna seleccionada
+      } // cierra el for que cicla entre las columnas existentes
+  }// cierra el metodo
 
   function mousemove(e) {
     pos = getMousePos(canvas, e);
     mouseX = pos.x;
     mouseY = pos.y;
   //si existe una FIcha seleccionada
+  fichaSelected = fichas.pop();
   if (fichaSelected != undefined) {
       //se calcula la distancia del dezplazamiento
       var dx =  mouseX - oldX ;
@@ -235,8 +229,8 @@ function getMousePos(canvas, evt) { // posicion del mouse en el canvas
       oldX = mouseX;
       oldY = mouseY;
       //se actualiza coordenadas X,Y de la Ficha seleccionada
-      fichaVal = fichas[fichaSelected]
-      fichas[fichaSelected] = new Ficha( fichaVal.id, fichaVal.Color, fichaVal.posX + dx,  fichaVal.posY + dy,fichaVal.largoX,fichaVal.altoY );
+      fichaVal = fichaSelected
+      fichas[0] = new Ficha( fichaVal.id, fichaVal.Color, fichaVal.posX + dx,  fichaVal.posY + dy,fichaVal.largoX,fichaVal.altoY );
       }
   }
 
