@@ -169,7 +169,8 @@ var tablerolargo,tableroalto; // definidos globales en caso de necesitarlos par 
 
 
 function festejo(){
-  ctx.clearRect(0, 0,canvas.width,canvas.height);
+  document.getElementById("demo").innerHTML = "Lograste completar las Torres de Hanoi, Felicidades";
+
 }
 
 function verSiGano(){
@@ -178,7 +179,6 @@ function verSiGano(){
       (t.columnas[1].colFichas.length == 0) &&
       (t.columnas[2].colFichas.length > 0)  &&
       (mano.length == 0)){
-    alert("ganaste");
     festejo();
   }
 }

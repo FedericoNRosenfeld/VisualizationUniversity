@@ -10,3 +10,15 @@ canvas{
   background-repeat: repeat;
   border:#000 solid 2px;
 }
+
+#titulo_principal{
+  font-family: serif;
+  color: blue;
+  text-decoration: underline;
+  text-shadow: 3px 2px black;
+}
+#mensaje_ganaste{
+   font-family: "Times New Roman", Times, serif;
+   font-style: italic;
+   color: blue;
+}

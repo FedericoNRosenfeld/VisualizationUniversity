@@ -12,13 +12,16 @@
 				<div class="container">
 						<section class="jumbotron text-center">
 
-									<h1 class="jumbotron-heading text-success">Las Torres de Hanoi</h1>
+									<h1 id="titulo_principal" class="jumbotron-heading ">Las Torres de Hanoi</h1>
 									<div class="row">
 											<div id="sector_canvas" class="col-sm-12">
 												<canvas id="canvas" width="700" height="200" style="border:#000 solid 2px;" />
 											</div>
-									</div>
-								<input id="valor"type="number" name="discos" min="3" max="7" step="1"> Numero De Discos</input>
+									</div><p></p>
+								<input id="valor"type="number" name="discos" min="3" max="7" step="1"> Numero De Discos (de 3 a 7)</input>
+								<div id="mensaje_ganaste" class="text-success">
+										<p id="demo"></p>
+								</div>
 						</section>
 
 					</div>
