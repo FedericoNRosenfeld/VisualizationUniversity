@@ -2,25 +2,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Template</title>
+		<title>Torres de Hanoi</title>
 
 		<link href="css/bootstrap.min.css" rel="stylesheet">
  <!-- Estilos propios -->
 	<link href="css/estilos.css" type="text/css" rel="stylesheet" >
 
 	</head>
-			<div class="container">
+				<div class="container">
 						<section class="jumbotron text-center">
-								<div class="container">
-									<h1 class="jumbotron-heading text-success">Las Torres</h1>
-									<p class="lead text-muted">Hay que jugar para ganar</p>
+
+									<h1 class="jumbotron-heading text-success">Las Torres de Hanoi</h1>
 									<div class="row">
-											<div id="imagen_original" class="col-sm-12">
-												<canvas id="canvas" width="900" height="200" style="border:#000 solid 2px;" />
+											<div id="sector_canvas" class="col-sm-12">
+												<canvas id="canvas" width="700" height="200" style="border:#000 solid 2px;" />
 											</div>
 									</div>
+								<input id="valor"type="number" name="discos" min="3" max="7" step="1"> Numero De Discos</input>
 						</section>
-		</div>
+
+					</div>
+		<div class="container">
+					<section class="jumbotron">
+							<div class="container">
+								<h2 class=" text-muted">Reglas Basicas</h2>
+								<div class="row">
+										<p> Los discos se apilan sobre una varilla en tamaño decreciente de abajo a arriba.</p>
+										<p> No hay dos discos iguales, y todos ellos están apilados de mayor a menor radio
+										 -de la base de la varilla hacia arriba-  en una de las varillas, quedando las otras dos varillas vacantes.</p>
+										<p>El juego consiste en pasar todos los discos de la varilla ocupada a una de las otras varillas vacantes.</p>
+										<p> Para realizar este objetivo, es necesario seguir tres simples reglas:</p>
+								</div>
+
+								<div class="row">
+										<ol>
+											<li>Sólo se puede mover un disco a la vez.</li>
+											<li> Un disco de mayor tamaño no se puede estar sobre uno más pequeño que él mismo. </li>
+											<li>Sólo puedes desplazar el disco que se encuentre arriba en cada varilla.       </li>
+										</ol>
+								</div>
+							</div>
+					</section>
+	</div>
 		<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 		<script type="text/javascript" src="js/function.js"></script>
 		<script src="js/bootstrap.min.js"></script>

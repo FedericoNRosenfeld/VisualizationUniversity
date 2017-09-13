@@ -1,5 +1,12 @@
 
 
 body{
- background-color: #DFDFEF;
+     background-image: url("modelo.jpg");
+     background-repeat: repeat;
+}
+
+canvas{
+  background-image: url("modelo2.jpg");
+  background-repeat: repeat;
+  border:#000 solid 2px;
 }
