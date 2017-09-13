@@ -29,8 +29,6 @@ var oldX,oldY; //almacena las coordenas X,Y antes de realizar un desplazamiento
      this.colFichas = [];
    }
 
-
-
    function Piso(posX, posY,ancho){
       this.posicionX = posX;
       this.posicionY = posY;
@@ -78,7 +76,12 @@ var oldX,oldY; //almacena las coordenas X,Y antes de realizar un desplazamiento
   /////////////// METODOS DE LA COLUMNA
 
     Columna.prototype.apilarFicha = function(){ // Retira la ficha tope de la pila auxiliar y la agrega en la columna
-		this.colFichas.push(fichas.pop());
+    fichaNueva = fichas.pop();
+    posicionY = this.colFichas.length * fichaNueva.altoY
+    fichaNueva.posX = this ;
+ 		fichaNueva.posY = this ;
+		this.colFichas.push(fichaNueva);
+
 	}
 
 	Columna.prototype.desapilarFicha = function(){ // Retira la ficha tope de la columna y la agrega en la pila auxiliar
@@ -89,13 +92,18 @@ var oldX,oldY; //almacena las coordenas X,Y antes de realizar un desplazamiento
 	Columna.prototype.validarFichaYLugar = function(){
 	// Chequea si es valido el movimiento de apliar en la columna la ficha que s eencuentra en el arreglo aux
 		var fichaMano = fichas[0];
-		var fichaColumna = this.colFichas[this.colFichas.length-1];
-		if (fichaMano.id > fichaColumna.id){ // el id mas chico hace la ficha mas grande
-			return true;
-		}
-		else{
-			return false;
-		}
+		var fichaColumna = this.colFichas;
+    if (fichaColumna.length > 0){
+        alert("fichaMano id= "+ fichaMano.id );
+        alert(" fichaTopeColumna id= "+ fichaColumna[fichaColumna.length-1].id);
+    		if (fichaMano.id > fichaColumna.id){ // el id mas chico hace la ficha mas grande
+    			return true;
+    		}
+    		else{
+    			return false;
+    		}
+      }
+     return true;
 	}
 
 
@@ -163,7 +171,6 @@ var oldX,oldY; //almacena las coordenas X,Y antes de realizar un desplazamiento
   function paint() {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       t.dibujartablero();
-      fichas[0].dibujarFicha;
     }
 
 
@@ -190,12 +197,16 @@ function getMousePos(canvas, evt) { // posicion del mouse en el canvas
       if ( (mouseX>columnaActual.posicionX-50) && (mouseX < (columnaActual.posicionX + columnaActual.ancho+50)) &&
            (mouseY<columnaActual.posicionY) && (mouseY > (columnaActual.posicionY + columnaActual.alto) )
          ){
-           fich = fichas[0] ;
-
+           if (fichas.length >0){
+             fich = fichas[0];
+           }
+          else {
+            fich = undefined;
+          }
             if (fich != undefined){
                alert("ficha en Fichas "+ fich.id);
               if (columnaActual.validarFichaYLugar()){
-                    alert("id de la ficha en mano es = " + fichas[0].id);
+                    alert("id de la ficha en mano es = " + fich.id);
                     columnaActual.apilarFicha();
               }
             }
@@ -229,7 +240,12 @@ function getMousePos(canvas, evt) { // posicion del mouse en el canvas
     mouseX = pos.x;
     mouseY = pos.y;
   //si existe una Ficha seleccionada
-  fichaSelected = fichas[0];
+  if (fichas.length > 0){
+    fichaSelected = fichas[0];
+  }
+  else {
+    fichaSelected = undefined;
+  }
   if (fichaSelected != undefined) {
       //se calcula la distancia del dezplazamiento
       var dx =  mouseX - oldX ;
