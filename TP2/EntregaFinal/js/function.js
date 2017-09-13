@@ -11,7 +11,7 @@ var tablerolargo,tableroalto; // definidos globales en caso de necesitarlos par 
  		this.posX =paramPosX;
  		this.posY = paramPosY ;
  		this.largoX = tamanio;
- 		this.altoY =10;
+ 		this.altoY =13;
 
  	}
 
@@ -41,14 +41,14 @@ var tablerolargo,tableroalto; // definidos globales en caso de necesitarlos par 
 
     function generadorFichas(cantidad,posX,posY,columna){
       var cX = posX;
-      var cY = posY;
+      var cY = posY ;
       var color = "";
       var tamanio = cantidad*20;
       for (i = 0; i < cantidad ;i++){
         var color = '#'+Math.floor(Math.random()*16777215).toString(16);
         var fichaX = new Ficha(i+1,cX,cY,color,tamanio);
         columna.colFichas.push(fichaX);
-        cY-= 12;
+        cY-= 15;
         tamanio-= 10;
         cX+=5;
       }
@@ -66,7 +66,7 @@ var tablerolargo,tableroalto; // definidos globales en caso de necesitarlos par 
       this.piso = new Piso(posX,posY,tablerolargo);
       posX = posX + Math.floor(cantPiezas*10);
       this.columnas.push(new Columna(1,posX,posY,tableroalto));
-      generadorFichas(cantPiezas,posX- Math.floor(cantPiezas*9), posY - this.piso.alto /2 ,this.columnas[0]);
+      generadorFichas(cantPiezas,posX- Math.floor(cantPiezas*9), posY - this.piso.alto /2 -2,this.columnas[0]);
       posX = posX + tablerolargo/3 ;
       this.columnas.push(new Columna(2,posX,posY,tableroalto));
       posX = posX + tablerolargo/3 ;
@@ -81,14 +81,14 @@ var tablerolargo,tableroalto; // definidos globales en caso de necesitarlos par 
 
     if (this.colFichas.length >0){
       fichaAnterior= this.colFichas[this.colFichas.length-1];
-    fichaNueva.posX = fichaAnterior.posX + ( fichaNueva.id - fichaAnterior.id)*5; //  para que el disco mantenga su centro respecto a su tamaño en comparacion a la de abajo
- 		fichaNueva.posY = fichaAnterior.posY - 12 ;
+    fichaNueva.posX = fichaAnterior.posX + ( fichaNueva.id - fichaAnterior.id)*5 ; //  para que el disco mantenga su centro respecto a su tamaño en comparacion a la de abajo
+ 		fichaNueva.posY = fichaAnterior.posY - fichaAnterior.altoY -2 ;
     //alert("fichanueva id="+fichaNueva.id+ " fichanueva posX="+ fichaNueva.posX+" fichanueva posY="+fichaNueva.posY );
     }
     else {
-      fichaNueva.posX = this.posicionX  - fichaNueva.largoX/2  ;
+      fichaNueva.posX = this.posicionX  - fichaNueva.largoX/2 +5 ;
       //this.posicionX - this.posicionX
-      fichaNueva.posY = this.posicionY - 12;
+      fichaNueva.posY = this.posicionY - fichaNueva.altoY -2;
     }
 
 		this.colFichas.push(fichaNueva);
