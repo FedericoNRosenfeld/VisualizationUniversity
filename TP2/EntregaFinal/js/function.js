@@ -265,8 +265,6 @@ function verSiGano(){
     document.getElementById("canvas").addEventListener("mousemove",mousemove);
 
   /////////////// Llamado al tablero inicial
-  t = new Tablero(3);
-  t.dibujartablero();
 
   /////////////// Llamado al tablero con eleccion de discos
 
@@ -274,5 +272,6 @@ function verSiGano(){
     $('#valor').change(function() {
       t = new Tablero($(this).val());
       t.dibujartablero();
+      document.getElementById("demo").innerHTML =" Buena Suerte ";
     });
   });
