@@ -1,0 +1,49 @@
+
+p{
+  text-align: center;
+  tex
+}
+
+.rotar{
+
+    transform:  rotate(45deg)
+                translateX(120px)
+                translateY(120px);
+}
+
+.escalar{
+
+  transform: scale(2)
+             translateX(120px)
+             translateY(120px);
+;
+}
+
+.skewskew{
+    transform: skew(60deg)
+               translateX(40px)
+               translateY(120px);
+;
+}
+
+div {
+
+    width: 200px;
+    height: 100px;
+    transform:  translateX(120px)
+                translateY(120px);
+    background-color: red;
+}
+
+
+div:hover {
+    transition:  2s;
+    height: 200px;
+    width: 300px;
+    background-color: blue;
+}
+
+div:active{
+  transition: 0.4s;
+  background-color: green;
+}

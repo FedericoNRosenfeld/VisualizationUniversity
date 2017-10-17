@@ -1,0 +1,41 @@
+
+
+
+.rotar{
+
+    transform:  rotate(45deg)
+                translateX(120px)
+                translateY(120px);
+}
+
+.escalar{
+
+  transform: scale(2)
+             translateX(120px)
+             translateY(120px);
+;
+}
+
+.skewskew{
+    transform: skew(60deg)
+               translateX(40px)
+               translateY(120px);
+;
+}
+
+div {
+
+    width: 200px;
+    height: 100px;
+    transform:  translateX(120px)
+                translateY(120px);
+
+    background-color: red;
+    transition: width 2s;
+}
+
+div:hover {
+    width: 500px;
+  
+
+}

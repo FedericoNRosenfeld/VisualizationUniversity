@@ -1,0 +1,37 @@
+
+
+
+@keyframes movimiento{
+  from{  transform: rotate(0deg);
+         transform-origin:0%}
+  to{  transform: rotate(360deg);
+       transform-origin:0%;}
+}
+
+div {
+    width: 200px;
+    height: 100px;
+    border-radius: 2px;
+}
+
+.reloj{
+  position:absolute;
+  top:0px;
+  left:0px;
+
+}
+
+.aguja_hora{
+     position:absolute;
+     top:175px;
+     left:175px;
+     animation-name: movimiento;
+     animation-duration: 5s;
+}
+
+.aguja_minuto{
+     position:absolute;
+     top:175px;
+     left:175px;
+
+}
