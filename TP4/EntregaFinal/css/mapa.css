@@ -1,0 +1,14 @@
+
+
+.contenedor {
+  background-image: linear-gradient(135deg, yellow ,grey);
+  background-color: #9d223c;
+  position: absolute;
+  top: 20px;
+  left: 70px;
+  width: 1000px;
+  height: 500px;
+  border-style: double;
+  border-color: black;
+
+}

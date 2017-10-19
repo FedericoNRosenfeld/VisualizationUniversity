@@ -1,0 +1,25 @@
+
+
+@keyframes quieto {
+100% { background-position: -88px; }
+}
+
+/*
+background: url('img/quieto.png') left center;
+animation: correr 0.8s steps(1) infinite;
+*/
+
+@keyframes correr {
+100% { background-position: -615px; }
+}
+
+.personaje {
+position: absolute;
+top: 10px;
+left: 10px;
+width: 88px;
+height: 114px;
+background: url('img/corriendo.png') left center;
+animation: correr 0.8s steps(7) infinite;
+
+}

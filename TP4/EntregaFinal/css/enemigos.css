@@ -1,0 +1,54 @@
+
+
+@keyframes example {
+0% {background-color: red; left:50px; top:50px;}
+25% {background-color: yellow; left:700px; top:50px;}
+50% {background-color: blue; left:700px; top:400px;}
+75% {background-color: green; left:50px; top:400px;}
+100% {background-color: red; left:50px; top:50px;}
+}
+
+/* El element al cual se aplica la animación */
+.caja {
+width: 20px;
+position: relative;
+animation: infinite;
+background-color: red;
+animation-name: example;
+animation-duration: 4s;
+
+}
+/* --------------------------------------------------------------*/
+@keyframes play_enem {
+100% { background-position: -96px; }
+}
+
+.enemigo {
+position: absolute;
+top: 320px;
+left: 400px;
+width: 96px;
+height: 96px;
+background: url('img/idle001.png') left center;
+/* Utilizar una imagen pixelada para que combine con el juego
+ La imagen actual solo es de muestra */
+animation: play_enem 0.8s steps(1) infinite;
+
+}
+
+
+
+/* --------------------------------------------------------------*/
+
+@keyframes play_coin_1 {
+100% { background-position: -536px ;}
+}
+
+.moneda_1 {
+  position: relative;
+  width: 53.5px;
+  height: 53.33px;
+  background: url('img/moneda.jpg') left center;
+  animation: play_coin_1 0.3s steps(10) infinite;
+
+}
