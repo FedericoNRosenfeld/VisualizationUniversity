@@ -20,19 +20,22 @@ animation-duration: 4s;
 }
 /* --------------------------------------------------------------*/
 @keyframes play_enem {
-100% { background-position: -96px; }
+100% {
+    background-position: -466px 0px; }
+
 }
 
 .enemigo {
 position: absolute;
 top: 320px;
 left: 400px;
-width: 96px;
-height: 96px;
-background: url('img/idle001.png') left center;
+width: 46.7px;
+height: 48px;
+background: url('img/ghost.png') 0px 0px ;
+
 /* Utilizar una imagen pixelada para que combine con el juego
  La imagen actual solo es de muestra */
-animation: play_enem 0.8s steps(1) infinite;
+animation: play_enem 1s steps(10) infinite;
 
 }
 

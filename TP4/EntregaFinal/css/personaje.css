@@ -4,22 +4,32 @@
 100% { background-position: -88px; }
 }
 
-/*
-background: url('img/quieto.png') left center;
-animation: correr 0.8s steps(1) infinite;
-*/
+@keyframes saltar {
+  100% {
+   background-position: -91px; }
+  }
 
 @keyframes correr {
-100% { background-position: -615px; }
+100% {
+ background-position: -615px; }
 }
 
+@keyframes morir {
+  100% {
+   background-position: -615px; }
+  }
+
+@keyframes recibir_danio {
+  100% {
+   background-position: -615px; }
+  }
+
+  
 .personaje {
 position: absolute;
-top: 10px;
-left: 10px;
 width: 88px;
 height: 114px;
-background: url('img/corriendo.png') left center;
-animation: correr 0.8s steps(7) infinite;
+background: url('img/quieto.png') left center;
+animation: quieto 0.8s steps(1) infinite;
 
 }
