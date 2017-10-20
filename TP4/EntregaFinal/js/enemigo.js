@@ -1,12 +1,11 @@
 
 
  // Clase personaje
- function Enemigo(name,posicionX,posicionY){
-   this.name = name;
+ function Enemigo(posicionX,posicionY,id){
    this.posX = posicionX;
    this.posY = posicionY;
    this.ojos = true; // con true esta mirando para la derecha , con false esta mirando para la izquierda
-   this.elemento =document.getElementById("enemigoX");
+   this.elemento =document.getElementById("enemigo"+id);
    this.elemento.className = "enemigo";
    this.elemento.style.transform = "translate( "+(posicionX)+"px,"+ (posicionY) +"px)";
  }
@@ -54,79 +53,32 @@ Enemigo.prototype.moverse = function(valorX){
   ///////////
 
 
-
-Enemigo.prototype.contacto = function(objeto,accion){ /// posee tanto una accion contra monedas como contra personaje
+function colicion_Efecto(objeto,accion){
   objeto.accion();
 }
 
-Enemigo.prototype.detectar_colicion = function(objeto_colicion){
-  var ancho_e =parseInt(this.elemento.style.width);
-  var alto_e = parseInt(this.elemento.style.height);
-  var ancho_o =parseInt(objeto_colicion.elemento.style.width);
-  var alto_o = parseInt(objeto_colicion.elemento.style.height);
+function detectar_colicion(objeto1,objeto2){
+  // true si hay colicion entre 2 objetos
+  var ancho_e =parseInt(objeto1.elemento.style.width);
+  var alto_e = parseInt(objeto1.elemento.style.height);
+  var ancho_o =parseInt(objeto2.elemento.style.width);
+  var alto_o = parseInt(objeto2.elemento.style.height);
 
-  if ((((ancho_e <= ancho_o) && (this.posX  )                                                                               )))) {
-
-  }
-
+  if ( (( objeto2.posX +ancho_o)> objeto1.posX || (objeto2.posX <= (objeto1.posX + ancho_o)))&&
+      (( objeto2.posY +alto_o)> objeto1.posY || (objeto2.posY<= (objeto1.posY + alto_e)))) {
+          this.contacto(objeto_colicion,accion)
+          return true;
+      }
+ return false;
 
 }
 
-///////////
-///////////                        EVENTOS:ANIMACIONES DEL PERSONAJE
-///////////                         QUIETO ,DANIO RECIBIDO Y MUERTE
-///////////
 
-
-Personaje.prototype.estarQuieto= function(){
-  var imagen = "url('css/img/quieto.png') left center";
-  var animacion = "quieto 0.8s steps(1) infinite";
-  cambioSprite(this.elemento,imagen,animacion);
+Enemigo.prototype.colicionar_personaje= function(personaje){
+  //colicion_Efecto(personaje,recibirGolpe);
+  alert("coliciono ");
 }
 
-Personaje.prototype.recibirGolpe= function(){
-  this.lives--;
-  if (this.lives == 0) {
-    this.morirse();
-  }
-  else {
-    var imagen = "url('css/img/muerte.png') left center";
-    var animacion = "saltar 0.8s steps(1) infinite";
-    cambioSprite(this.elemento,imagen,animacion);
-  }
-}
-
-
-Personaje.prototype.morirse= function(){
-  var imagen = "url('css/img/muerte.png') left center";
-  var animacion = "saltar 0.8s steps(1) infinite";
-  cambioSprite(this.elemento,imagen,animacion);
-  Puntos_Juego(this.points);           /// esto le envia a la funcion que envia los puntos
-}
-
-///////////
-///////////                       MENU DE ACCIONES DISPONIBLES
-///////////                           PARA EL PERSONAJE
-///////////
-
-function realizarAccion(e){
-  e = e || window.event;
-  console.log(e.keyCode);
-  switch(e.keyCode) {
-        case 119:    ///////// Letra W de mi pc
-            personaje.empezarSaltar();
-            break;
-        case 100:    ///////// Letra D de mi pc
-            personaje.moverse(1);
-            break;
-        case 97:    ///////// Letra A de mi pc
-            personaje.moverse(-1);
-            break;
-        case 115:   ///////// Letra S de mi pc, para probar la funcionalidad de los sprites con Acciones no cliqueables
-            personaje.estarQuieto();
-            break;
-    }
-}
-
-  var personaje = new Personaje("Muddy",300,300,false,3,0);
-  addEventListener("keypress",realizarAccion);
+//// Crear un Enemigo
+var enemigo1 = new Enemigo(100,400,1);
+var enemigo2 = new Enemigo(300,200,2);

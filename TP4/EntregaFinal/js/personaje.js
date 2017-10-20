@@ -166,6 +166,7 @@ Personaje.prototype.morirse= function(){
 ///////////
 
 function realizarAccion(e){
+  
   e = e || window.event;
   console.log(e.keyCode);
   switch(e.keyCode) {
