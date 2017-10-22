@@ -1,14 +1,56 @@
 
 
+@keyframes play_back {
+100% { background-position: -1024px ;}
+}
+
+
+@keyframes play_back {
+100% { background-position: -1024px ;}
+}
+
+.pausa{
+  animation-play-state: paused !important;
+}
+
 .contenedor {
-  background-image: linear-gradient(135deg, yellow ,grey);
-  background-color: #9d223c;
   position: absolute;
   top: 20px;
-  left: 70px;
-  width: 1000px;
-  height: 500px;
+  left: 170px;
+  width: 1031px;
+  height: 606px;
   border-style: double;
   border-color: black;
 
+}
+
+.backg-1,.backg-2,.backg-3,.backg-4 {
+   background-repeat: repeat-x;
+/*  todas los atributos que comparten los background */
+  position: absolute;
+  width: 1024px;
+  height: 600px;
+  background-size: 1024px 600px;
+
+}
+
+.backg-1 {
+  background-image: url('img/fondo/cl_4.png') ;
+  animation: play_back 4s infinite linear;
+  z-index: 500;
+
+}
+.backg-2 {
+  background-image: url('img/fondo/cl_3.png');
+  animation: play_back 9s infinite linear;
+  z-index: 400;
+}
+.backg-3 {
+  background-image: url('img/fondo/cl_2.png');
+  animation: play_back 15s infinite linear;
+  z-index: 300;
+}
+.backg-4 {
+  background-image: url('img/fondo/cl_1.jpg');
+  z-index: 200;
 }

@@ -8,21 +8,7 @@
    this.elemento =document.getElementById("enemigo"+id);
    this.elemento.className = "enemigo";
    this.elemento.style.transform = "translate( "+(posicionX)+"px,"+ (posicionY) +"px)";
- }
-
-/// funciones que pueden ir fuera de personaje para ser reutilizadas
-
- function cambioSprite(entidad,imagen,animacion){
-   entidad.style.background = imagen;
-   entidad.style.animation = animacion;
- }
-
- function desplazarEnElAire(personaje,valorenX,valorenY,num){
-   desplazamientoAire++;
-   tiempoAire--;
-   personaje.elemento.style.transform = "translate( "+(personaje.posX + valorenX)+"px,"+(personaje.posY + valorenY)+"px) scale("+num+",1)";
-   personaje.posX+= valorenX;
-   personaje.posY+= valorenY;
+   this.patrones = [];
  }
 
 
@@ -46,39 +32,20 @@ Enemigo.prototype.moverse = function(valorX){
     desplazarEnElAire(this,valorX,-valorY,num);
   }
 
-
   ///////////
   ///////////                   ACCIONES DE CONCATCO Y DETECCION DE COLICION
   ///////////                       TANTO CON MONEDAS COMO CON JUGADOR
   ///////////
 
-
-function colicion_Efecto(objeto,accion){
-  objeto.accion();
-}
-
-function detectar_colicion(objeto1,objeto2){
-  // true si hay colicion entre 2 objetos
-  var ancho_e =parseInt(objeto1.elemento.style.width);
-  var alto_e = parseInt(objeto1.elemento.style.height);
-  var ancho_o =parseInt(objeto2.elemento.style.width);
-  var alto_o = parseInt(objeto2.elemento.style.height);
-
-  if ( (( objeto2.posX +ancho_o)> objeto1.posX || (objeto2.posX <= (objeto1.posX + ancho_o)))&&
-      (( objeto2.posY +alto_o)> objeto1.posY || (objeto2.posY<= (objeto1.posY + alto_e)))) {
-          this.contacto(objeto_colicion,accion)
-          return true;
-      }
- return false;
-
-}
-
-
 Enemigo.prototype.colicionar_personaje= function(personaje){
-  //colicion_Efecto(personaje,recibirGolpe);
-  alert("coliciono ");
+  colicion_Efecto(personaje,recibirGolpe);
 }
 
-//// Crear un Enemigo
-var enemigo1 = new Enemigo(100,400,1);
-var enemigo2 = new Enemigo(300,200,2);
+Enemigo.prototype.colicionar_personaje= function(moneda){
+  //colicion_Efecto(moneda,desaparecer);
+}
+
+function crearEnemigo(x,y,id){
+  var enemigo = new Enemigo(x,y,id);
+  return enemigo;
+}

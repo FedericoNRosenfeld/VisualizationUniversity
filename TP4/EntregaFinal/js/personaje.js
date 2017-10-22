@@ -16,6 +16,14 @@
 
 /// funciones que pueden ir fuera de personaje para ser reutilizadas
 
+  function tope_movimiento_x(desplazamiento,posicion_actual){ /// evitar que se salga del cuadro de juego
+    sum = desplazamiento + posicion_actual;
+     if ((sum >= 50) && (sum <= 900)){
+       return desplazamiento;
+     }
+     return 0;
+  }
+
  function cambioSprite(entidad,imagen,animacion){
    entidad.style.background = imagen;
    entidad.style.animation = animacion;
@@ -64,6 +72,7 @@ valorY = valorX;
   if(! this.ojos){ /// por si el personaje esta mirando para la izquierda
     num = -1;
   }
+  valorX=tope_movimiento_x(valorX,this.posX);
   cambioSprite(this.elemento,imagen,animacion);
     if (tiempoAire > 0){
       if(desplazamientoAire <5 ){
@@ -88,10 +97,10 @@ Personaje.prototype.empezarSaltar= function(){
   }
   if (this.onJump) {
     if (this.ojos){ //// si mira a derecha
-      var valor = 20;
+      var valor = 15;
     }
     else {  //// si mira a izquierda
-      var valor = -20;
+      var valor = -15;
 
     }
     this.moveOnJump(valor);
@@ -109,21 +118,22 @@ Personaje.prototype.empezarSaltar= function(){
 // para que tome un tono mas realista.
 Personaje.prototype.moverse= function(valor){
 
-  if (! personaje.onJump){
+  if (! this.onJump){
     var imagen = "url('css/img/corriendo.png') left center";
     var animacion = "correr 0.8s steps(7) infinite";
     cambioSprite(this.elemento,imagen,animacion);
-
-    var moverse = 10*valor;
+    var moverse = tope_movimiento_x(5*valor,this.posX);
     if ( valor == -1) {
-
         this.ojos = false;
+        movimiento_fondo(-1);
     }
     else {
-      this.ojos = true;
+        this.ojos = true;
+        movimiento_fondo(1);
     }
       this.posX+=moverse;
       this.elemento.style.transform = " translate( "+(this.posX)+"px,"+(this.posY)+"px)  scale("+valor+",1)";
+
 
   }
 }
@@ -138,6 +148,7 @@ Personaje.prototype.estarQuieto= function(){
   var imagen = "url('css/img/quieto.png') left center";
   var animacion = "quieto 0.8s steps(1) infinite";
   cambioSprite(this.elemento,imagen,animacion);
+  movimiento_fondo(0);
 }
 
 Personaje.prototype.recibirGolpe= function(){
@@ -165,25 +176,7 @@ Personaje.prototype.morirse= function(){
 ///////////                           PARA EL PERSONAJE
 ///////////
 
-function realizarAccion(e){
-  
-  e = e || window.event;
-  console.log(e.keyCode);
-  switch(e.keyCode) {
-        case 119:    ///////// Letra W de mi pc
-            personaje.empezarSaltar();
-            break;
-        case 100:    ///////// Letra D de mi pc
-            personaje.moverse(1);
-            break;
-        case 97:    ///////// Letra A de mi pc
-            personaje.moverse(-1);
-            break;
-        case 115:   ///////// Letra S de mi pc, para probar la funcionalidad de los sprites con Acciones no cliqueables
-            personaje.estarQuieto();
-            break;
-    }
+function crearPersonaje(){
+  var personaje = new Personaje("Muddy",400,343,3,0);
+  return personaje;
 }
-
-  var personaje = new Personaje("Muddy",300,300,3,0);
-  addEventListener("keypress",realizarAccion);

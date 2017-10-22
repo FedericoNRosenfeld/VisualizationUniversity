@@ -24,12 +24,13 @@
    background-position: -615px; }
   }
 
-  
+
 .personaje {
 position: absolute;
 width: 88px;
 height: 114px;
 background: url('img/quieto.png') left center;
 animation: quieto 0.8s steps(1) infinite;
+z-index: 700;
 
 }

@@ -31,6 +31,8 @@ width: 46.7px;
 height: 48px;
 background: url('img/ghost.png') 0px 0px ;
 animation: play_enem 1s steps(10) infinite;
+z-index: 700;
+
 
 }
 
