@@ -1,14 +1,17 @@
 
 
- // Clase personaje
- function Enemigo(posicionX,posicionY,id){
-   this.posX = posicionX;
-   this.posY = posicionY;
-   this.ojos = true; // con true esta mirando para la derecha , con false esta mirando para la izquierda
+ // Clase Enemigo 
+ function Enemigo(id,x,y,ojos){
+   this.posX = x;
+   this.posY = y;
+   this.velocidad = 10;
+   this.alto = 20;
+   this.ancho = 30;
+   this.ojos = ojos; // con 1 esta mirando para la derecha , con false esta mirando para la izquierda
    this.elemento =document.getElementById("enemigo"+id);
    this.elemento.className = "enemigo";
-   this.elemento.style.transform = "translate( "+(posicionX)+"px,"+ (posicionY) +"px)";
-   this.patrones = [];
+   this.elemento.style.transform = " translate( "+x+"px,"+y+"px)";
+   this.altura = -1 * id;
  }
 
 
@@ -17,20 +20,28 @@
  ///////////
 
 
-///////////////////////////////////////////// MOVIMIENTO DEL SALTO
-
-Enemigo.prototype.moverse = function(valorX){
-    valorY = valorX;
-    if (valorY < 0){
-      valorY = -valorY;
-    }
-    var num = 1; /// es para ver la direccion en la cual esta mirando la criatura
-    if(! this.ojos){ /// por si el la criatura esta mirando para la izquierda
-      num = -1;
-    }
-    cambioSprite(this.elemento,imagen,animacion);
-    desplazarEnElAire(this,valorX,-valorY,num);
+Enemigo.prototype.moverseE = function(){
+      if(this.posX <= 49 ){
+        this.ojos*= -1;
+        this.velocidad -= Math.floor(Math.random()*4)+1;
+      }
+      if (this.posX >= 901 ){
+          this.velocidad += Math.floor(Math.random()*2)+1;
+          this.ojos*= -1;
+      }
+      this.posX += this.velocidad * this.ojos;
+      this.posY += this.velocidad * this.altura;
+      this.altura *= -1;
+      this.setAnimation();
+      if ((this.velocidad <5) || (this.velocidad > 40)){
+         this.velocidad = 10;
+      }
   }
+
+
+Enemigo.prototype.setAnimation = function(){
+  this.elemento.style.transform = "translate( "+(this.posX)+"px,"+ (this.posY) +"px) scale("+this.ojos+",1)";
+}
 
   ///////////
   ///////////                   ACCIONES DE CONCATCO Y DETECCION DE COLICION
@@ -41,11 +52,11 @@ Enemigo.prototype.colicionar_personaje= function(personaje){
   colicion_Efecto(personaje,recibirGolpe);
 }
 
-Enemigo.prototype.colicionar_personaje= function(moneda){
-  //colicion_Efecto(moneda,desaparecer);
+Enemigo.prototype.colicionar_moneda= function(moneda){
+  colicion_Efecto(moneda,desaparecer);
 }
 
-function crearEnemigo(x,y,id){
-  var enemigo = new Enemigo(x,y,id);
+function crearEnemigo(id,x,y,ojos){
+  var enemigo = new Enemigo(id,x,y,ojos);
   return enemigo;
 }

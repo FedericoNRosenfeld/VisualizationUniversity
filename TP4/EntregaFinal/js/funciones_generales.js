@@ -1,9 +1,12 @@
 
 /*
 --------------
---------------        FUNCIONALIDADES GENERALES DE MOVIMIENTO
+--------------        FUNCIONALIDADES GENERALES DE MOVIMIENTO y Patron
 --------------
 */
+
+ var desplazamientoAire = 0;
+ var tiempoAire = 10;
 
   function tope_movimiento_x(desplazamiento,posicion_actual){ /// evitar que se salga del cuadro de juego
     sum = desplazamiento + posicion_actual;
@@ -58,15 +61,10 @@
  }
 
  function detectar_colicion(objeto1,objeto2){
-   // true si hay colicion entre 2 objetos
-   var ancho_e =parseInt(objeto1.elemento.style.width);
-   var alto_e = parseInt(objeto1.elemento.style.height);
-   var ancho_o =parseInt(objeto2.elemento.style.width);
-   var alto_o = parseInt(objeto2.elemento.style.height);
+	// true si hay colicion entre 2 objetos
 
-   if ( (( objeto2.posX +ancho_o)> objeto1.posX || (objeto2.posX <= (objeto1.posX + ancho_o)))&&
-       (( objeto2.posY +alto_o)> objeto1.posY || (objeto2.posY<= (objeto1.posY + alto_e)))) {
-           this.contacto(objeto_colicion,accion)
+   if ( (( objeto2.posX +objeto2.ancho)> objeto1.posX || (objeto2.posX <= (objeto1.posX + objeto1.ancho)))&&
+       (( objeto2.posY +objeto2.alto)> objeto1.posY || (objeto2.posY<= (objeto1.posY + objeto1.alto)))) {
            return true;
        }
   return false;
