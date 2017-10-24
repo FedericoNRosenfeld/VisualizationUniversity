@@ -32,22 +32,14 @@
  --------------
  */
 
-  function cambioSprite(entidad,imagen,animacion){
-    entidad.style.background = imagen;
-    entidad.style.animation = animacion;
+  function cambioSprite(entidad,clase,claseBase){
+    entidad.className =claseBase;
+    entidad.classList.add(clase);
   }
 
-  function movimiento_fondo(opcion){ // -1 izquierda, 0 quieto, 1 derecha
-  }
-
-  /*
-  --------------
-  --------------        FUNCIONALIDADES GENERALES DE PUNTUACION
-  --------------
-  */
 
  function Puntos_Juego(puntos){
-    document.getElementById("puntuacion_final")= puntos;
+    document.getElementById("puntuacion_final") = puntos;
  }
 
  /*
@@ -55,10 +47,6 @@
  --------------        FUNCIONALIDADES GENERALES DE COLICION
  --------------
  */
-
- function colicion_Efecto(objeto,accion){
-   objeto.accion();
- }
 
  function detectar_colicion(objeto1,objeto2){
 	// true si hay colicion entre 2 objetos

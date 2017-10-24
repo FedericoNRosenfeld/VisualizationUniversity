@@ -1,60 +1,79 @@
 
 
 
-function Constructor() {
+function Juego() {
   this.objetos = [];
   this.personaje = null;
   this.enemigos = [];
   this.fondos =[];
 }
 
-function update(valor){
-  if( personaje.onJump){
-
-  }
-  else {
-
-  }
+Juego.prototype.update = function(){
+  setInterval(function (){
+          if (this.jugando){
+            for (var i = 0; i < this.fondos.length; i++) {
+              this.fondos[i].update();
+            }
+            for (var j = 0; j < this.enemigos.length; j++) {
+              this.enemigos[j].update();
+              for (var k = 0; k < this.objetos.length; k++) {
+                this.objetos[k].update();
+                if (detectar_colicion(this.personaje,this.enemigos[j])){
+                    this.enemigos[j].colicionar_personaje(this.personaje);
+                }
+                if (detectar_colicion(this.personaje,this.objetos[k])){
+                    this.personaje.colicionar_moneda(this.objetos[k]);
+                }
+                if (detectar_colicion(this.enemigos[j],this.objetos[k])){
+                   this.enemigos[j].colicionar_moneda(this.objetos[k]);
+                }
+              }
+            }
+             if (this.personaje.estaMuerto()){
+               this.jugando = false;
+             }
+          }
+          else{
+              mostrarFin();
+          }
+      }, 100);
 }
 
+
 function realizarAccion(e){
-
+  var pj = juego.personaje;
   e = e || window.event;
-//  console.log(e.keyCode);
- if ((detectar_colicion(juego.personaje,juego.enemigos[0])) || (detectar_colicion(juego.personaje,juego.enemigos[1]))){
-   //colicion_Efecto(juego.personaje,recibirGolpe);
 
- }
   switch(e.keyCode) {
         case 119:    ///////// Letra W de mi pc
-            juego.personaje.empezarSaltar();
+            if (! pj.onJump){
+            pj.Jump()
+            setInterval(function(){
+            pj.empezarSaltar();
+          },800);}
             break;
         case 100:    ///////// Letra D de mi pc
-            juego.personaje.moverse(1);
-              juego.enemigos[1].moverseE();
-              juego.enemigos[0].moverseE();
+            if (! pj.onJump){
+            pj.moverse(1);
+            }
             break;
         case 97:    ///////// Letra A de mi pc
-            juego.personaje.moverse(-1);
-            break;
-        case 112:
-            juego.fondos[0].pausaYplay("running");
-            break;
-        case 111:   ///////// Letra S de mi pc, para probar la funcionalidad de los sprites con Acciones no cliqueables
-            juego.fondos[0].pausaYplay("pausa");
+            if (! pj.onJump){
+            pj.moverse(-1);
+            }
             break;
 
     }
 }
 
 
-
+addEventListener("keypress",realizarAccion);
 /*
 --------------
 --------------        CREACION DE OBJETOS DEL JUEGO
 --------------
 */
-  var juego = new Constructor();
+  var juego = new Juego();
   juego.personaje = crearPersonaje();
   juego.enemigos.push(crearEnemigo(1,900,440,-1));
   juego.enemigos.push(crearEnemigo(2,50,300,1));
@@ -62,6 +81,3 @@ function realizarAccion(e){
   juego.fondos.push(crearFondo(2));
   juego.fondos.push(crearFondo(3));
   juego.fondos.push(crearFondo(4));
-
-
-  addEventListener("keypress",realizarAccion);

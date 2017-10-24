@@ -1,11 +1,16 @@
 
 
-@keyframes saltar {
+@keyframes agarrando {
   100% {
    background-position: -91px; }
   }
 
-@keyframes correr {
+@keyframes saltando {
+  100% {
+   background-position: -91px; }
+  }
+
+@keyframes corriendo {
 100% {
  background-position: -615px; }
 }
@@ -15,18 +20,42 @@
    background-position: -615px; }
   }
 
-@keyframes recibir_danio {
+@keyframes golpeado {
   100% {
    background-position: -615px; }
   }
+
+.agarrando {
+  background :url('img/salto.png') left center;
+  animation: agarrando 0.8s steps(1) infinite;
+}
+
+.saltando {
+  background :url('img/salto.png') left center;
+  animation: saltando 0.8s steps(1) infinite;
+}
+
+.corriendo {
+  background: url('img/corriendo.png') left center;
+  animation: corriendo 0.8s steps(7) infinite;
+}
+
+
+.morir {
+  : url('img/corriendo.png') left center;
+  animation: morir 0.8s steps(7) infinite;
+}
+
+.golpeado {
+  : url('img/corriendo.png') left center;
+  animation: golpeado 0.8s steps(7) infinite;
+}
 
 
 .personaje {
 position: absolute;
 width: 88px;
 height: 114px;
-background: url('img/corriendo.png') left center;
-animation: correr 0.8s steps(7) infinite;
 z-index: 700;
 
 }

@@ -1,6 +1,6 @@
 
 
- // Clase Enemigo 
+ // Clase Enemigo
  function Enemigo(id,x,y,ojos){
    this.posX = x;
    this.posY = y;
@@ -49,12 +49,17 @@ Enemigo.prototype.setAnimation = function(){
   ///////////
 
 Enemigo.prototype.colicionar_personaje= function(personaje){
-  colicion_Efecto(personaje,recibirGolpe);
+  personaje.recibirGolpe();
 }
 
 Enemigo.prototype.colicionar_moneda= function(moneda){
-  colicion_Efecto(moneda,desaparecer);
+  moneda.desaparecer();
 }
+
+Enemigo.prototype.update = function(){
+      juego.enemigos.moverseE();
+}
+
 
 function crearEnemigo(id,x,y,ojos){
   var enemigo = new Enemigo(id,x,y,ojos);
