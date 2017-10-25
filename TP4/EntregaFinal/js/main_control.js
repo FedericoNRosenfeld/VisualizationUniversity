@@ -1,6 +1,7 @@
 
-
-
+var juego = null;
+var intervalo = null;
+var intervalo_salto = null;
 
 
 function Juego() {
@@ -10,12 +11,6 @@ function Juego() {
   this.fondos =[];
 }
 
-function etereos(){
-  setTimeout( function(){
-  },2000);
-}
-
-
 Juego.prototype.update = function(){
 
           if (! this.personaje.lives == 0 ){
@@ -23,9 +18,7 @@ Juego.prototype.update = function(){
               this.enemigos[j].update();
               for (var k = 0; k < this.objetos.length; k++) {
                 this.objetos[k].update();
-                //console.log(this.personaje.elemento.className);
-                if (detectar_colicion(this.personaje,this.enemigos[j])) {
-                    etereos();
+               if (detectar_colicion(this.personaje,this.enemigos[j])) {
                     this.enemigos[j].colicionar_personaje(this.personaje);
                 }
                 if (detectar_colicion(this.personaje,this.objetos[k])){
@@ -36,11 +29,55 @@ Juego.prototype.update = function(){
                 }
               }
             }
-
           }
           else{
-              //mostrarFin();
+
+              for (var i = 0; i < this.fondos.length; i++) {
+                this.fondos[i].pausaYplay("pausa");}
+                cambioSprite(this.personaje.elemento,"golpeado","personaje");
+                document.getElementById("puntos_finales").innerHTML = puntosX;
+                setTimeout(function(){
+                  borradoObjetos();
+                  p_juego.hide();
+                  p_puntos.show();
+                },2000 );
+
           }
+  }
+
+
+
+Juego.prototype.eliminarme = function(){
+
+  var juego = null;
+  var intervalo = null;
+  var intervalo_salto = null;
+  this.delete;
+}
+
+function borradoObjetos(){
+  clearInterval(intervalo);
+  juego.personaje.eliminarme();
+  juego.personaje = null;
+
+  for (var j = 0; j < juego.enemigos.length; j++) {
+    juego.enemigos[j].eliminarme();
+    delete juego.enemigos[j];
+  }
+  juego.enemigos = [];
+  for (var k = 0; k < juego.objetos.length; k++) {
+    juego.objetos[k].eliminarme();
+    delete  juego.objetos[k];
+  }
+  juego.objetos = [];
+
+  for (var j = 0; j < juego.fondos.length; j++) {
+    juego.fondos[j].eliminarme();
+    delete  juego.fondos[j];
+  }
+  juego.fondos = [];
+
+  //juego.eliminarme();
 }
 
 
@@ -72,7 +109,6 @@ function realizarAccion(e){
 }
 
 
-addEventListener("keypress",realizarAccion);
 /*
 --------------
 --------------        CREACION DE OBJETOS DEL JUEGO
@@ -80,13 +116,21 @@ addEventListener("keypress",realizarAccion);
 */
 var p_juego = $('#p_juego');
 var p_inicio = $('#p_inicio');
-var play_btn = $('#play-btn');
+var p_puntos = $('#p_puntos');
+var p_rules = $('#p_rules');
+
+var play_btn = $('.play-btn');
+var rules_btn = $('#rules-btn');
+
 
 play_btn.click(function(){
   p_juego.show();
   p_inicio.hide();
+  p_puntos.hide();
+  p_reglas.hide();
   empezarJuego();
 });
+p_puntos.hide();
 p_juego.hide();
 p_inicio.show();
 
@@ -96,15 +140,15 @@ function empezarJuego(){
   jugando = true;
 }
 */
-var juego = new Juego();
 
+addEventListener("keypress",realizarAccion);
 function empezarJuego(){
 
+  juego = new Juego();
 
-  setInterval(function(){
-    juego.personaje.empezarSaltar();
-  },100);
   juego.personaje = crearPersonaje();
+  intervalo_salto =  setInterval(function (){
+  juego.personaje.empezarSaltar();},100);
   juego.enemigos.push(crearEnemigo(1,900,440,-1));
   juego.enemigos.push(crearEnemigo(2,50,300,1));
   juego.objetos.push(crearObjeto(1000,piso));
@@ -112,6 +156,7 @@ function empezarJuego(){
   juego.fondos.push(crearFondo(2));
   juego.fondos.push(crearFondo(3));
   juego.fondos.push(crearFondo(4));
-    setInterval(function (){
-  juego.update();},80);
+
+  intervalo =  setInterval(function (){
+    juego.update();},80);
 }

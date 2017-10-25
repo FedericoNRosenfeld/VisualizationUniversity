@@ -1,5 +1,5 @@
 
-
+var puntosX = 0; // puntos finales
  // Clase personaje
  function Personaje(name,posicionX,posicionY,lives,puntos){
    this.name = name;
@@ -12,14 +12,16 @@
    this.lives = lives;
    this.puntos = puntos;
    this.elemento =document.getElementById("personajeX");
+   this.elemento.className = "personaje";
    this.elemento.classList.add("corriendo");
    this.elemento.style.transform = "translate( "+(posicionX)+"px,"+ (posicionY) +"px)";
 
  }
 
 
-Personaje.prototype.sumarPuntos = function(puntos){
-  this.puntos += puntos;
+Personaje.prototype.sumarPuntos = function(puntosP){
+  this.puntos += puntosP;
+  puntosX = this.puntos;
 //  document.getElementById("puntos").innerHTM = this.puntos;
 }
 
@@ -99,7 +101,7 @@ Personaje.prototype.moverse= function(valor){
     var moverse = tope_movimiento_x(5*valor,this.posX);
     this.ojos = valor;
     this.posX+=moverse;
-    this.elemento.style.transform = " translate( "+(this.posX)+"px,"+(this.posY)+"px) ";// scale("+this.ojos+",1)
+    this.elemento.style.transform = " translate( "+(this.posX)+"px,"+(this.posY)+"px) "; //scale("+this.ojos+",1)
 }
 
 
@@ -109,9 +111,12 @@ Personaje.prototype.moverse= function(valor){
 ///////////                         QUIETO ,DANIO RECIBIDO Y MUERTE
 ///////////
 
+
+
+
 Personaje.prototype.recibirGolpe= function(){
   this.lives--;
-  if (this.lives == 0) {
+  if (this.estaMuerto()) {
     this.morirse();
   }
   else {
@@ -119,10 +124,11 @@ Personaje.prototype.recibirGolpe= function(){
   }
 }
 
-
 Personaje.prototype.morirse= function(){
   Puntos_Juego(this.puntos);
   cambioSprite(this.elemento,"morir","personaje");
+  tiempoAire=10;
+  desplazamientoAire=0;
   //DIE;
 }
 
@@ -132,11 +138,21 @@ Personaje.prototype.estaMuerto = function(){
   return false;
 }
 
+Personaje.prototype.eliminarme = function(){
+  clearInterval(intervalo_salto);
+  delete this;
+}
+
 ///////////
 ///////////                               CREAR EL
 ///////////                               PERSONAJE
 ///////////
+
+var personaje = null;
+
 function crearPersonaje(){
-  var personaje = new Personaje("Muddy",400,370,3,0);
+  personaje = null;
+  var pj =new Personaje("Muddy",400,370,1,0);
+  personaje = pj;
   return personaje;
 }

@@ -66,6 +66,9 @@ Objeto.prototype.desaparecer = function(){
   this.posY = piso;
 }
 
+Objeto.prototype.eliminarme = function(){
+  delete this;
+}
 
 function crearObjeto(x,y){
   var moneda = new Objeto(x,y);

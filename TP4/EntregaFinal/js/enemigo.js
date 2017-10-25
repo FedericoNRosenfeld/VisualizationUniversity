@@ -11,7 +11,7 @@
    this.elemento =document.getElementById("enemigo"+id);
    this.elemento.className = "enemigo";
    this.elemento.style.transform = " translate( "+x+"px,"+y+"px)";
-   this.altura = -1 * id;
+   // this.altura = -1 * id;
  }
 
 
@@ -30,8 +30,8 @@ Enemigo.prototype.moverseE = function(){
           this.ojos*= -1;
       }
       this.posX += this.velocidad * this.ojos;
-      this.posY += this.velocidad * this.altura;
-      this.altura *= -1;
+    //  this.posY += this.velocidad * this.altura;
+    //  this.altura *= -1;
       this.setAnimation();
       if ((this.velocidad <5) || (this.velocidad > 40)){
          this.velocidad = 10;
@@ -59,7 +59,9 @@ Enemigo.prototype.colicionar_moneda= function(moneda){
 Enemigo.prototype.update = function(){
       this.moverseE();
 }
-
+Enemigo.prototype.eliminarme = function(){
+  delete this;
+}
 
 function crearEnemigo(id,x,y,ojos){
   var enemigo = new Enemigo(id,x,y,ojos);

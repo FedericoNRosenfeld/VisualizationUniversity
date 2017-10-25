@@ -14,15 +14,13 @@
 }
 
 .contenedor_juego {
-  background-image: url('img/inicio.jpg');
+  background-image: url('img/inicio.bmp');
   position: relative;
-  top: 20px;
-  left: 170px;
+  left: 8%;
   width: 1031px;
   height: 606px;
   border-style: double;
   border-color: black;
-
 }
 
 .backg-1,.backg-2,.backg-3,.backg-4 {

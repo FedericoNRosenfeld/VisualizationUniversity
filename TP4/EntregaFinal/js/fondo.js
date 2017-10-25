@@ -16,7 +16,9 @@ Fondo.prototype.pausaYplay = function(accion){
     }
   }
 
-
+  Fondo.prototype.eliminarme = function(){
+    delete this;
+  }
 function crearFondo(id){
    fondo = new Fondo(id);
    return fondo;

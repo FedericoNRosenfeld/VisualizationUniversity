@@ -6,14 +6,13 @@
     color: RED;
     font-size: 60px;
     margin-top: 200px;
-
-
 }
 
 .titulos{
   text-align: center;
 }
-#play-btn{
+
+.btn{
     left: 200px;
     top: 200px;
     color: black;
@@ -23,4 +22,20 @@
     background-color: grey;
     border-style: double;
     border-color: black;
+}
+.btn_r {
+  margin-top: 2%;
+  margin-left: 41.5%;
+}
+.caja_puntos{
+  margin-top: 20%;
+  margin-left: 43%;
+  text-align: center;
+  font-family: cursive;
+  font-size: 23px;
+  width: 20%;
+  height: 30%;
+  background-color: white;
+  border-style: double;
+  border-color: black;
 }

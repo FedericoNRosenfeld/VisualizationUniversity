@@ -22,8 +22,8 @@
 
 @keyframes golpeado {
   100% {
-   background-position: -615px; }
-  }
+   background-position: -425px;}
+}
 
 .agarrando {
   background :url('img/salto.png') left center;
@@ -42,13 +42,14 @@
 
 
 .morir {
-  : url('img/corriendo.png') left center;
+  background: url('img/corriendo.png') left center;
   animation: morir 0.8s steps(7) infinite;
 }
 
 .golpeado {
-  : url('img/corriendo.png') left center;
-  animation: golpeado 0.8s steps(7) infinite;
+  width: 85px;
+  background: url('img/golpeado.png') left center;
+  animation: golpeado 0.8s steps(5) infinite;
 }
 
 
