@@ -59,9 +59,6 @@ Enemigo.prototype.colicionar_moneda= function(moneda){
 Enemigo.prototype.update = function(){
       this.moverseE();
 }
-Enemigo.prototype.eliminarme = function(){
-  delete this;
-}
 
 function crearEnemigo(id,x,y,ojos){
   var enemigo = new Enemigo(id,x,y,ojos);

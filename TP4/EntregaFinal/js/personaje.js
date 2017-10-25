@@ -144,11 +144,6 @@ Personaje.prototype.estaMuerto = function(){
   return false;
 }
 
-Personaje.prototype.eliminarme = function(){
-  clearInterval(intervalo_salto);
-  delete this;
-}
-
 ///////////
 ///////////                               CREAR EL
 ///////////                               PERSONAJE

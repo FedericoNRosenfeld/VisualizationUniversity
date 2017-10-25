@@ -46,38 +46,27 @@ Juego.prototype.update = function(){
   }
 
 
-
-Juego.prototype.eliminarme = function(){
-
-  var juego = null;
-  var intervalo = null;
-  var intervalo_salto = null;
-  this.delete;
-}
-
 function borradoObjetos(){
   clearInterval(intervalo);
-  juego.personaje.eliminarme();
+  clearInterval(intervalo_salto);
+  delete juego.personaje;
   juego.personaje = null;
 
   for (var j = 0; j < juego.enemigos.length; j++) {
-    juego.enemigos[j].eliminarme();
     delete juego.enemigos[j];
   }
   juego.enemigos = [];
   for (var k = 0; k < juego.objetos.length; k++) {
-    juego.objetos[k].eliminarme();
     delete  juego.objetos[k];
   }
   juego.objetos = [];
 
   for (var j = 0; j < juego.fondos.length; j++) {
-    juego.fondos[j].eliminarme();
     delete  juego.fondos[j];
   }
   juego.fondos = [];
 
-  //juego.eliminarme();
+  delete juego;
 }
 
 
