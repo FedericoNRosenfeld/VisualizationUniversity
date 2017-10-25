@@ -5,8 +5,8 @@
    this.posX = x;
    this.posY = y;
    this.velocidad = 10;
-   this.alto = 20;
-   this.ancho = 30;
+   this.alto = 35;
+   this.ancho = 35;
    this.ojos = ojos; // con 1 esta mirando para la derecha , con false esta mirando para la izquierda
    this.elemento =document.getElementById("enemigo"+id);
    this.elemento.className = "enemigo";
@@ -57,7 +57,7 @@ Enemigo.prototype.colicionar_moneda= function(moneda){
 }
 
 Enemigo.prototype.update = function(){
-      juego.enemigos.moverseE();
+      this.moverseE();
 }
 
 

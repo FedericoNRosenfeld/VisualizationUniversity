@@ -1,36 +1,42 @@
 
 
-@keyframes example {
-0% {background-color: red; left:50px; top:50px;}
-25% {background-color: yellow; left:700px; top:50px;}
-50% {background-color: blue; left:700px; top:400px;}
-75% {background-color: green; left:50px; top:400px;}
-100% {background-color: red; left:50px; top:50px;}
+@keyframes play_moneda {
+100% {  background-position: -360px 0px; }
+
 }
 
 /* El element al cual se aplica la animación */
-.caja {
-width: 20px;
-position: relative;
-animation: infinite;
-background-color: red;
-animation-name: example;
-animation-duration: 4s;
+
+.moneda {
+
+  position: absolute;
+  width: 60px;
+  height: 100px;
+
+  background: url('img/moneda.png') 5px 0px ;
+  background-size: 360px 100px ;
+  background-repeat: no-repeat;
+  animation: play_moneda 0.3s steps(6) infinite;
+  z-index: 600;
+
 
 }
 
 /* --------------------------------------------------------------*/
 @keyframes play_enem {
-100% {  background-position: -466px 0px; }
+100% {  background-position: -240px 0px; }
 
 }
 
 .enemigo {
 position: absolute;
-width: 46.7px;
-height: 48px;
-background: url('img/ghost.png') 0px 0px ;
-animation: play_enem 1s steps(10) infinite;
+width: 40px;
+height: 37.2px;
+/* 2400 372  */
+background: url('img/enemigo.png') 0px 0px ;
+background-size: 240px 37.2px ;
+background-repeat: no-repeat;
+animation: play_enem 1s steps(6) infinite;
 z-index: 700;
 
 

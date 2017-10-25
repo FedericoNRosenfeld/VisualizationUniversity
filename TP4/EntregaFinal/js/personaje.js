@@ -25,6 +25,7 @@ Personaje.prototype.sumarPuntos = function(puntos){
 Personaje.prototype.colicionar_moneda= function(moneda){
   cambioSprite(this.elemento,"agarrando","personaje");
   moneda.agarrarla(this);
+  //console.log(this.puntos);
 }
 
  ///////////
@@ -118,8 +119,8 @@ Personaje.prototype.recibirGolpe= function(){
 
 
 Personaje.prototype.morirse= function(){
-  cambioSprite(this.elemento,"morir","personaje");
   Puntos_Juego(this.puntos);
+  cambioSprite(this.elemento,"morir","personaje");
   //DIE;
 }
 
@@ -133,8 +134,7 @@ Personaje.prototype.estaMuerto = function(){
 ///////////                               CREAR EL
 ///////////                               PERSONAJE
 ///////////
-
 function crearPersonaje(){
-  var personaje = new Personaje("Muddy",400,343,3,0);
+  var personaje = new Personaje("Muddy",400,370,3,0);
   return personaje;
 }
