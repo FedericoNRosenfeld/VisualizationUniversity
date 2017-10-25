@@ -1,6 +1,7 @@
 
 
 
+
 #p_inicio{
     text-align: center;
     color: RED;
@@ -11,7 +12,6 @@
 .titulos{
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 2%;
   text-align: center;
 }
 
@@ -45,4 +45,9 @@ img{
   background-color: white;
   border-style: double;
   border-color: black;
+}
+body{
+  background: url('img/fondo.png') left center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
