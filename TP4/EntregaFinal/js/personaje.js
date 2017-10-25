@@ -158,6 +158,7 @@ var personaje = null;
 
 function crearPersonaje(){
   personaje = null;
+  puntosX = 0;
   var pj =new Personaje("Muddy",400,370,1,0);
   personaje = pj;
   return personaje;
