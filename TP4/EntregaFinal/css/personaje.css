@@ -2,7 +2,7 @@
 
 @keyframes agarrando {
   100% {
-   background-position: -91px; }
+   background-position: -110px; }
   }
 
 @keyframes saltando {
@@ -25,10 +25,8 @@
    background-position: -425px;}
 }
 
-.agarrando {
-  background :url('img/salto.png') left center;
-  animation: agarrando 0.8s steps(1) infinite;
-}
+
+
 
 .saltando {
   background :url('img/salto.png') left center;
@@ -59,4 +57,16 @@ width: 88px;
 height: 114px;
 z-index: 700;
 
+}
+
+.agarrar_saltando {
+  width: 110px;
+  background :url('img/agarrar_saltando.png') left center;
+  animation: agarrando 0.8s steps(1) infinite;
+}
+
+.agarrar_corriendo {
+  width: 110px;
+  background :url('img/agarrar_corriendo.png') left center;
+  animation: agarrando 0.8s steps(1) infinite;
 }

@@ -117,12 +117,16 @@ function realizarAccion(e){
 var p_juego = $('#p_juego');
 var p_inicio = $('#p_inicio');
 var p_puntos = $('#p_puntos');
-var p_rules = $('#p_rules');
+var p_reglas = $('#p_reglas');
 
 var play_btn = $('.play-btn');
-var rules_btn = $('#rules-btn');
+var rules_btn = $('.rules-btn');
 
 
+rules_btn.click(function(){
+  p_inicio.hide();
+  p_reglas.show();
+});
 play_btn.click(function(){
   p_juego.show();
   p_inicio.hide();
@@ -130,6 +134,7 @@ play_btn.click(function(){
   p_reglas.hide();
   empezarJuego();
 });
+p_reglas.hide();
 p_puntos.hide();
 p_juego.hide();
 p_inicio.show();

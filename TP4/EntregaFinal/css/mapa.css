@@ -16,7 +16,9 @@
 .contenedor_juego {
   background-image: url('img/inicio.bmp');
   position: relative;
-  left: 8%;
+  margin-left: 9%;
+  margin-right: 9%;
+
   width: 1031px;
   height: 606px;
   border-style: double;

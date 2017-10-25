@@ -9,9 +9,16 @@
 }
 
 .titulos{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
   text-align: center;
 }
 
+img{
+  margin-top: 5%;
+
+}
 .btn{
     left: 200px;
     top: 200px;

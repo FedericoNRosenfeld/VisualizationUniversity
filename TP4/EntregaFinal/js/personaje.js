@@ -26,7 +26,13 @@ Personaje.prototype.sumarPuntos = function(puntosP){
 }
 
 Personaje.prototype.colicionar_moneda= function(moneda){
-  cambioSprite(this.elemento,"agarrando","personaje");
+  if (this.onJump){
+    cambioSprite(this.elemento,"agarrar_saltando","personaje");
+
+  }
+  else{
+    cambioSprite(this.elemento,"agarrar_corriendo","personaje");
+  }
   moneda.agarrarla(this);
 
   //console.log(this.puntos);
