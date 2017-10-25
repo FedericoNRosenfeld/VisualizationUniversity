@@ -1,0 +1,26 @@
+
+
+
+#p_inicio{
+    text-align: center;
+    color: RED;
+    font-size: 60px;
+    margin-top: 200px;
+
+
+}
+
+.titulos{
+  text-align: center;
+}
+#play-btn{
+    left: 200px;
+    top: 200px;
+    color: black;
+    height: 100px;
+    width: 200px;
+    font-size: 23px;
+    background-color: grey;
+    border-style: double;
+    border-color: black;
+}

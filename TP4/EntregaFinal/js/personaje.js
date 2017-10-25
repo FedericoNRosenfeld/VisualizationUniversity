@@ -20,11 +20,13 @@
 
 Personaje.prototype.sumarPuntos = function(puntos){
   this.puntos += puntos;
+//  document.getElementById("puntos").innerHTM = this.puntos;
 }
 
 Personaje.prototype.colicionar_moneda= function(moneda){
   cambioSprite(this.elemento,"agarrando","personaje");
   moneda.agarrarla(this);
+
   //console.log(this.puntos);
 }
 

@@ -13,8 +13,9 @@
   animation-play-state: paused !important;
 }
 
-.contenedor {
-  position: absolute;
+.contenedor_juego {
+  background-image: url('img/inicio.jpg');
+  position: relative;
   top: 20px;
   left: 170px;
   width: 1031px;

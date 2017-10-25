@@ -2,30 +2,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Template</title>
+		<title>Gallinas Locas</title>
 			<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<!-- Estilos propios -->
 		<link href="css/personaje.css" type="text/css" rel="stylesheet" >
 		<link href="css/mapa.css" type="text/css" rel="stylesheet" >
+		<link href="css/estilos.css" type="text/css" rel="stylesheet" >
 		<link href="css/enemigos.css" type="text/css" rel="stylesheet" >
 	</head>
-	<div>
-		<p id="puntos">Puntos finales</p>
-		<p id="tecla">teclas</p>
-	</div>
-				<div class="contenedor">
-				<div class="" id="fondo1"> </div>
-				<div class="" id="fondo2"> </div>
-				<div class="" id="fondo3"> </div>
-				<div class="" id="fondo4"> </div>
-				<div class="" id="enemigo1"></div>
-				<div class="" id="enemigo2"></div>
-				<div class="" id="moneda"></div>
 
-				<div class="personaje" id="personajeX"></div>
+		<div class="contenedor titulos">
+			<div class=""><h1> Gallinas Locas </h1> </div>
+			<h2> Un hombre VS dos gallinas compitiendo en:</h2>
+			<h2> Cazadores de monedas </h2>
+		</div>
+		</div>
+		<div class="contenedor_juego">
+				<div class="" id="p_inicio">
+						<div class="row">
+							<div class="col-xl-2 "></div>
 
-	</div>
+							<div class="col-xl-8">
+	                <div id="Iniciar_jugar" class="caja_boton">
+	                    <button class="btn" id="play-btn">INICIAR JUEGO</button>
+	                </div>
+	            </div>
+							<div class="col-xl-8">
+	                <div id="reglas" class="caja_boton">
+	                    <button class="btn" id="play-btn">INICIAR JUEGO</button>
+	                </div>
+	            </div>
+						</div>
+					</div>
+				<div id="p_juego">
+					<div class="" id="fondo1"> </div>
+					<div class="" id="fondo2"> </div>
+					<div class="" id="fondo3"> </div>
+					<div class="" id="fondo4"> </div>
+					<div class="" id="enemigo1"></div>
+					<div class="" id="enemigo2"></div>
+					<div class="" id="moneda"></div>
+					<div class="personaje" id="personajeX"></div>
+				</div>
+			<div class="" id="p_fin">
+				<div class="pantalla_fin"></div>
+			</div>
+		</div>
 
 	</body>
 	<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
