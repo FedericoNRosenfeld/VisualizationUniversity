@@ -113,6 +113,7 @@ var rules_btn = $('.rules-btn');
 
 
 rules_btn.click(function(){
+  p_puntos.hide();
   p_inicio.hide();
   p_reglas.show();
 });
