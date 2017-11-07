@@ -1,4 +1,13 @@
 
+
+/// --------------------------------------------    Authentication
+//var Codebird = require('cd/codebird');
+// or with leading "./", if the codebird.js file is in your main folder:
+// var Codebird = require("./codebird");
+//CONSUMER ALT "ZjATE7n0u6cve4juuPiyitw9O", "32DuRj57NXTKp7pOMCw4c7Ubsee57qffr2jrk8vAmjHwwwLg4b"
+//TOKEN ALT "926493527856566272-DW8mbl8NYupY9WY4ce9pUuCqALoKpPL", "m2Anmygd0uJ1tjTlU5WC8JCVH6S6R9DlTugfEQbwb9z8v"
+
+
 var imagenes = [];
 
 /// --------------------------------------------    Authentication
@@ -22,7 +31,7 @@ function (reply) {
  for (var i = 0; i < reply.statuses.length; i++) {
   // var pertenece = false;
    var twitter = reply.statuses[i];
-   if(( twitter.extended_entities && twitter.extended_entities.media[0].type == "photo" ){
+   if(( twitter.extended_entities && twitter.extended_entities.media[0].type == "photo" )){
      /*
      var hasht = twitter.entities.hashtags;
      for (var j = 0; j < hasht.length; j++) {
@@ -40,14 +49,42 @@ function (reply) {
         imagenes.push(paquete);
      }
    }
- }
   cargarImagenes();// la encargada de mandar las imagenes a la pagina
 }
 );
-
 
 function cargarImagenes(){
   for (var i = 0; i < imagenes.length; i++) {
       // unir esto con los contenedores correspondientes
   }
 }
+$('#hash').submit(function(e){
+  e.preventDefault();
+  document.getElementById("ejemplo").style.display = "none";
+  document.getElementById("contenido").style.display = "block";
+  document.getElementById("grilla").style.backgroundColor = "lightblue";
+  var busqueda = document.getElementById("hash").buscar.value;
+  params.q = busqueda;
+  console.log(params.q);
+});
+$('#grilla').click(function(e){
+  e.preventDefault();
+  document.getElementById("grilla").style.backgroundColor = "lightblue";
+  document.getElementById("galeria").style.backgroundColor = "white";
+  document.getElementById("presentacion").style.backgroundColor = "white";
+
+});
+$('#galeria').click(function(e){
+  e.preventDefault();
+  document.getElementById("grilla").style.backgroundColor = "white";
+  document.getElementById("galeria").style.backgroundColor = "lightblue";
+  document.getElementById("presentacion").style.backgroundColor = "white";
+
+});
+$('#presentacion').click(function(e){
+  e.preventDefault();
+  document.getElementById("grilla").style.backgroundColor = "white";
+  document.getElementById("galeria").style.backgroundColor = "white";
+  document.getElementById("presentacion").style.backgroundColor = "lightblue";
+
+});

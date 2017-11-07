@@ -18,3 +18,12 @@
 .boton_busqueda{
 
 }
+nav{
+  color: white;
+}
+#contenido{
+  display: none;
+}
+#contenido button{
+  background-color: white;
+}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <title>Hello, world!</title>
     <!-- Required meta tags -->
@@ -10,38 +10,46 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/estilos.css" type="text/css" rel="stylesheet" >
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   </head>
   <body>
-
-
-    <div class="container-fluid contendor_navbar">
-        <div class="row justify-content-md-center">
-          <div class=" col-2 titulo_navbar">
-            <p>  Aplicacion Tweeter </p>
-          </div>
-          <div class=" col-2 logo_navbar">
-            <p>  logo  </p>
-          </div>
+    <nav class="navbar navbar-inverse bg-primary">
+      <div class="row">
+        <div class="col-sm-4">
+          <h2>titulo</h2>
         </div>
-
-        <div class="row">
-          <div class="col-2 barra_busqueda">
-            <p>  Barra de busqueda </p>
-          </div>
-          <div class="col-1 boton_busqueda">
-              <button class="btn" id="auth"> Boton CodeBird </button>
-          </div>
+        <div class="col-sm-3">
+          <form class="form-inline" id="hash">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">#</span>
+              <input type="text" class="form-control" placeholder="Tu busqueda" aria-describedby="basic-addon1" size="50" name="buscar" required>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </div>
+          </form>
         </div>
+        <div class="col-sm-4">
+          <img src="logo.png" alt="">
+        </div>
+      </div>
+    </nav>
+    <div id="ejemplo">
+      <div class="text-center">
+        <p>Cientos de imagenes para tu hashtag</p>
+        <img src="ejemplo.jpg" alt="">
+      </div>
+    </div>
+    <div id="contenido">
+      <div id="Muestra">
+        <button type="button" name="button"id="grilla"><i class="fa fa-th" aria-hidden="true"></i></button>|<button type="button" name="button" id="galeria"><i class="fa fa-sitemap" aria-hidden="true"></i></button>|<button type="button" name="button" id="presentacion"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+      </div>
+      <div id="galeria">
+
+      </div>
     </div>
 
-      <div class="container contendor_rojo">
-        <p> contenedor con margenes </p>
-      </div>
-
-
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-	  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	  <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/cd/codebird.js"></script>
     <script type="text/javascript" src="js/function.js"></script>
 
