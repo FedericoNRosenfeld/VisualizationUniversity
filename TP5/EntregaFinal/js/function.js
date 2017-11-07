@@ -9,7 +9,6 @@
 
 
 var imagenes = [];
-
 /// --------------------------------------------    Authentication
 //var Codebird = require("cd/codebird");
 // or with leading "./", if the codebird.js file is in your main folder:
@@ -18,11 +17,12 @@ var cb = new Codebird;
 cb.setConsumerKey("8Vmq8hzhPIPjYc4EAfGQ3vlke", "8h2fSU4vYhLqeJJmpRQRv9JxwtUP6jkmBU4vgitWR6Gjt859Ov");
 cb.setToken("163239019-rJLe5uULgm7ZVDO8yPVstjugvQRSqB6LzEtiakAV", "FnOHS2LkDQfICIBmlwia4oCsfGrSx4ohBQPOmViuToBTU");
 
+function consulta(busqueda){
  var params = {
    // q: consulta que se haria
-      q: "NYC"
-
-  };
+      q: "%23"+busqueda
+  }
+  console.log(params.q);
 
 cb.__call(
 "search_tweets",
@@ -52,21 +52,28 @@ function (reply) {
   cargarImagenes();// la encargada de mandar las imagenes a la pagina
 }
 );
+}
 
 function cargarImagenes(){
+  alert( imagenes.length);
   for (var i = 0; i < imagenes.length; i++) {
-      // unir esto con los contenedores correspondientes
+    console.log(imagenes[i]);
   }
 }
+
+
 $('#hash').submit(function(e){
   e.preventDefault();
   document.getElementById("ejemplo").style.display = "none";
   document.getElementById("contenido").style.display = "block";
   document.getElementById("grilla").style.backgroundColor = "lightblue";
   var busqueda = document.getElementById("hash").buscar.value;
-  params.q = busqueda;
-  console.log(params.q);
+  //params.q = busqueda;   esto lo saco de aca y lo mando mas arriba en function consulta(...)
+  // console.log(params.q);
+  consulta(busqueda);
 });
+
+
 $('#grilla').click(function(e){
   e.preventDefault();
   document.getElementById("grilla").style.backgroundColor = "lightblue";
