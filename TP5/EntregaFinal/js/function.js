@@ -18,11 +18,15 @@ cb.setConsumerKey("8Vmq8hzhPIPjYc4EAfGQ3vlke", "8h2fSU4vYhLqeJJmpRQRv9JxwtUP6jkm
 cb.setToken("163239019-rJLe5uULgm7ZVDO8yPVstjugvQRSqB6LzEtiakAV", "FnOHS2LkDQfICIBmlwia4oCsfGrSx4ohBQPOmViuToBTU");
 
 function consulta(busqueda){
+  imagenes = [];
  var params = {
-   // q: consulta que se haria
-      q: "%23"+busqueda
+   //https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
+      q: "#"+busqueda, /// busqueda a realizar
+      result_type: "mixed", // tipo de busqueda mixta
+      count:50 // maximo de 50 twitters
   }
   console.log(params.q);
+
 
 cb.__call(
 "search_tweets",
@@ -32,14 +36,7 @@ function (reply) {
   // var pertenece = false;
    var twitter = reply.statuses[i];
    if(( twitter.extended_entities && twitter.extended_entities.media[0].type == "photo" )){
-     /*
-     var hasht = twitter.entities.hashtags;
-     for (var j = 0; j < hasht.length; j++) {
-         if ( hasht[i].text == params.q){
-            pertenece = true;
-         }
-     }
-     if (pertenece){ */
+     /* var hasht = twitter.entities.hashtags; for (var j = 0; j < hasht.length; j++) {if ( hasht[i].text == params.q){pertenece = true;}} if (pertenece){ */
        var paquete = {
            // https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/extended-entities-object
            url: twitter.extended_entities.media[0].media_url_https,
@@ -51,6 +48,7 @@ function (reply) {
    }
   cargarImagenes();// la encargada de mandar las imagenes a la pagina
 }
+
 );
 }
 
