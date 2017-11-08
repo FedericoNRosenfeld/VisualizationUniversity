@@ -38,6 +38,28 @@ nav{
 .imagenesGaleria img{
   width: 100%;
 }
+h2{
+  font-style: italic;
+}
+
+.spaces{
+margin-bottom: 3%;}
+
+.largs{
+  height: 90px;
+  padding: 2%;
+  padding-left: 20%;
+}
+a{
+  background-color:blue;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* VISUALES PARA LA ESTATICAS DE LA VISTA 1 = GRILLA    */
+.likes{
+  color: red;  /*para que el corazon y el numero de likes sea en rojo*/
+}
+
 /* ---------------------------------------------------------------------------*/
 /* VISUALES PARA LA ESTATICAS DE LA VISTA 2 = CARRUSEL    */
 .imagen_muestra_v2{
@@ -80,18 +102,3 @@ nav{
   transform: scale(-1,1);
 }
 /* ---------------------------------------------------------------------------*/
-h2{
-  font-style: italic;
-}
-
-.spaces{
-margin-bottom: 3%;}
-
-.largs{
-  height: 90px;
-  padding: 2%;
-  padding-left: 20%;
-}
-a{
-  background-color:blue;
-}
