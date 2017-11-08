@@ -1,6 +1,10 @@
 
+body{
+ background-image: url("images/colage.png");
+}
+
 .fondo_inicio{
-  background-color: white;
+
   height: 250px;
 }
 
@@ -39,8 +43,8 @@ h2{
 }
 
 .largs{
-  height: 150px;
-  padding: 5%;
+  height: 90px;
+  padding: 2%;
   padding-left: 20%;
 }
 a{

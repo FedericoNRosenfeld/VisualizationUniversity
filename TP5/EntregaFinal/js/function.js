@@ -1,5 +1,5 @@
 
-
+ document.body.style.background = "url('css/images/background_t.png')";
 /// --------------------------------------------    Authentication
 //var Codebird = require('cd/codebird');
 // or with leading "./", if the codebird.js file is in your main folder:
