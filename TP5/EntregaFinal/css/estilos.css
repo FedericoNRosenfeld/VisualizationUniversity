@@ -1,7 +1,13 @@
 
+.fondo_inicio{
+  background-color: white;
+  height: 250px;
+}
+
 .selector-for-some-widget {
   box-sizing: content-box;
 }
+
 
 .contendor_navbar{
   height: 20%;
@@ -30,4 +36,13 @@ nav{
 }
 h2{
   font-style: italic;
+}
+
+.largs{
+  height: 150px;
+  padding: 5%;
+  padding-left: 20%;
+}
+a{
+  background-color:blue;
 }
