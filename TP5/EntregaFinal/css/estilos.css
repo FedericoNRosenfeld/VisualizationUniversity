@@ -102,3 +102,14 @@ a{
   transform: scale(-1,1);
 }
 /* ---------------------------------------------------------------------------*/
+/* VISUALES PARA LA ESTATICAS DE LA VISTA 3 = Imagen cambiante    */
+.sright{
+  position:relative;
+  left:100%;
+}
+
+.grados90{
+  transform: rotate(90deg);
+}
+
+/* ---------------------------------------------------------------------------*/
