@@ -8,7 +8,6 @@
 //TOKEN ALT "926493527856566272-DW8mbl8NYupY9WY4ce9pUuCqALoKpPL", "m2Anmygd0uJ1tjTlU5WC8JCVH6S6R9DlTugfEQbwb9z8v"
 
 
-
 var imagenes = [];
 /// --------------------------------------------    Authentication
 //var Codebird = require("cd/codebird");
