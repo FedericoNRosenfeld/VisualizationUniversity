@@ -8,6 +8,7 @@
 //TOKEN ALT "926493527856566272-DW8mbl8NYupY9WY4ce9pUuCqALoKpPL", "m2Anmygd0uJ1tjTlU5WC8JCVH6S6R9DlTugfEQbwb9z8v"
 
 
+
 var imagenes = [];
 /// --------------------------------------------    Authentication
 //var Codebird = require("cd/codebird");
@@ -16,6 +17,8 @@ var imagenes = [];
 var cb = new Codebird;
 cb.setConsumerKey("8Vmq8hzhPIPjYc4EAfGQ3vlke", "8h2fSU4vYhLqeJJmpRQRv9JxwtUP6jkmBU4vgitWR6Gjt859Ov");
 cb.setToken("163239019-rJLe5uULgm7ZVDO8yPVstjugvQRSqB6LzEtiakAV", "FnOHS2LkDQfICIBmlwia4oCsfGrSx4ohBQPOmViuToBTU");
+
+consulta("perro");
 
 function consulta(busqueda){
   imagenes = [];
@@ -54,42 +57,55 @@ function (reply) {
 
 function cargarImagenes(){
   alert( imagenes.length);
+  var img = document.getElementById("galeria");
+  while (img.hasChildNodes()) {
+      img.removeChild(img.firstChild);
+  }
+  var divs = document.createElement('div');
+  divs.className = "row";
+  divs.id = 'grill'
   for (var i = 0; i < imagenes.length; i++) {
     console.log(imagenes[i]);
-  }
-}
+    var divtamano = document.createElement('div');
+    divtamano.className = "col-md-3";
+    var divclase = document.createElement('div');
+    divclase.className = "imagenesGaleria";
+    var images = document.createElement('img');
+    images.src = imagenes[i].url;
+    images.id = i;
+    images.className = "img-responsive";
+    divclase.appendChild(images);
+    divtamano.appendChild(divclase);
+    divs.appendChild(divtamano);
 
+  }
+  document.getElementById('galeria').appendChild(divs);
+}
 
 $('#hash').submit(function(e){
   e.preventDefault();
-  document.getElementById("ejemplo").style.display = "none";
-  document.getElementById("contenido").style.display = "block";
   document.getElementById("grilla").style.backgroundColor = "lightblue";
   var busqueda = document.getElementById("hash").buscar.value;
-  //params.q = busqueda;   esto lo saco de aca y lo mando mas arriba en function consulta(...)
-  // console.log(params.q);
   consulta(busqueda);
 });
-
-
 $('#grilla').click(function(e){
   e.preventDefault();
   document.getElementById("grilla").style.backgroundColor = "lightblue";
-  document.getElementById("galeria").style.backgroundColor = "white";
+  document.getElementById("exposicion").style.backgroundColor = "white";
   document.getElementById("presentacion").style.backgroundColor = "white";
 
 });
 $('#galeria').click(function(e){
   e.preventDefault();
   document.getElementById("grilla").style.backgroundColor = "white";
-  document.getElementById("galeria").style.backgroundColor = "lightblue";
+  document.getElementById("exposicion").style.backgroundColor = "lightblue";
   document.getElementById("presentacion").style.backgroundColor = "white";
 
 });
 $('#presentacion').click(function(e){
   e.preventDefault();
   document.getElementById("grilla").style.backgroundColor = "white";
-  document.getElementById("galeria").style.backgroundColor = "white";
+  document.getElementById("exposicion").style.backgroundColor = "white";
   document.getElementById("presentacion").style.backgroundColor = "lightblue";
 
 });

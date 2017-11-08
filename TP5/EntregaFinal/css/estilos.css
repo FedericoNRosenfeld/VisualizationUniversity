@@ -21,9 +21,13 @@
 nav{
   color: white;
 }
-#contenido{
-  display: none;
-}
+
 #contenido button{
   background-color: white;
+}
+.imagenesGaleria img{
+  width: 100%;
+}
+h2{
+  font-style: italic;
 }
