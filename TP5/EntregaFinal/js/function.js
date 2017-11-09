@@ -83,26 +83,29 @@ $('#hash').submit(function(e){
   e.preventDefault();
   document.getElementById("grilla").style.backgroundColor = "lightblue";
   var busqueda = document.getElementById("hash").buscar.value;
-  consulta(busqueda);
+  //consulta(busqueda);
+  $("body").load("vista1");
 });
 $('#grilla').click(function(e){
   e.preventDefault();
+  cargarpagina("vista1.html");
   document.getElementById("grilla").style.backgroundColor = "lightblue";
   document.getElementById("exposicion").style.backgroundColor = "white";
   document.getElementById("presentacion").style.backgroundColor = "white";
-
 });
-$('#galeria').click(function(e){
+$('#exposicion').click(function(e){
   e.preventDefault();
+  cargarpagina("vista2.html");
   document.getElementById("grilla").style.backgroundColor = "white";
   document.getElementById("exposicion").style.backgroundColor = "lightblue";
   document.getElementById("presentacion").style.backgroundColor = "white";
-
 });
 $('#presentacion').click(function(e){
-  e.preventDefault();
+  cargarpagina("vista3.html");
   document.getElementById("grilla").style.backgroundColor = "white";
   document.getElementById("exposicion").style.backgroundColor = "white";
   document.getElementById("presentacion").style.backgroundColor = "lightblue";
-
 });
+function cargarpagina(pagina){
+  location.href = pagina;
+}
