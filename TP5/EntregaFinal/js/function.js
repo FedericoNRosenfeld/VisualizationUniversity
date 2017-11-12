@@ -21,10 +21,18 @@ cb.setToken("163239019-rJLe5uULgm7ZVDO8yPVstjugvQRSqB6LzEtiakAV", "FnOHS2LkDQfIC
 
 
 function consulta(busqueda,tipo){
-
+  var consulta; // para chequear si no arranca con un #
+  consulta = busqueda.substring(0,1);
+  if  (consulta <> "#"){
+    consulta = "#"+ busqueda;
+  }
+  else {
+    consulta = busqueda;
+  }
  var params = {
    //https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
-      q: "#"+busqueda, 			// busqueda a realizar , hacer un chequeo si lo que viene no posee ya un #
+
+      q: consulta, 			// busqueda a realizar , hacer un chequeo si lo que viene no posee ya un #
       result_type: tipo, 	// mixta era el dafault pero no traia todos, sino que traia los que tenia en comun
       count:50 					// maximo de 50 twitters
   };
@@ -56,9 +64,9 @@ function consulta(busqueda,tipo){
 	   else{
         cambiar_tipo = true; // para que quede seteado en default otra vez
         cargarImagenes();// la encargada de mandar las imagenes a la pagina
-        
+
 	   }
-	 
+
 	}
 
 );
