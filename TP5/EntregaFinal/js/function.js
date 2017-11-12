@@ -7,7 +7,7 @@
 //CONSUMER ALT "ZjATE7n0u6cve4juuPiyitw9O", "32DuRj57NXTKp7pOMCw4c7Ubsee57qffr2jrk8vAmjHwwwLg4b"
 //TOKEN ALT "926493527856566272-DW8mbl8NYupY9WY4ce9pUuCqALoKpPL", "m2Anmygd0uJ1tjTlU5WC8JCVH6S6R9DlTugfEQbwb9z8v"
 
-
+var cambio_tipo = true;
 var imagenes = [];
 /// --------------------------------------------    Authentication
 //var Codebird = require("cd/codebird");
@@ -17,14 +17,15 @@ var cb = new Codebird;
 cb.setConsumerKey("8Vmq8hzhPIPjYc4EAfGQ3vlke", "8h2fSU4vYhLqeJJmpRQRv9JxwtUP6jkmBU4vgitWR6Gjt859Ov");
 cb.setToken("163239019-rJLe5uULgm7ZVDO8yPVstjugvQRSqB6LzEtiakAV", "FnOHS2LkDQfICIBmlwia4oCsfGrSx4ohBQPOmViuToBTU");
 
-//consulta("perro");
+//cb.setProxy("https://cb-proxy.herokuapp.com/"); // proxy que paso Axel
 
-function consulta(busqueda){
-  imagenes = [];
+
+function consulta(busqueda,tipo){
+
  var params = {
    //https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
-      q: "#"+busqueda, 			// busqueda a realizar
-	  result_type: "mixed", 	// tipo de busqueda mixta
+      q: "#"+busqueda, 			// busqueda a realizar , hacer un chequeo si lo que viene no posee ya un #
+      result_type: tipo, 	// mixta era el dafault pero no traia todos, sino que traia los que tenia en comun
       count:50 					// maximo de 50 twitters
   };
   console.log(params.q);
@@ -36,17 +37,28 @@ function consulta(busqueda){
 	  // var pertenece = false;
 	   var twitter = reply.statuses[i];
 	   if(( twitter.extended_entities && twitter.extended_entities.media[0].type == "photo" )){
-		 /* var hasht = twitter.entities.hashtags; for (var j = 0; j < hasht.length; j++) {if ( hasht[i].text == params.q){pertenece = true;}} if (pertenece){ */
 		   var paquete = {
 			   // https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/extended-entities-object
 			   url: twitter.extended_entities.media[0].media_url_https,
 			   //https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object
 			   likes: twitter.favorite_count
+			   // Nombre del emisor del twit
+			   usuario: twiter.user[0].name;
 		   }
+		   // armar un contains para evitar imagenes repetidas (re-twitts)
 			imagenes.push(paquete);
 		 }
 	   }
-	  cargarImagenes();// la encargada de mandar las imagenes a la pagina
+	   if (cambio_tipo){
+          cambio_tipo = false; //asi evita entrar en el if la segunda vuelta
+          consulta(busqueda,"recent");
+	   }
+	   else{
+        cambiar_tipo = true; // para que quede seteado en default otra vez
+        cargarImagenes();// la encargada de mandar las imagenes a la pagina
+        
+	   }
+	 
 	}
 
 );
@@ -83,7 +95,8 @@ $('#hash').submit(function(e){
   e.preventDefault();
   document.getElementById("grilla").style.backgroundColor = "lightblue";
   var busqueda = document.getElementById("hash").buscar.value;
-  //consulta(busqueda);
+  imagenes = [];
+  consulta(busqueda,"popular");
   $("body").load("vista1");
 });
 $('#grilla').click(function(e){
