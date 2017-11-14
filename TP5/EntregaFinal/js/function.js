@@ -17,8 +17,7 @@ var cb = new Codebird;
 cb.setConsumerKey("8Vmq8hzhPIPjYc4EAfGQ3vlke", "8h2fSU4vYhLqeJJmpRQRv9JxwtUP6jkmBU4vgitWR6Gjt859Ov");
 cb.setToken("163239019-rJLe5uULgm7ZVDO8yPVstjugvQRSqB6LzEtiakAV", "FnOHS2LkDQfICIBmlwia4oCsfGrSx4ohBQPOmViuToBTU");
 
-//cb.setProxy("https://cb-proxy.herokuapp.com/"); // proxy que paso Axel
-
+//cb.setProxy("https://cb-proxy.herokuapp.com/"); // proxy que paso Axel en caso que no ande CB
 
 function consulta(busqueda,tipo){
   var consulta; // para chequear si no arranca con un #
@@ -54,7 +53,10 @@ function consulta(busqueda,tipo){
 			   usuario: twiter.user[0].name;
 		   }
 		   // armar un contains para evitar imagenes repetidas (re-twitts)
-			imagenes.push(paquete);
+      if (! existeImagen(paquete)){
+        imagenes.push(paquete);
+
+      }
 		 }
 	   }
 	   if (cambio_tipo){
@@ -71,6 +73,20 @@ function consulta(busqueda,tipo){
 
 );
 }
+
+
+function existeImagen(paquete){
+  //Funcion encargada de determinar si una imagen de un Twitt ya esta en el arreglo iamgenes
+  for (var i = 0; i < imagenes.length; i++) {
+    if (imagenes[i].url == paquete.url){
+      //usarMejorImagen(imagenes[i],paquete);
+      return true;
+    }
+  }
+  return false;
+
+}
+
 
 function cargarImagenes(){
   alert( imagenes.length);

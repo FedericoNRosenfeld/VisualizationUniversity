@@ -1,0 +1,29 @@
+
+@keyframes desaparecer_centro {
+    from { transform: none; }
+    100% { transform: scale(0); }
+}
+
+@keyframes aparecer_centro {
+    from { transform: scale(0) }
+    100% { transform: none; }
+}
+
+.cambio_automatico_v1{
+  animation: desaparecer_centro 2s;
+}
+
+
+.cambio_automatico_v2{
+  animation: aparecer_centro 2s;
+}
+
+.contenedorFotoV2{
+  text-align: center;
+  vertical-align:middle;
+}
+.contenedorFotoV2 .img-chica{
+  width: 70%;
+  height: 70%;
+}
+/*width:100%; height:auto;*/
