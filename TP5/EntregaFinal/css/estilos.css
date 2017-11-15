@@ -1,11 +1,18 @@
 
 body{
- background-image: url("images/colage.png")
- ;
+ background-image: url("images/colage.png");
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+#paginaInicio{
+}
+
+#paginaGaleria{
+ background-image: url("images/background_t.png");
+ display: none;
 }
 
 .fondo_inicio{
-
   height: 250px;
 }
 
@@ -36,8 +43,37 @@ nav{
 #contenido button{
   background-color: white;
 }
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
+
+.imagenesGaleria{
+  background-color: lightgray;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 8px;
+  border-color: lightgray;
+  margin: 20px;
+}
 .imagenesGaleria img{
   width: 100%;
+  height: 200px;
+  margin-top: 5%;
 }
 h2{
   font-style: italic;
@@ -51,9 +87,7 @@ margin-bottom: 3%;}
   padding: 2%;
   padding-left: 20%;
 }
-a{
-  background-color:blue;
-}
+
 
 /* ---------------------------------------------------------------------------*/
 /* VISUALES PARA LA ESTATICAS DE LA VISTA 1 = GRILLA    */
