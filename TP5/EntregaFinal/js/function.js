@@ -100,7 +100,7 @@ function cargargrilla(){
   for (var i = 0; i < imagenes.length; i++) {
     console.log(imagenes[i]);
     var divtamano = document.createElement('div');
-    divtamano.className = "col-sm-3 imagenesGaleria";
+    divtamano.className = "col-sm-3 imagenesgrilla";
     var divImages = document.createElement('div');
     //divImages.className = "imagenesGaleria";
     var images = document.createElement('img');
