@@ -6,8 +6,8 @@
 }
 
 .likes{
+  top: 5px;
   color: red;  /*para que el corazon y el numero de likes sea en rojo*/
-  font-size: 25px;
   text-align: center;
 }
 
@@ -19,7 +19,7 @@
 
 @keyframes latidos {
     from { transform: none; }
-    50% { transform: scale(2); }
+    50% { transform: scale(1.5); }
     to { transform: none; }
 }
 
@@ -31,7 +31,7 @@
 }
 
 @keyframes gira2 {
-       
+
        50%{transform:rotateY(180deg); }
        100%{ transform:rotateX(360deg); }
 }
@@ -56,21 +56,13 @@
 
 
 .girando{
-  
   animation: gira 5s infinite;
-  font-size: 35px;
-
 }
 
 .girando2{
-  
   animation: gira2 2s infinite;
-  font-size: 35px;
-
 }
 
 .arcoiris{
   animation: colores 10s infinite;
-  font-size: 35px;
-
 }

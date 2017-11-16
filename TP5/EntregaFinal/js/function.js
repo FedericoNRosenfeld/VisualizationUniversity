@@ -8,6 +8,7 @@ $( document ).ready(function() {
 var vistaActiva = "grilla";
 var cambio_tipo = true;
 var imagenes = [];
+console.log(cambio_tipo);
 /// --------------------------------------------    Authentication
 //var Codebird = require("cd/codebird");
 // or with leading "./", if the codebird.js file is in your main folder:
@@ -20,11 +21,6 @@ cb.setToken("163239019-rJLe5uULgm7ZVDO8yPVstjugvQRSqB6LzEtiakAV", "FnOHS2LkDQfIC
 
 
 function consultar(busqueda,tipo){
-  document.getElementById("paginaInicio").style.display = "none";
-  document.getElementById("paginaGaleria").style.display = "block"
-  document.getElementById("grilla").style.backgroundColor = "lightblue";
-  document.getElementById("exposicion").style.backgroundColor = "white";
-  document.getElementById("presentacion").style.backgroundColor = "white";
   var consulta; // para chequear si no arranca con un #
   consulta = busqueda.substring(0,1);
   if  (consulta != "#"){
@@ -67,9 +63,10 @@ function consultar(busqueda,tipo){
 	   if (cambio_tipo){
           cambio_tipo = false; //asi evita entrar en el if la segunda vuelta
           consultar(busqueda,"recent");
+          console.log("entro");
 	   }
 	   else{
-        cambiar_tipo = true; // para que quede seteado en default otra vez
+        cambio_tipo = true; // para que quede seteado en default otra vez
         cargarvista();
 	   }
 	}
@@ -92,7 +89,7 @@ function existeImagen(paquete){
 
 //-----------------------metodos de carga de galerias----------------------------//
 function cargargrilla(){
-  var img = document.getElementById("grill");
+  var img = document.getElementById("grillaCompleta");
   while (img.hasChildNodes()) {
       img.removeChild(img.firstChild);
   }
@@ -111,12 +108,12 @@ function cargargrilla(){
     divDatos.className = "row";
 
     var likes = document.createElement('div');
-    likes.className = "text-right col-sm-6 likes";
+    likes.className = "text-center col-sm-3 likes latiendo";
     var figura = document.createElement('i');
     figura.className = "fa fa-heart";
     var texto = document.createTextNode(imagenes[i].likes);
     var divUser = document.createElement('div');
-    divUser.className = "text-left col-sm-6 user";
+    divUser.className = "text-left col-sm-9 user";
     var p = document.createElement('p');
     var nombre = document.createTextNode("@"+imagenes[i].usuario);
 
@@ -133,7 +130,7 @@ function cargargrilla(){
     divImages.appendChild(images);
     divtamano.appendChild(divImages);
     divtamano.appendChild(divDatos);
-    document.getElementById('grill').appendChild(divtamano);
+    document.getElementById('grillaCompleta').appendChild(divtamano);
   }
 }
 
@@ -168,16 +165,16 @@ function  muestraAutomaticaV3(){
       document.getElementById("usuario3").innerHTML = imagenes[contador].usuario;
       imagenV3.classList.add("giroShow");
       console.log(document.getElementById("imagenV3").src);
+      if( contador < (imagenes.length -1)) {
+        contador++
+      }
+      else {
+        console.log("entro al cont 0");
+        console.log(document.getElementById("imagenV3").src);
+        contador = 0;
+      }
 
     },2000 );
-    if( contador < (imagenes.length -1)) {
-        contador++
-    }
-    else {
-      console.log("entro al cont 0");
-      console.log(document.getElementById("imagenV3").src);
-        contador = 0;
-    }
 }
 
 //-------------------------Cargado de las vistas----------------------------------//
@@ -219,30 +216,36 @@ var cargarvista = function() {
 };
 //-------------------------pagina de inicio----------------------------------//
 
+$(document).on("click", "#nuevoHash", function(e){
+  e.preventDefault();
+  imagenes = [];
+  var busqueda = document.getElementById("hash").buscar.value;
+  console.log(busqueda);
+  consultar(busqueda,"popular");
+});
 
 $(document).on("click", "#primeraBusqueda", function(e){
   e.preventDefault();
   document.body.style.background = "url('css/images/background_t.png')";
   var busqueda = document.getElementById("primerFormulario").buscar.value;
   console.log(busqueda);
-  consultar(busqueda,"popular");
-});
-
-
-//-------------------------Busqueda--------------------------------------------//
-$('#hash').submit(function(e){
-  e.preventDefault();
-  var busqueda = document.getElementById("hash").buscar.value;
-  imagenes = [];
-  consultar(busqueda,"popular");
-  cargarvista();
+  document.getElementById("paginaInicio").style.display = "none";
+  document.getElementById("paginaGaleria").style.display = "block"
   document.getElementById("grilla").style.backgroundColor = "lightblue";
+  document.getElementById("exposicion").style.backgroundColor = "white";
+  document.getElementById("presentacion").style.backgroundColor = "white";
+  consultar(busqueda,"popular");
 });
+
+
 
 //-------------------------Cambio de galerias--------------------------------------------//
 
 $('#grilla').click(function(e){
   e.preventDefault();
+  if (vistaActiva == "presentacion") {
+    terminandoIntervalo3();
+  }
   vistaActiva = "grilla";
   cargarvista();
   document.getElementById("grilla").style.backgroundColor = "lightblue";
