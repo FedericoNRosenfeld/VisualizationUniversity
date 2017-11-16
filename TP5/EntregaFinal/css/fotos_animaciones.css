@@ -28,13 +28,12 @@
   animation: aparecer_centro 2s;
 }
 
-.giroHide{
-  animation: girar-90 3s;
-
-}
 .giroShow{
-  animation: girar90 2s;
+  animation: girar-90 2s;
+}
 
+.giroHide{
+  animation: girar90 2s;
 }
 .contenedorFotoV2{
   text-align: center;

@@ -137,6 +137,49 @@ function cargargrilla(){
   }
 }
 
+
+/// --------------------------------------- VISTA 3 - MOVIMIENTO AUTOMATICO CON GIRO
+var contador = 1;
+var intervalo03;
+var imagenV3;
+function iniciandoVista3(){
+  imagenV3 = document.getElementById("imagenV3");
+  document.getElementById("imagenV3").src = imagenes[0].url;
+  document.getElementById("like3").innerHTML = imagenes[0].likes;
+  document.getElementById("usuario3").innerHTML = imagenes[0].usuario;
+  // setTimeout(function(){ // le dejamos 2 segundos de inicio a la primera imagen
+  intervalo03 = setInterval(function (){
+    muestraAutomaticaV3();},7000); // cada 6 segundos se reinicia el ciclo
+  // },2000 );
+
+}
+function terminandoIntervalo3(){ // destruye el intervalo03 para evitar que se repita (unir para cuando se salga de la vista3)
+  clearInterval(intervalo03);
+  contador = 0;
+}
+
+function  muestraAutomaticaV3(){
+    imagenV3.classList.remove("giroShow");
+    imagenV3.classList.add("giroHide");
+    setTimeout(function(){
+      imagenV3.classList.remove("giroHide");
+      document.getElementById("imagenV3").src = imagenes[contador].url;
+      document.getElementById("like3").innerHTML = imagenes[contador].likes;
+      document.getElementById("usuario3").innerHTML = imagenes[contador].usuario;
+      imagenV3.classList.add("giroShow");
+      console.log(document.getElementById("imagenV3").src);
+
+    },2000 );
+    if( contador < (imagenes.length -1)) {
+        contador++
+    }
+    else {
+      console.log("entro al cont 0");
+      console.log(document.getElementById("imagenV3").src);
+        contador = 0;
+    }
+}
+
 //-------------------------Cargado de las vistas----------------------------------//
 
 var cargarvista = function() {
@@ -166,7 +209,8 @@ var cargarvista = function() {
           pagina = "vista2";
           break;
         case "presentacion":
-          pagina = "vista3";
+          iniciandoVista3();
+          // pagina = "vista3";
           break;
       }
 
