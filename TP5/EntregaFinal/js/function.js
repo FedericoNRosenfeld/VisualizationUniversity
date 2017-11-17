@@ -134,16 +134,206 @@ function cargargrilla(){
   }
 }
 
+function moverCarrusel(direccion){
+  var primera = document.getElementById('muestra1');
+  var segunda = document.getElementById('muestra2');
+  var tercera = document.getElementById('muestra3');
+  var cuarta = document.getElementById('muestra4');
+  // primera.onclick = ""
+  // segunda.onclick = ""
+  // tercera.onclick = ""
+  // cuarta.onclick = ""
+  primera.classList.add("opacoAtrans");
+  segunda.classList.add("opacoAtrans");
+  tercera.classList.add("opacoAtrans");
+  cuarta.classList.add("opacoAtrans");
+  setTimeout(function(){
+    primera.classList.remove("opacoAtrans");
+    segunda.classList.remove("opacoAtrans");
+    tercera.classList.remove("opacoAtrans");
+    cuarta.classList.remove("opacoAtrans");
+    var posicion = contador;
+    if (posicion >= imagenes.length) {
+      posicion = 0;
+    }
+    else {
+      if (posicion < 0) {
+        posicion = imagenes.length-1;
+      }
+    }
+    primera.src = imagenes[posicion].url;
+    posicion+=direccion;
+    if (posicion >= imagenes.length) {
+      posicion = 0;
+    }
+    else {
+      if (posicion < 0) {
+        posicion = imagenes.length-1;
+      }
+    }
+    segunda.src = imagenes[posicion].url;
+    posicion+=direccion;
+    if (posicion >= imagenes.length) {
+      posicion = 0;
+    }
+    else {
+      if (posicion < 0) {
+        posicion = imagenes.length-1;
+      }
+    }
+    tercera.src = imagenes[posicion].url;
+    posicion+=direccion;
+    if (posicion >= imagenes.length) {
+      posicion = 0;
+    }
+    else {
+      if (posicion < 0) {
+        posicion = imagenes.length-1;
+      }
+    }
+    cuarta.src = imagenes[posicion].url;
+    posicion+=direccion;
+    if (posicion >= imagenes.length) {
+      posicion = 0;
+    }
+    else {
+      if (posicion < 0) {
+        posicion = imagenes.length-1;
+      }
+    }
+    contador=posicion+direccion;
+
+    primera.classList.add("trasAopaco");
+    segunda.classList.add("trasAopaco");
+    tercera.classList.add("trasAopaco");
+    cuarta.classList.add("trasAopaco");
+    setTimeout(function(){
+      primera.classList.remove("trasAopaco");
+      segunda.classList.remove("trasAopaco");
+      tercera.classList.remove("trasAopaco");
+      cuarta.classList.remove("trasAopaco");
+      // primera.onclick = "cambiarImagenActiva(1)"
+      // segunda.onclick = "cambiarImagenActiva(2)"
+      // tercera.onclick = "cambiarImagenActiva(3)"
+      // cuarta.onclick = "cambiarImagenActiva(4)"
+    },1000 );
+  },1000 );
+}
+
+// function cambiarImagenActiva(numero){
+//  var activa = document.getElementById('activa2');
+//  activa.src = src
+// }
+//var V2cargada = 0;
+function cargar_foto(clase1,clase2,src){
+  imagen = document.getElementById("bigImg");
+  imagen.classList.add(clase1);
+  setTimeout(function(){
+    document.getElementById("bigImg").src = src;
+    imagen.classList.remove(clase1);
+    imagen.classList.add(clase2);
+    setTimeout(function(){
+      imagen.classList.remove(clase2);
+    },2000 );
+  },2000 );
+}
+$(document).on("click", "#muestra1", function(e){
+    e.preventDefault();
+    var src = $(this).attr('src');
+    cargar_foto("cambio_automatico_v1","cambio_automatico_v2",src);
+    var suma = contador-4
+    if (suma<0) {
+      suma+=imagenes.length
+    }
+    document.getElementById("like2").innerHTML = imagenes[suma].likes;
+    document.getElementById("usuario2").innerHTML = imagenes[suma].usuario;
+});
+$(document).on("click", "#muestra2", function(e){
+  e.preventDefault();
+  var src = $(this).attr('src');
+  cargar_foto("cambio_automatico_v1","cambio_automatico_v2",src);
+  var suma = contador-4
+  if (suma<0) {
+    suma+=imagenes.length
+  }
+  document.getElementById("like2").innerHTML = imagenes[suma].likes;
+  document.getElementById("usuario2").innerHTML = imagenes[suma].usuario;
+});
+$(document).on("click", "#muestra3", function(e){
+  e.preventDefault();
+  var src = $(this).attr('src');
+  cargar_foto("cambio_automatico_v1","cambio_automatico_v2",src);
+  var suma = contador-4
+  if (suma<0) {
+    suma+=imagenes.length
+  }
+  document.getElementById("like2").innerHTML = imagenes[suma].likes;
+  document.getElementById("usuario2").innerHTML = imagenes[suma].usuario;
+});
+$(document).on("click", "#muestra4", function(e){
+  e.preventDefault();
+  var src = $(this).attr('src');
+  cargar_foto("cambio_automatico_v1","cambio_automatico_v2",src);
+  var suma = contador-4
+  if (suma<0) {
+    suma+=imagenes.length
+  }
+  document.getElementById("like2").innerHTML = imagenes[suma].likes;
+  document.getElementById("usuario2").innerHTML = imagenes[suma].usuario;
+});
+$(document).on("click", "#flechaDerecha", function(e){
+    e.preventDefault();
+    if (imagenes.length>4) {
+      moverCarrusel(1)
+    }
+});
+$(document).on("click", "#flechaIzquierda", function(e){
+    e.preventDefault();
+    if (imagenes.length>4) {
+      moverCarrusel(-1)
+    }
+});
+function segundaVista(){
+  if (imagenes.length>0) {
+    var activa = document.getElementById('activa2');
+    var primera = document.getElementById('muestra1');
+    var segunda = document.getElementById('muestra2');
+    var tercera = document.getElementById('muestra3');
+    var cuarta = document.getElementById('muestra4');
+    activa.src = imagenes[0].url;
+    primera.src = imagenes[0].url;
+    document.getElementById("like2").innerHTML = imagenes[0].likes;
+    document.getElementById("usuario2").innerHTML = imagenes[0].usuario;
+    if (imagenes.length>1) {
+      segunda.src = imagenes[1].url;
+      if (imagenes.length>2) {
+        tercera.src = imagenes[2].url;
+        if (imagenes.length>3) {
+          cuarta.src = imagenes[3].url;
+        }
+      }
+    }
+  }
+  var tamano = imagenes.length;
+  if (tamano>4) {
+    contador=4;
+  }
+  else {
+    contador=imagenes.length;
+  }
+}
+
 
 /// --------------------------------------- VISTA 3 - MOVIMIENTO AUTOMATICO CON GIRO
-var contador = 1;
+var contador = 0;
 var intervalo03;
 var imagenV3;
 function iniciandoVista3(){
+  contador = 0;
   imagenV3 = document.getElementById("imagenV3");
-  document.getElementById("imagenV3").src = imagenes[0].url;
-  document.getElementById("like3").innerHTML = imagenes[0].likes;
-  document.getElementById("usuario3").innerHTML = imagenes[0].usuario;
+  document.getElementById("imagenV3").src = imagenes[contador].url;
+  document.getElementById("like3").innerHTML = imagenes[contador].likes;
+  document.getElementById("usuario3").innerHTML = imagenes[contador].usuario;
   // setTimeout(function(){ // le dejamos 2 segundos de inicio a la primera imagen
   intervalo03 = setInterval(function (){
     muestraAutomaticaV3();},7000); // cada 6 segundos se reinicia el ciclo
@@ -173,9 +363,10 @@ function  muestraAutomaticaV3(){
         console.log(document.getElementById("imagenV3").src);
         contador = 0;
       }
-
     },2000 );
 }
+
+
 
 //-------------------------Cargado de las vistas----------------------------------//
 
@@ -203,11 +394,11 @@ var cargarvista = function() {
           cargargrilla();
           break;
         case "exposicion":
+          segundaVista();
           pagina = "vista2";
           break;
         case "presentacion":
           iniciandoVista3();
-          // pagina = "vista3";
           break;
       }
 
@@ -218,23 +409,34 @@ var cargarvista = function() {
 
 $(document).on("click", "#nuevoHash", function(e){
   e.preventDefault();
-  imagenes = [];
+  if (vistaActiva == "presentacion") {
+    terminandoIntervalo3();
+  }
   var busqueda = document.getElementById("hash").buscar.value;
-  console.log(busqueda);
-  consultar(busqueda,"popular");
+  if (busqueda!="") {
+    imagenes = [];
+    consultar(busqueda,"popular");
+  }
+  else {
+    alert("ingreso una busqueda vacia");
+  }
 });
 
 $(document).on("click", "#primeraBusqueda", function(e){
+  if (busqueda!="") {
   e.preventDefault();
-  document.body.style.background = "url('css/images/background_t.png')";
   var busqueda = document.getElementById("primerFormulario").buscar.value;
-  console.log(busqueda);
-  document.getElementById("paginaInicio").style.display = "none";
-  document.getElementById("paginaGaleria").style.display = "block"
-  document.getElementById("grilla").style.backgroundColor = "lightblue";
-  document.getElementById("exposicion").style.backgroundColor = "white";
-  document.getElementById("presentacion").style.backgroundColor = "white";
-  consultar(busqueda,"popular");
+    document.body.style.background = "url('css/images/background_t.png')";
+    document.getElementById("paginaInicio").style.display = "none";
+    document.getElementById("paginaGaleria").style.display = "block"
+    document.getElementById("grilla").style.backgroundColor = "lightblue";
+    document.getElementById("exposicion").style.backgroundColor = "white";
+    document.getElementById("presentacion").style.backgroundColor = "white";
+    consultar(busqueda,"popular");
+  }
+  else {
+    alert("ingreso una busqueda vacia");
+  }
 });
 
 
@@ -255,6 +457,9 @@ $('#grilla').click(function(e){
 
 $('#exposicion').click(function(e){
   e.preventDefault();
+  if (vistaActiva == "presentacion") {
+    terminandoIntervalo3();
+  }
   vistaActiva = "exposicion";
   cargarvista();
   document.getElementById("grilla").style.backgroundColor = "white";
