@@ -8,7 +8,6 @@ $( document ).ready(function() {
 var vistaActiva = "grilla";
 var cambio_tipo = true;
 var imagenes = [];
-console.log(cambio_tipo);
 /// --------------------------------------------    Authentication
 //var Codebird = require("cd/codebird");
 // or with leading "./", if the codebird.js file is in your main folder:
@@ -36,7 +35,6 @@ function consultar(busqueda,tipo){
       result_type: tipo, 	// mixta era el dafault pero no traia todos, sino que traia los que tenia en comun
       count:50, 					// maximo de 50 twitters
   };
-  console.log(params.q);
 	cb.__call(
 	"search_tweets",
 	params,
@@ -63,7 +61,6 @@ function consultar(busqueda,tipo){
 	   if (cambio_tipo){
           cambio_tipo = false; //asi evita entrar en el if la segunda vuelta
           consultar(busqueda,"recent");
-          console.log("entro");
 	   }
 	   else{
         cambio_tipo = true; // para que quede seteado en default otra vez
@@ -95,7 +92,6 @@ function cargargrilla(){
   }
 
   for (var i = 0; i < imagenes.length; i++) {
-    console.log(imagenes[i]);
     var divtamano = document.createElement('div');
     divtamano.className = "col-sm-3 imagenesgrilla";
     var divImages = document.createElement('div');
@@ -139,10 +135,6 @@ function moverCarrusel(direccion){
   var segunda = document.getElementById('muestra2');
   var tercera = document.getElementById('muestra3');
   var cuarta = document.getElementById('muestra4');
-  // primera.onclick = ""
-  // segunda.onclick = ""
-  // tercera.onclick = ""
-  // cuarta.onclick = ""
   primera.classList.add("opacoAtrans");
   segunda.classList.add("opacoAtrans");
   tercera.classList.add("opacoAtrans");
@@ -212,24 +204,17 @@ function moverCarrusel(direccion){
       segunda.classList.remove("trasAopaco");
       tercera.classList.remove("trasAopaco");
       cuarta.classList.remove("trasAopaco");
-      // primera.onclick = "cambiarImagenActiva(1)"
-      // segunda.onclick = "cambiarImagenActiva(2)"
-      // tercera.onclick = "cambiarImagenActiva(3)"
-      // cuarta.onclick = "cambiarImagenActiva(4)"
+
     },1000 );
   },1000 );
 }
 
-// function cambiarImagenActiva(numero){
-//  var activa = document.getElementById('activa2');
-//  activa.src = src
-// }
-//var V2cargada = 0;
+
 function cargar_foto(clase1,clase2,src){
   imagen = document.getElementById("bigImg");
   imagen.classList.add(clase1);
   setTimeout(function(){
-    document.getElementById("bigImg").src = src;
+    document.getElementById("activa2").src = src;
     imagen.classList.remove(clase1);
     imagen.classList.add(clase2);
     setTimeout(function(){
@@ -251,8 +236,9 @@ $(document).on("click", "#muestra1", function(e){
 $(document).on("click", "#muestra2", function(e){
   e.preventDefault();
   var src = $(this).attr('src');
+
   cargar_foto("cambio_automatico_v1","cambio_automatico_v2",src);
-  var suma = contador-4
+  var suma = contador-3
   if (suma<0) {
     suma+=imagenes.length
   }
@@ -262,19 +248,22 @@ $(document).on("click", "#muestra2", function(e){
 $(document).on("click", "#muestra3", function(e){
   e.preventDefault();
   var src = $(this).attr('src');
+
   cargar_foto("cambio_automatico_v1","cambio_automatico_v2",src);
-  var suma = contador-4
+  var suma = contador-2
   if (suma<0) {
     suma+=imagenes.length
   }
+
   document.getElementById("like2").innerHTML = imagenes[suma].likes;
   document.getElementById("usuario2").innerHTML = imagenes[suma].usuario;
 });
 $(document).on("click", "#muestra4", function(e){
   e.preventDefault();
   var src = $(this).attr('src');
+
   cargar_foto("cambio_automatico_v1","cambio_automatico_v2",src);
-  var suma = contador-4
+  var suma = contador-1
   if (suma<0) {
     suma+=imagenes.length
   }
@@ -295,6 +284,7 @@ $(document).on("click", "#flechaIzquierda", function(e){
 });
 function segundaVista(){
   if (imagenes.length>0) {
+    contador = 0;
     var activa = document.getElementById('activa2');
     var primera = document.getElementById('muestra1');
     var segunda = document.getElementById('muestra2');
@@ -349,20 +339,17 @@ function  muestraAutomaticaV3(){
     imagenV3.classList.remove("giroShow");
     imagenV3.classList.add("giroHide");
     setTimeout(function(){
+      if( contador < (imagenes.length -1)) {
+        contador++
+      }
+      else {
+        contador = 0;
+      }
       imagenV3.classList.remove("giroHide");
       document.getElementById("imagenV3").src = imagenes[contador].url;
       document.getElementById("like3").innerHTML = imagenes[contador].likes;
       document.getElementById("usuario3").innerHTML = imagenes[contador].usuario;
       imagenV3.classList.add("giroShow");
-      console.log(document.getElementById("imagenV3").src);
-      if( contador < (imagenes.length -1)) {
-        contador++
-      }
-      else {
-        console.log("entro al cont 0");
-        console.log(document.getElementById("imagenV3").src);
-        contador = 0;
-      }
     },2000 );
 }
 
@@ -423,9 +410,9 @@ $(document).on("click", "#nuevoHash", function(e){
 });
 
 $(document).on("click", "#primeraBusqueda", function(e){
-  if (busqueda!="") {
   e.preventDefault();
   var busqueda = document.getElementById("primerFormulario").buscar.value;
+  if (busqueda!="") {
     document.body.style.background = "url('css/images/background_t.png')";
     document.getElementById("paginaInicio").style.display = "none";
     document.getElementById("paginaGaleria").style.display = "block"
